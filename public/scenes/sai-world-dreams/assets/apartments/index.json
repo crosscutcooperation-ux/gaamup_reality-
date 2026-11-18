@@ -1,0 +1,723 @@
+{
+  "version": 1,
+  "scope": "Complete furnished apartments, one model per numbered plan configuration.",
+  "units": "metres",
+  "upAxis": "Y",
+  "source": "SWD Plans.pdf / backend-program validated apartment library",
+  "limitations": "Reference reconstruction. Footprints and partitions traced from plan imagery; scale calibrated from visible room dimensions. Wall height is a approximately 1.12 m cutaway. Furniture and fixtures reconstructed in approved color theme; fine details and some mirrored-family variations approximate.",
+  "sharedReferences": {
+    "orchard": "spring"
+  },
+  "apartments": {
+    "castle:typical:01": {
+      "url": "assets/apartments/castle/typical/01.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "93416997950b8d7fda9b0b72e6ff07558d87e87ad5596c0981fdca53387df6ed",
+      "sourcePage": 1
+    },
+    "castle:typical:02": {
+      "url": "assets/apartments/castle/typical/02.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "8f491441cf2c6d9d412ff67f9dd5dda050cfbedcf4a87365142b975e67b990c8",
+      "sourcePage": 1
+    },
+    "castle:typical:07": {
+      "url": "assets/apartments/castle/typical/07.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 2,
+      "bytes": 8932304,
+      "sha256": "9a038f863e9ed665c2375b6b0837d5625ca0cbef38073fb887b549d4848e49ba",
+      "sourcePage": 1
+    },
+    "castle:typical:06": {
+      "url": "assets/apartments/castle/typical/06.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 2,
+      "bytes": 8932300,
+      "sha256": "8219a5faa7d3f6e3dc89f1670f824f40e3a7739cf06bb7358af8863d58a8ad04",
+      "sourcePage": 1
+    },
+    "castle:typical:04": {
+      "url": "assets/apartments/castle/typical/04.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 3,
+      "bytes": 10133764,
+      "sha256": "ad7a8d7fc0c3b00cde79bf2d3f1a6435e860bd06dd311221b403eeba3014fa12",
+      "sourcePage": 1
+    },
+    "castle:typical:05": {
+      "url": "assets/apartments/castle/typical/05.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 3,
+      "bytes": 10133764,
+      "sha256": "ea8bbcdf8aebe22b84ec4fe6be189eef8b05719bed1332c1cea9bd1551f36ef3",
+      "sourcePage": 1
+    },
+    "castle:typical:03": {
+      "url": "assets/apartments/castle/typical/03.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 2,
+      "bytes": 8932304,
+      "sha256": "cc52e175e3f8deed926a3dc3c8611409ad3d300e4810f7d4452b8e6a771d1df8",
+      "sourcePage": 1
+    },
+    "castle:typical:08": {
+      "url": "assets/apartments/castle/typical/08.glb",
+      "tower": "castle",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "be396b89c72c20a85091364cffefd86b4c3b06c252d7bf2a0df9e7bdf44534e5",
+      "sourcePage": 1
+    },
+    "vista:typical:11": {
+      "url": "assets/apartments/vista/typical/11.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "11",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "64d4cb5df6faaa5e3a00e6abb5fae468d44a77e70b3d214d261f5ea9d6543356",
+      "sourcePage": 3
+    },
+    "vista:typical:12": {
+      "url": "assets/apartments/vista/typical/12.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "12",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "c88c88f9c798b58b5d1b8fd535229bd825e1f7afd8161b4daef789ca6334841e",
+      "sourcePage": 3
+    },
+    "vista:typical:02": {
+      "url": "assets/apartments/vista/typical/02.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "046fcf676faf23b5417a9793fc8c7222a4cb62df7d229f9b0921444e34a5485e",
+      "sourcePage": 3
+    },
+    "vista:typical:07": {
+      "url": "assets/apartments/vista/typical/07.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "019d6c55445e148839411058bcead7878fedf4b5346b7d311ea831db8f777b14",
+      "sourcePage": 3
+    },
+    "vista:typical:08": {
+      "url": "assets/apartments/vista/typical/08.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "d46b9ca1f6b811ca0c0d8e04baeb39a744359b27cacf766c85a38c8070aa5c1e",
+      "sourcePage": 3
+    },
+    "vista:typical:06": {
+      "url": "assets/apartments/vista/typical/06.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "4c5fe8381e8cb6739c42394d68f7fcdc6aeab140e2654034b737515bb6760f57",
+      "sourcePage": 3
+    },
+    "vista:typical:05": {
+      "url": "assets/apartments/vista/typical/05.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "527770aa852ddbfda7f5c7a0c298ca42cc7b48e696cbbaf97872591b3fc9d000",
+      "sourcePage": 3
+    },
+    "vista:typical:04": {
+      "url": "assets/apartments/vista/typical/04.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 2.5,
+      "bytes": 9505260,
+      "sha256": "2d816a4ec29f0216c66c85db66fa3bfbd1b71829b469b761e4a10fcebff5da4c",
+      "sourcePage": 3
+    },
+    "vista:typical:03": {
+      "url": "assets/apartments/vista/typical/03.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 2.5,
+      "bytes": 9505260,
+      "sha256": "a27d363f9f1c497fe3e785bbfc32ec363b44ff1463ecba69a28bf4a6b1d6db2b",
+      "sourcePage": 3
+    },
+    "vista:typical:01": {
+      "url": "assets/apartments/vista/typical/01.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 1,
+      "bytes": 8100660,
+      "sha256": "76804ba0f7e5ca504262b2909581dc568e29fbc54e7dc5c81a7a4bcacb73e087",
+      "sourcePage": 3
+    },
+    "vista:typical:09": {
+      "url": "assets/apartments/vista/typical/09.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "09",
+      "bedrooms": 2,
+      "bytes": 8844996,
+      "sha256": "760921d25fdd3060ba8ea1789b9db64737be08d1ad10c4f2438a216503d85747",
+      "sourcePage": 3
+    },
+    "vista:typical:10": {
+      "url": "assets/apartments/vista/typical/10.glb",
+      "tower": "vista",
+      "configuration": "typical",
+      "unit": "10",
+      "bedrooms": 2,
+      "bytes": 8844992,
+      "sha256": "21e957e42b983f7b6a7b05e9667f9e69b15a333b43ab216ba879386d46481fcf",
+      "sourcePage": 3
+    },
+    "mist:typical:01": {
+      "url": "assets/apartments/mist/typical/01.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 3,
+      "bytes": 9327584,
+      "sha256": "35ff5f7db9a6337201efa10745cd9aa863eb53348d4853f74242dec68ae7884d",
+      "sourcePage": 5
+    },
+    "mist:typical:08": {
+      "url": "assets/apartments/mist/typical/08.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 3,
+      "bytes": 9526436,
+      "sha256": "8d49ef9f25dc356e5c44fd0f3fbb587cdfc032fcdb25ceaae31aa1a7f01c20fd",
+      "sourcePage": 5
+    },
+    "mist:typical:02": {
+      "url": "assets/apartments/mist/typical/02.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 3,
+      "bytes": 9526432,
+      "sha256": "6e3c683f621042beca7fbad7297e71f0e5a930229d9ece7bf760f868bead9875",
+      "sourcePage": 5
+    },
+    "mist:typical:03": {
+      "url": "assets/apartments/mist/typical/03.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 3,
+      "bytes": 9526436,
+      "sha256": "df5f74ec9b90b173d5a33de5d54408fe7374654816a0abbcf82208c21b7c8e11",
+      "sourcePage": 5
+    },
+    "mist:typical:04": {
+      "url": "assets/apartments/mist/typical/04.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 3,
+      "bytes": 9327584,
+      "sha256": "5098d74f7021cb5c4563119930b1af44d377e8afff56e9ca6093e769324b005b",
+      "sourcePage": 5
+    },
+    "mist:typical:05": {
+      "url": "assets/apartments/mist/typical/05.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 3,
+      "bytes": 9327584,
+      "sha256": "158b685f2699b87cadc691a4d8ff55223d2249b436d27a7dd7d44f5b825dc306",
+      "sourcePage": 5
+    },
+    "mist:typical:06": {
+      "url": "assets/apartments/mist/typical/06.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 3,
+      "bytes": 9694796,
+      "sha256": "29e04bca73616f920fbbce7339c6ef2d236d940b904ca22cf3446d0bfd7f179a",
+      "sourcePage": 5
+    },
+    "mist:typical:07": {
+      "url": "assets/apartments/mist/typical/07.glb",
+      "tower": "mist",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 3,
+      "bytes": 9694796,
+      "sha256": "e2417044327d4cd1431ce23ea9a1e88fc25711d192bf457e3fdc4a6efe788ee6",
+      "sourcePage": 5
+    },
+    "spring:typical:02": {
+      "url": "assets/apartments/spring/typical/02.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 3,
+      "bytes": 9139140,
+      "sha256": "36f5274d15e1dc1aa26342336ae2c7dc29f68db8bf7779804770fc823876bb81",
+      "sourcePage": 7
+    },
+    "spring:typical:03": {
+      "url": "assets/apartments/spring/typical/03.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 3,
+      "bytes": 9139140,
+      "sha256": "d45336a3b10d50e7fa63fcfdffd6b640dcb6f57b3c7ff03ca689f580b0e1b91f",
+      "sourcePage": 7
+    },
+    "spring:typical:07": {
+      "url": "assets/apartments/spring/typical/07.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 3,
+      "bytes": 9695152,
+      "sha256": "041bd50396d6183b1a10f46cf439ef713431696d036484a0915d62d7ba6f2ecf",
+      "sourcePage": 7
+    },
+    "spring:typical:06": {
+      "url": "assets/apartments/spring/typical/06.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 3,
+      "bytes": 9695152,
+      "sha256": "15b44814b7d902e83e9c269e6cd682a1b45a06abd0e99d5a4d75c33113264f8e",
+      "sourcePage": 7
+    },
+    "spring:typical:04": {
+      "url": "assets/apartments/spring/typical/04.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 3,
+      "bytes": 9376028,
+      "sha256": "89aed49e940885962cc372c9aaf891a2bd37e733a75fb24c8ab26b4a4cf76188",
+      "sourcePage": 7
+    },
+    "spring:typical:05": {
+      "url": "assets/apartments/spring/typical/05.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 3,
+      "bytes": 9376028,
+      "sha256": "b472ffee702199b5b3c11c03a0f289cedda0634068bbd194ecf7bf29bcbd1842",
+      "sourcePage": 7
+    },
+    "spring:typical:08": {
+      "url": "assets/apartments/spring/typical/08.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 3,
+      "bytes": 9376028,
+      "sha256": "1b84b9f39438ec8247f5fffae9ee3fde6b9c3ee6ad05bd1bd38eca691532ac23",
+      "sourcePage": 7
+    },
+    "spring:typical:01": {
+      "url": "assets/apartments/spring/typical/01.glb",
+      "tower": "spring",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 3,
+      "bytes": 9376028,
+      "sha256": "68883eb6b854ec2a68e71e1618fd8e31c541c0db82fa6ae8354595b0b646c40a",
+      "sourcePage": 7
+    },
+    "breeze:6-9:02": {
+      "url": "assets/apartments/breeze/6-9/02.glb",
+      "tower": "breeze",
+      "configuration": "6-9",
+      "unit": "02",
+      "bedrooms": 1,
+      "bytes": 7866884,
+      "sha256": "fec4b4db5037b10fe5014ab2d2d0d8a7128940797bef12bfa6172377c40f02e1",
+      "sourcePage": 11
+    },
+    "breeze:6-9:09": {
+      "url": "assets/apartments/breeze/6-9/09.glb",
+      "tower": "breeze",
+      "configuration": "6-9",
+      "unit": "09",
+      "bedrooms": 1,
+      "bytes": 7866884,
+      "sha256": "e4ed0cd5614a0f2e643d9eb2709b9980f18dcbf275f38caa6f1cb2644949b193",
+      "sourcePage": 11
+    },
+    "breeze:6-9:10": {
+      "url": "assets/apartments/breeze/6-9/10.glb",
+      "tower": "breeze",
+      "configuration": "6-9",
+      "unit": "10",
+      "bedrooms": 2,
+      "bytes": 8326148,
+      "sha256": "d91109a2bfe01e578bd376720e4452b9b3bd7974a1f1112fd1f65d8ddb031346",
+      "sourcePage": 11
+    },
+    "breeze:6-9:01": {
+      "url": "assets/apartments/breeze/6-9/01.glb",
+      "tower": "breeze",
+      "configuration": "6-9",
+      "unit": "01",
+      "bedrooms": 2,
+      "bytes": 8326148,
+      "sha256": "d12deb65589d3ee674034aec86aff59685fc74071cf887afd658bd315431c1df",
+      "sourcePage": 11
+    },
+    "breeze:6-9:08": {
+      "url": "assets/apartments/breeze/6-9/08.glb",
+      "tower": "breeze",
+      "configuration": "6-9",
+      "unit": "08",
+      "bedrooms": 3,
+      "bytes": 9245236,
+      "sha256": "55d47d288ce30d9ea3f3e342b82c434570a91cc52447106a3799762669cf4ab4",
+      "sourcePage": 11
+    },
+    "breeze:upper:02": {
+      "url": "assets/apartments/breeze/upper/02.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "02",
+      "bedrooms": 1,
+      "bytes": 7866888,
+      "sha256": "5b2f571833a9e719846b62d0a84e28390b6a3fdb08e7a66e13cdff9c0c3b9cd2",
+      "sourcePage": 12
+    },
+    "breeze:upper:03": {
+      "url": "assets/apartments/breeze/upper/03.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "03",
+      "bedrooms": 1,
+      "bytes": 7866888,
+      "sha256": "c22a07f23acacc91ed8f5de0c47b7648fa59cae21f598c0df487948c3eeef1b6",
+      "sourcePage": 12
+    },
+    "breeze:upper:04": {
+      "url": "assets/apartments/breeze/upper/04.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "04",
+      "bedrooms": 2,
+      "bytes": 8735000,
+      "sha256": "d29d12afa755097b4d14cdb88655e532df2f2693f50086eb34b817c292fbb37e",
+      "sourcePage": 12
+    },
+    "breeze:upper:05": {
+      "url": "assets/apartments/breeze/upper/05.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "05",
+      "bedrooms": 2,
+      "bytes": 8735000,
+      "sha256": "7ae474ebb9df8d92c3fa2902899ad7227b89cc15d872fefcfbfcaef674a964f9",
+      "sourcePage": 12
+    },
+    "breeze:upper:06": {
+      "url": "assets/apartments/breeze/upper/06.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "06",
+      "bedrooms": 1,
+      "bytes": 7866884,
+      "sha256": "892d811385183798910f82db251a25b934d8f37e8ca972c43844f12c71f9331a",
+      "sourcePage": 12
+    },
+    "breeze:upper:07": {
+      "url": "assets/apartments/breeze/upper/07.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "07",
+      "bedrooms": 1,
+      "bytes": 7976224,
+      "sha256": "80b357bc9fef7c6357899e3f31a36529216569975b0d2d5195f9266947bb5ed1",
+      "sourcePage": 12
+    },
+    "breeze:upper:08": {
+      "url": "assets/apartments/breeze/upper/08.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "08",
+      "bedrooms": 1,
+      "bytes": 7976224,
+      "sha256": "c52139dd9e58ba43f9e3d402be731775c05da0e16cb309b7c3b9be0f4891e6a9",
+      "sourcePage": 12
+    },
+    "breeze:upper:09": {
+      "url": "assets/apartments/breeze/upper/09.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "09",
+      "bedrooms": 1,
+      "bytes": 7866884,
+      "sha256": "d0ec2fae00f7f39739b3b04b2b19a1e5cf0e96a2a5689830d2377a4235741e0c",
+      "sourcePage": 12
+    },
+    "breeze:upper:01": {
+      "url": "assets/apartments/breeze/upper/01.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "01",
+      "bedrooms": 2,
+      "bytes": 8326148,
+      "sha256": "e12c9a522acc89ceda5ddeba4d3b487be82621ced916042094802ae9404c2c52",
+      "sourcePage": 12
+    },
+    "breeze:upper:10": {
+      "url": "assets/apartments/breeze/upper/10.glb",
+      "tower": "breeze",
+      "configuration": "upper",
+      "unit": "10",
+      "bedrooms": 2,
+      "bytes": 8326148,
+      "sha256": "9221dc459d1cd0ad3e03b7fb138485757812b92258941a9d61060bb63754b8a8",
+      "sourcePage": 12
+    },
+    "heaven:typical:01": {
+      "url": "assets/apartments/heaven/typical/01.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "e9ad0c01140fc73f0ceefc36e1a3e9c8b61dc626757313ff301997ab9745462f",
+      "sourcePage": 10
+    },
+    "heaven:typical:02": {
+      "url": "assets/apartments/heaven/typical/02.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "e3d08d6ad7da37401292f96d8bcbad0f795d70b60cea7b98288ce51391d0540b",
+      "sourcePage": 10
+    },
+    "heaven:typical:07": {
+      "url": "assets/apartments/heaven/typical/07.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 2,
+      "bytes": 8932304,
+      "sha256": "dee49472b2d5811a6d175d5928a54d87a528e802f332fe93af9fe0d08adbb130",
+      "sourcePage": 10
+    },
+    "heaven:typical:06": {
+      "url": "assets/apartments/heaven/typical/06.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 2,
+      "bytes": 8932304,
+      "sha256": "74f773b58d9baf9001719f189e5462f11631101458cbb0868392374daaf6dc88",
+      "sourcePage": 10
+    },
+    "heaven:typical:04": {
+      "url": "assets/apartments/heaven/typical/04.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 3,
+      "bytes": 10133764,
+      "sha256": "95771fad66ad385389ca0e0ee6f38c313ed7fffbc54b175a5d828d9ca10efb31",
+      "sourcePage": 10
+    },
+    "heaven:typical:05": {
+      "url": "assets/apartments/heaven/typical/05.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 3,
+      "bytes": 10133768,
+      "sha256": "b4bcf626971a614313a57b1ef6e07c314025792f55beb878244ad65c4d9d6d16",
+      "sourcePage": 10
+    },
+    "heaven:typical:03": {
+      "url": "assets/apartments/heaven/typical/03.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 2,
+      "bytes": 8932304,
+      "sha256": "5f44a4e86ee7aa10bc3d531e107a034a5725b6994c51f23a649426ee332ec705",
+      "sourcePage": 10
+    },
+    "heaven:typical:08": {
+      "url": "assets/apartments/heaven/typical/08.glb",
+      "tower": "heaven",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 2,
+      "bytes": 8806924,
+      "sha256": "a510ca692c0d9f0b6b18ca9e2e9afefeb081e9afee0255fd062068635eb1c63f",
+      "sourcePage": 10
+    },
+    "meadows:typical:11": {
+      "url": "assets/apartments/meadows/typical/11.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "11",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "b7545086fb6d185deff05af308d3a15b088f129b230155579b8bf326e47f8627",
+      "sourcePage": 9
+    },
+    "meadows:typical:12": {
+      "url": "assets/apartments/meadows/typical/12.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "12",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "9dab4d75554048e7817cb2a4791c9e5aee19b3a99a27be240791cf8d514aa67a",
+      "sourcePage": 9
+    },
+    "meadows:typical:02": {
+      "url": "assets/apartments/meadows/typical/02.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "02",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "f64abea36c2bdb9881aab9cfbd32e11b9d6bd415da85fa7a5ad60cbdc19a4fe9",
+      "sourcePage": 9
+    },
+    "meadows:typical:07": {
+      "url": "assets/apartments/meadows/typical/07.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "07",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "267080f5e00e5cd425048f40b15a64f3d5769ea82f8949b5da1bc911b7379c37",
+      "sourcePage": 9
+    },
+    "meadows:typical:08": {
+      "url": "assets/apartments/meadows/typical/08.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "08",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "8711d62ec4f7737c5e3e3e4b56f6b1a366a03433c438a1ed9d171c476cc334cb",
+      "sourcePage": 9
+    },
+    "meadows:typical:06": {
+      "url": "assets/apartments/meadows/typical/06.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "06",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "6e5f8915d559e58d4954b72ada64a3742c73e8bfc4c1f98db854446debcdc3c2",
+      "sourcePage": 9
+    },
+    "meadows:typical:05": {
+      "url": "assets/apartments/meadows/typical/05.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "05",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "542069d770979ce714fe58250faf9683ecf3572b83709b19e32799849c4b0555",
+      "sourcePage": 9
+    },
+    "meadows:typical:04": {
+      "url": "assets/apartments/meadows/typical/04.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "04",
+      "bedrooms": 2.5,
+      "bytes": 9505264,
+      "sha256": "072575add941aa9a101e17f84fb77dc50d482e21ab03219bf24fb3e0dfaf9457",
+      "sourcePage": 9
+    },
+    "meadows:typical:03": {
+      "url": "assets/apartments/meadows/typical/03.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "03",
+      "bedrooms": 2.5,
+      "bytes": 9505264,
+      "sha256": "6f6fc8723d6ae5eb176d0258d4da612bef264058a94c1f29a32f4fdd981298b4",
+      "sourcePage": 9
+    },
+    "meadows:typical:01": {
+      "url": "assets/apartments/meadows/typical/01.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "01",
+      "bedrooms": 1,
+      "bytes": 8100664,
+      "sha256": "4d96660a3c63bf7077a3e1f7418a20c92b943f4d3a870d04275702e9a023ec0f",
+      "sourcePage": 9
+    },
+    "meadows:typical:09": {
+      "url": "assets/apartments/meadows/typical/09.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "09",
+      "bedrooms": 2,
+      "bytes": 8844996,
+      "sha256": "ba4422a5ba6a2c5d9556ed86396bb4b22fa4d94f0b5856df12896aa2d7ca02b3",
+      "sourcePage": 9
+    },
+    "meadows:typical:10": {
+      "url": "assets/apartments/meadows/typical/10.glb",
+      "tower": "meadows",
+      "configuration": "typical",
+      "unit": "10",
+      "bedrooms": 2,
+      "bytes": 8844996,
+      "sha256": "e922b2745c8d8ad38bf02672025d70eed2485ac3aabd3529857e4e45e43486b5",
+      "sourcePage": 9
+    }
+  }
+}
