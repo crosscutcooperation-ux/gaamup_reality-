@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "projectId": "venus-skky-city",
+  "units": {
+    "aristo-01": {
+      "id": "aristo-01",
+      "url": "/scene-assets/venus-apartments/aristo-01.glb",
+      "building": "aristo",
+      "flat": "01",
+      "bedrooms": 1,
+      "sha256": "b947a29b5740f0a45e5e49612a96260b2c891fcd0494be71ad7bba74f2a7b9d4",
+      "bytes": 8592632,
+      "label": "Aristo \u00b7 Flat 01"
+    },
+    "aristo-02": {
+      "id": "aristo-02",
+      "url": "/scene-assets/venus-apartments/aristo-02.glb",
+      "building": "aristo",
+      "flat": "02",
+      "bedrooms": 2,
+      "sha256": "3d7d22955d5095fbed688667727ee42e9c842209c84e7e84c6c54dbbdfec5273",
+      "bytes": 8673008,
+      "label": "Aristo \u00b7 Flat 02"
+    },
+    "aristo-03": {
+      "id": "aristo-03",
+      "url": "/scene-assets/venus-apartments/aristo-03.glb",
+      "building": "aristo",
+      "flat": "03",
+      "bedrooms": 2,
+      "sha256": "dee57f29ec0fb29d795bedf32479966094c677f687110103977af8e809feb8ce",
+      "bytes": 8582444,
+      "label": "Aristo \u00b7 Flat 03"
+    },
+    "aristo-04": {
+      "id": "aristo-04",
+      "url": "/scene-assets/venus-apartments/aristo-04.glb",
+      "building": "aristo",
+      "flat": "04",
+      "bedrooms": 1,
+      "sha256": "4ccf9f05242ddd45cd91bd8c0b20f78f4dbaa586b73b6c264b319d59c71311fb",
+      "bytes": 8469620,
+      "label": "Aristo \u00b7 Flat 04"
+    },
+    "aristo-05": {
+      "id": "aristo-05",
+      "url": "/scene-assets/venus-apartments/aristo-05.glb",
+      "building": "aristo",
+      "flat": "05",
+      "bedrooms": 1,
+      "sha256": "62dcd102713d626997e6129e997b5d8f2417615d06a088c4a1ec9f17efcefe36",
+      "bytes": 8469620,
+      "label": "Aristo \u00b7 Flat 05"
+    },
+    "aristo-06": {
+      "id": "aristo-06",
+      "url": "/scene-assets/venus-apartments/aristo-06.glb",
+      "building": "aristo",
+      "flat": "06",
+      "bedrooms": 2,
+      "sha256": "e79d551d00007bc1a59378c2206728f297b2021a93422a8e9394ce8b6efc6997",
+      "bytes": 8582444,
+      "label": "Aristo \u00b7 Flat 06"
+    },
+    "aristo-07": {
+      "id": "aristo-07",
+      "url": "/scene-assets/venus-apartments/aristo-07.glb",
+      "building": "aristo",
+      "flat": "07",
+      "bedrooms": 2,
+      "sha256": "a07d38b484a24f4bfdb735ed9157de217edecccceeb549af7bb35b683dd50de2",
+      "bytes": 8673008,
+      "label": "Aristo \u00b7 Flat 07"
+    },
+    "aristo-08": {
+      "id": "aristo-08",
+      "url": "/scene-assets/venus-apartments/aristo-08.glb",
+      "building": "aristo",
+      "flat": "08",
+      "bedrooms": 1,
+      "sha256": "7b1f03525a89097833597a6a5f75cdd12183fd9e059896e1ee5fc55ced54ff87",
+      "bytes": 8592632,
+      "label": "Aristo \u00b7 Flat 08"
+    },
+    "aristo-09": {
+      "id": "aristo-09",
+      "url": "/scene-assets/venus-apartments/aristo-09.glb",
+      "building": "aristo",
+      "flat": "09",
+      "bedrooms": 1,
+      "sha256": "96108f67d44325a6d80964e450fad2f3afacd8fbb8071ad0cd6af20b2ce8c12f",
+      "bytes": 8530120,
+      "label": "Aristo \u00b7 Flat 09"
+    },
+    "aristo-10": {
+      "id": "aristo-10",
+      "url": "/scene-assets/venus-apartments/aristo-10.glb",
+      "building": "aristo",
+      "flat": "10",
+      "bedrooms": 1,
+      "sha256": "8c0a5504eec24c7b0e84773f7fd107b1d5ab8461472a14901be42c2f44cd1108",
+      "bytes": 8530120,
+      "label": "Aristo \u00b7 Flat 10"
+    },
+    "lavista-01": {
+      "id": "lavista-01",
+      "url": "/scene-assets/venus-apartments/lavista-01.glb",
+      "building": "lavista",
+      "flat": "01",
+      "bedrooms": 1,
+      "sha256": "d9f34c3d5489891bfdc44e65bc7ff68b1b5c142a99c21abfec5040d0706260a7",
+      "bytes": 8416004,
+      "label": "La\u2019 Vista \u00b7 Flat 01"
+    },
+    "lavista-02": {
+      "id": "lavista-02",
+      "url": "/scene-assets/venus-apartments/lavista-02.glb",
+      "building": "lavista",
+      "flat": "02",
+      "bedrooms": 1,
+      "sha256": "aef35f80ec00243224c2f1f40d08805cc086d4ef4a7f928aff4228ca14574014",
+      "bytes": 8416004,
+      "label": "La\u2019 Vista \u00b7 Flat 02"
+    },
+    "lavista-03": {
+      "id": "lavista-03",
+      "url": "/scene-assets/venus-apartments/lavista-03.glb",
+      "building": "lavista",
+      "flat": "03",
+      "bedrooms": 2,
+      "sha256": "a154b63dbdb6826d49fea5083be4cefb3d484e7cd42c356a23b0a05b51d75508",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 03"
+    },
+    "lavista-04": {
+      "id": "lavista-04",
+      "url": "/scene-assets/venus-apartments/lavista-04.glb",
+      "building": "lavista",
+      "flat": "04",
+      "bedrooms": 2,
+      "sha256": "481fff362323da24ae9e93bcbf8a42c2416f3155733ae5d5646c8aaf877dac6f",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 04"
+    },
+    "lavista-05": {
+      "id": "lavista-05",
+      "url": "/scene-assets/venus-apartments/lavista-05.glb",
+      "building": "lavista",
+      "flat": "05",
+      "bedrooms": 2,
+      "sha256": "02eaf805dcde4dc4789fdf4d5206f06f3b07c1571dc52e1c6141dbec8d5dea0f",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 05"
+    },
+    "lavista-06": {
+      "id": "lavista-06",
+      "url": "/scene-assets/venus-apartments/lavista-06.glb",
+      "building": "lavista",
+      "flat": "06",
+      "bedrooms": 2,
+      "sha256": "40b735b61b72430fb544616096bb9c4768f2033963258f4168b4fa72c475cd2a",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 06"
+    },
+    "lavista-07": {
+      "id": "lavista-07",
+      "url": "/scene-assets/venus-apartments/lavista-07.glb",
+      "building": "lavista",
+      "flat": "07",
+      "bedrooms": 2,
+      "sha256": "8abe5ec6e49d6d653ec23f717c1625522f7e6c2c93ad98a2423bb41a56a5969e",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 07"
+    },
+    "lavista-08": {
+      "id": "lavista-08",
+      "url": "/scene-assets/venus-apartments/lavista-08.glb",
+      "building": "lavista",
+      "flat": "08",
+      "bedrooms": 2,
+      "sha256": "2199427bd6675cf2277bc94c2d9a8046d65fb974c27011b24361d9c4e9811b89",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 08"
+    },
+    "lavista-09": {
+      "id": "lavista-09",
+      "url": "/scene-assets/venus-apartments/lavista-09.glb",
+      "building": "lavista",
+      "flat": "09",
+      "bedrooms": 2,
+      "sha256": "aee98dc22541d134866db682c2d40866b5656b8d017dac6d8437992c339722d1",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 09"
+    },
+    "lavista-10": {
+      "id": "lavista-10",
+      "url": "/scene-assets/venus-apartments/lavista-10.glb",
+      "building": "lavista",
+      "flat": "10",
+      "bedrooms": 2,
+      "sha256": "350d09a37adbc9365309d49477f377b32dcc6cc134e5dd6ddaa5c329ef6b53d1",
+      "bytes": 8744664,
+      "label": "La\u2019 Vista \u00b7 Flat 10"
+    },
+    "lavista-11": {
+      "id": "lavista-11",
+      "url": "/scene-assets/venus-apartments/lavista-11.glb",
+      "building": "lavista",
+      "flat": "11",
+      "bedrooms": 1,
+      "sha256": "10d7b789800f750278728f5a168f742bdc2c41520aac9ccfba71bf63347fc9cd",
+      "bytes": 8416004,
+      "label": "La\u2019 Vista \u00b7 Flat 11"
+    },
+    "lavista-12": {
+      "id": "lavista-12",
+      "url": "/scene-assets/venus-apartments/lavista-12.glb",
+      "building": "lavista",
+      "flat": "12",
+      "bedrooms": 1,
+      "sha256": "a4cf6fb555f2da42d4bfd11375695b2c5168bcee476659c3bb20914ac35ff61a",
+      "bytes": 8416000,
+      "label": "La\u2019 Vista \u00b7 Flat 12"
+    },
+    "lavista-13": {
+      "id": "lavista-13",
+      "url": "/scene-assets/venus-apartments/lavista-13.glb",
+      "building": "lavista",
+      "flat": "13",
+      "bedrooms": 1,
+      "sha256": "1b8159c7cc306123b846ff144ca3d24fd150ce1c8247885b75182180e4e0e404",
+      "bytes": 8416000,
+      "label": "La\u2019 Vista \u00b7 Flat 13"
+    },
+    "lavista-14": {
+      "id": "lavista-14",
+      "url": "/scene-assets/venus-apartments/lavista-14.glb",
+      "building": "lavista",
+      "flat": "14",
+      "bedrooms": 1,
+      "sha256": "074bb6667fdd2e7b80f2ab588986eb1594fd1c197695f7adcb9df5feba54cf53",
+      "bytes": 8416004,
+      "label": "La\u2019 Vista \u00b7 Flat 14"
+    },
+    "lavista-15": {
+      "id": "lavista-15",
+      "url": "/scene-assets/venus-apartments/lavista-15.glb",
+      "building": "lavista",
+      "flat": "15",
+      "bedrooms": 1,
+      "sha256": "708b6a55d49e0aa9db778ebb4cc54ade06e73dd839ab85b1400dc7c9805991bf",
+      "bytes": 8416004,
+      "label": "La\u2019 Vista \u00b7 Flat 15"
+    },
+    "A-01": {
+      "id": "A-01",
+      "url": "/scene-assets/venus-apartments/A-01.glb",
+      "building": "A",
+      "flat": "01",
+      "bedrooms": 1,
+      "sha256": "555f2ff21aef4ccfe206cc09da5ddd579e5fe77dc721982a08cfa718b4b1334f",
+      "bytes": 8416004,
+      "label": "Vivanta Building A \u00b7 Flat 01"
+    },
+    "A-02": {
+      "id": "A-02",
+      "url": "/scene-assets/venus-apartments/A-02.glb",
+      "building": "A",
+      "flat": "02",
+      "bedrooms": 1,
+      "sha256": "b99437b3e5ae6e551c941e7726d42ad83e93217e2859a140136ad355e17f7a66",
+      "bytes": 8416004,
+      "label": "Vivanta Building A \u00b7 Flat 02"
+    },
+    "A-03": {
+      "id": "A-03",
+      "url": "/scene-assets/venus-apartments/A-03.glb",
+      "building": "A",
+      "flat": "03",
+      "bedrooms": 2,
+      "sha256": "76579f59242e9538ba55468b2fc5dd286cb3b7241bcefdc90d87f81056b1471b",
+      "bytes": 8744664,
+      "label": "Vivanta Building A \u00b7 Flat 03"
+    },
+    "A-04": {
+      "id": "A-04",
+      "url": "/scene-assets/venus-apartments/A-04.glb",
+      "building": "A",
+      "flat": "04",
+      "bedrooms": 2,
+      "sha256": "e9ce8ab6cab04e729f1fae19cf9762d2981cfabec6573560ae3e159436c736ac",
+      "bytes": 8744664,
+      "label": "Vivanta Building A \u00b7 Flat 04"
+    },
+    "A-05": {
+      "id": "A-05",
+      "url": "/scene-assets/venus-apartments/A-05.glb",
+      "building": "A",
+      "flat": "05",
+      "bedrooms": 2,
+      "sha256": "931fb9855dfaa8ecb3ec3123c58645258a49f0e87edab6803d635a51d472c929",
+      "bytes": 8744664,
+      "label": "Vivanta Building A \u00b7 Flat 05"
+    },
+    "A-06": {
+      "id": "A-06",
+      "url": "/scene-assets/venus-apartments/A-06.glb",
+      "building": "A",
+      "flat": "06",
+      "bedrooms": 2,
+      "sha256": "e14f626a75d05908ab7241e729578fc97cc8b1a8167334282d9a122e27d72e88",
+      "bytes": 8744664,
+      "label": "Vivanta Building A \u00b7 Flat 06"
+    },
+    "A-07": {
+      "id": "A-07",
+      "url": "/scene-assets/venus-apartments/A-07.glb",
+      "building": "A",
+      "flat": "07",
+      "bedrooms": 1,
+      "sha256": "52f57fce861b904b88f1fb13600a1af31b9632b4e30a63eea269dee26657e767",
+      "bytes": 8416004,
+      "label": "Vivanta Building A \u00b7 Flat 07"
+    },
+    "A-08": {
+      "id": "A-08",
+      "url": "/scene-assets/venus-apartments/A-08.glb",
+      "building": "A",
+      "flat": "08",
+      "bedrooms": 1,
+      "sha256": "efe2a28f05d3d1783e4f640c7c7242f6c35922abf7baae17183f7d48f3f48e38",
+      "bytes": 8416004,
+      "label": "Vivanta Building A \u00b7 Flat 08"
+    },
+    "A-09": {
+      "id": "A-09",
+      "url": "/scene-assets/venus-apartments/A-09.glb",
+      "building": "A",
+      "flat": "09",
+      "bedrooms": 1,
+      "sha256": "7a4e6b1678712319fe91bc9f429f6505920c6514ca81206c21a520872289f4b5",
+      "bytes": 8557472,
+      "label": "Vivanta Building A \u00b7 Flat 09"
+    },
+    "A-10": {
+      "id": "A-10",
+      "url": "/scene-assets/venus-apartments/A-10.glb",
+      "building": "A",
+      "flat": "10",
+      "bedrooms": 1,
+      "sha256": "fc01b435b9ce0f8f7a5d65d0f4e8c24c557d747c2d87ffa826f26945af5d120f",
+      "bytes": 8557472,
+      "label": "Vivanta Building A \u00b7 Flat 10"
+    },
+    "A-11": {
+      "id": "A-11",
+      "url": "/scene-assets/venus-apartments/A-11.glb",
+      "building": "A",
+      "flat": "11",
+      "bedrooms": 1,
+      "sha256": "3908e060d26c23b0531b7de64befd5582d0fc9686409fa8d49316377ac16d6ca",
+      "bytes": 8557472,
+      "label": "Vivanta Building A \u00b7 Flat 11"
+    },
+    "A-12": {
+      "id": "A-12",
+      "url": "/scene-assets/venus-apartments/A-12.glb",
+      "building": "A",
+      "flat": "12",
+      "bedrooms": 1,
+      "sha256": "48726db6fc29993f9475122e9b97ccbeb887a325d12c0f48d6eaaf8e482aaabf",
+      "bytes": 8557472,
+      "label": "Vivanta Building A \u00b7 Flat 12"
+    },
+    "C-01": {
+      "id": "C-01",
+      "url": "/scene-assets/venus-apartments/C-01.glb",
+      "building": "C",
+      "flat": "01",
+      "bedrooms": 1,
+      "sha256": "38a9deff0884b50a995dfef3277c798ac198e571472f7887d780b380224b1219",
+      "bytes": 8415984,
+      "label": "Tower C \u00b7 Flat 01"
+    },
+    "C-02": {
+      "id": "C-02",
+      "url": "/scene-assets/venus-apartments/C-02.glb",
+      "building": "C",
+      "flat": "02",
+      "bedrooms": 1,
+      "sha256": "d457f371cb693ba470264bb76cae9a0bf9a91c24f5f0bdb90e7768b6715c1f32",
+      "bytes": 8415984,
+      "label": "Tower C \u00b7 Flat 02"
+    },
+    "C-03": {
+      "id": "C-03",
+      "url": "/scene-assets/venus-apartments/C-03.glb",
+      "building": "C",
+      "flat": "03",
+      "bedrooms": 2,
+      "sha256": "95cefe9c5effc86de3b2cb38c66d2ab2e950b65d174b1691b6a3b9a6082b7c31",
+      "bytes": 8744648,
+      "label": "Tower C \u00b7 Flat 03"
+    },
+    "C-04": {
+      "id": "C-04",
+      "url": "/scene-assets/venus-apartments/C-04.glb",
+      "building": "C",
+      "flat": "04",
+      "bedrooms": 2,
+      "sha256": "260a1e658f311d58b7079b36ae2d0c1b679a6b3ecd925beb06009d76b033146f",
+      "bytes": 8744648,
+      "label": "Tower C \u00b7 Flat 04"
+    },
+    "C-05": {
+      "id": "C-05",
+      "url": "/scene-assets/venus-apartments/C-05.glb",
+      "building": "C",
+      "flat": "05",
+      "bedrooms": 2,
+      "sha256": "613de11254fef1cf2570a808df62078d8b4eff2951e16b113320df9ada231cd6",
+      "bytes": 8744648,
+      "label": "Tower C \u00b7 Flat 05"
+    },
+    "C-06": {
+      "id": "C-06",
+      "url": "/scene-assets/venus-apartments/C-06.glb",
+      "building": "C",
+      "flat": "06",
+      "bedrooms": 2,
+      "sha256": "05a8cc1a3ba76602623878534cfcfe43305db9ceb635522b99a5cd81ebc21d17",
+      "bytes": 8744648,
+      "label": "Tower C \u00b7 Flat 06"
+    },
+    "C-07": {
+      "id": "C-07",
+      "url": "/scene-assets/venus-apartments/C-07.glb",
+      "building": "C",
+      "flat": "07",
+      "bedrooms": 1,
+      "sha256": "8d7e7cdea30dcba371424620b45cc317ce48d4f94600e5fcc01fdfc8f315f82d",
+      "bytes": 8415984,
+      "label": "Tower C \u00b7 Flat 07"
+    },
+    "C-08": {
+      "id": "C-08",
+      "url": "/scene-assets/venus-apartments/C-08.glb",
+      "building": "C",
+      "flat": "08",
+      "bedrooms": 1,
+      "sha256": "7129830a0abcfb9b172befb0f3166c859cd6b68317f4789780492632c6726f07",
+      "bytes": 8415984,
+      "label": "Tower C \u00b7 Flat 08"
+    },
+    "C-09": {
+      "id": "C-09",
+      "url": "/scene-assets/venus-apartments/C-09.glb",
+      "building": "C",
+      "flat": "09",
+      "bedrooms": 1,
+      "sha256": "6c93503967b32a08827a25492a8e67124acbee2021a64e7188c6a3331e2bfc30",
+      "bytes": 8557456,
+      "label": "Tower C \u00b7 Flat 09"
+    },
+    "C-10": {
+      "id": "C-10",
+      "url": "/scene-assets/venus-apartments/C-10.glb",
+      "building": "C",
+      "flat": "10",
+      "bedrooms": 1,
+      "sha256": "a1aca3756baa912901b5bb543cc283e0d6efc1bda2db3595aa56f19065c73372",
+      "bytes": 8557452,
+      "label": "Tower C \u00b7 Flat 10"
+    },
+    "C-11": {
+      "id": "C-11",
+      "url": "/scene-assets/venus-apartments/C-11.glb",
+      "building": "C",
+      "flat": "11",
+      "bedrooms": 1,
+      "sha256": "0eb55f62334e782404ecda76fc282f38e45e0c70e8cc00bb4c409c5ce2fa9519",
+      "bytes": 8557456,
+      "label": "Tower C \u00b7 Flat 11"
+    },
+    "C-12": {
+      "id": "C-12",
+      "url": "/scene-assets/venus-apartments/C-12.glb",
+      "building": "C",
+      "flat": "12",
+      "bedrooms": 1,
+      "sha256": "f06bd420a14a3beb3067a3eb886106cfab317d6d1f1eb7bf6019255b336236ac",
+      "bytes": 8557456,
+      "label": "Tower C \u00b7 Flat 12"
+    },
+    "F-01": {
+      "id": "F-01",
+      "url": "/scene-assets/venus-apartments/F-01.glb",
+      "building": "F",
+      "flat": "01",
+      "bedrooms": 1,
+      "sha256": "4c7dbf68c106a285cdfaad1528b7afd1dcbde92b762707f437fbc34aa1973ae9",
+      "bytes": 8415984,
+      "label": "Tower F \u00b7 Flat 01"
+    },
+    "F-02": {
+      "id": "F-02",
+      "url": "/scene-assets/venus-apartments/F-02.glb",
+      "building": "F",
+      "flat": "02",
+      "bedrooms": 1,
+      "sha256": "62efaaaeb6e70c6a9012268efa79bd9afa67c4663a6ba853d40f4337668c4ebe",
+      "bytes": 8415984,
+      "label": "Tower F \u00b7 Flat 02"
+    },
+    "F-03": {
+      "id": "F-03",
+      "url": "/scene-assets/venus-apartments/F-03.glb",
+      "building": "F",
+      "flat": "03",
+      "bedrooms": 2,
+      "sha256": "3b71c6e28139783eb561a76424433302361773108fa0d92c0012252b08f470c9",
+      "bytes": 8585220,
+      "label": "Tower F \u00b7 Flat 03"
+    },
+    "F-04": {
+      "id": "F-04",
+      "url": "/scene-assets/venus-apartments/F-04.glb",
+      "building": "F",
+      "flat": "04",
+      "bedrooms": 2,
+      "sha256": "c471dff8f34d499f1b7d0ef0b82a9c48d0fac38853bfdaced0360d8d9b98381b",
+      "bytes": 8585220,
+      "label": "Tower F \u00b7 Flat 04"
+    },
+    "F-05": {
+      "id": "F-05",
+      "url": "/scene-assets/venus-apartments/F-05.glb",
+      "building": "F",
+      "flat": "05",
+      "bedrooms": 2,
+      "sha256": "c1eeecbfc5f89887205569014781e15c5c4880bfbd7edeb8aa05bcf39c07d6d3",
+      "bytes": 8585220,
+      "label": "Tower F \u00b7 Flat 05"
+    },
+    "F-06": {
+      "id": "F-06",
+      "url": "/scene-assets/venus-apartments/F-06.glb",
+      "building": "F",
+      "flat": "06",
+      "bedrooms": 2,
+      "sha256": "fa54138be7ea1de9825f58898d34e25cc19b3c5cb8d189939ac6caaed0563225",
+      "bytes": 8585220,
+      "label": "Tower F \u00b7 Flat 06"
+    },
+    "F-07": {
+      "id": "F-07",
+      "url": "/scene-assets/venus-apartments/F-07.glb",
+      "building": "F",
+      "flat": "07",
+      "bedrooms": 1,
+      "sha256": "b6fe93ad3d00c4b69c67d059d2ebfc0d147b2b180b4833320c854148647b0397",
+      "bytes": 8415984,
+      "label": "Tower F \u00b7 Flat 07"
+    },
+    "F-08": {
+      "id": "F-08",
+      "url": "/scene-assets/venus-apartments/F-08.glb",
+      "building": "F",
+      "flat": "08",
+      "bedrooms": 1,
+      "sha256": "c75a67abc1e7a2c2a3f2d7925fe9adccb4ccb436b58a0f6b0c42bb14dcdd89ee",
+      "bytes": 8415984,
+      "label": "Tower F \u00b7 Flat 08"
+    },
+    "F-09": {
+      "id": "F-09",
+      "url": "/scene-assets/venus-apartments/F-09.glb",
+      "building": "F",
+      "flat": "09",
+      "bedrooms": 1,
+      "sha256": "8c23e990f947aafbc691578161223e7a506f0ed51241abb232d8a58761bdb569",
+      "bytes": 8557456,
+      "label": "Tower F \u00b7 Flat 09"
+    },
+    "F-10": {
+      "id": "F-10",
+      "url": "/scene-assets/venus-apartments/F-10.glb",
+      "building": "F",
+      "flat": "10",
+      "bedrooms": 1,
+      "sha256": "e681079d816c5283199494340a19797842778d8ada7d63d14cdbef1697115328",
+      "bytes": 8557452,
+      "label": "Tower F \u00b7 Flat 10"
+    },
+    "F-11": {
+      "id": "F-11",
+      "url": "/scene-assets/venus-apartments/F-11.glb",
+      "building": "F",
+      "flat": "11",
+      "bedrooms": 1,
+      "sha256": "56c038d2d3d86c16959ac27b5a1028ae4fd4a28fd176a6f2cfa020f6cdec0792",
+      "bytes": 8557456,
+      "label": "Tower F \u00b7 Flat 11"
+    },
+    "F-12": {
+      "id": "F-12",
+      "url": "/scene-assets/venus-apartments/F-12.glb",
+      "building": "F",
+      "flat": "12",
+      "bedrooms": 1,
+      "sha256": "f7b5a746920a6d2d78e0fabd3c53fd8f5113573b930aa2d2d3a45d3f33e0eb91",
+      "bytes": 8557456,
+      "label": "Tower F \u00b7 Flat 12"
+    }
+  },
+  "alternatives": [
+    {
+      "id": "A-jodi",
+      "url": "/scene-assets/venus-apartments/A-jodi.glb",
+      "building": "A",
+      "flat": "Jodi option",
+      "bedrooms": 3,
+      "sha256": "187c235df9f1644d5a196737e0076eaa9e8e396719f8aff1914b3495db31288d",
+      "bytes": 9235640,
+      "label": "Vivanta Building A \u00b7 Jodi combined option"
+    },
+    {
+      "id": "C-jodi",
+      "url": "/scene-assets/venus-apartments/C-jodi.glb",
+      "building": "C",
+      "flat": "Jodi option",
+      "bedrooms": 3,
+      "sha256": "6a909b0c97da811cf26cea849dedfaed021df23c3a464100f7239be4fb7cce06",
+      "bytes": 9029940,
+      "label": "Tower C \u00b7 Jodi combined option"
+    },
+    {
+      "id": "F-jodi",
+      "url": "/scene-assets/venus-apartments/F-jodi.glb",
+      "building": "F",
+      "flat": "Jodi option",
+      "bedrooms": 3,
+      "sha256": "bf8b57d26050e0eef04a7e580a32c2a8978ebf1e7ae49a240ad7752b969383e1",
+      "bytes": 9029940,
+      "label": "Tower F \u00b7 Jodi combined option"
+    }
+  ],
+  "provenance": {
+    "sourceFolder": "https://drive.google.com/drive/folders/1-JZJ0tgcBSCGfygBEWN_B1rXHWEE5pUT",
+    "units": "metres",
+    "upAxis": "Y",
+    "note": "Complete furnished apartment GLBs supplied by the user. Source dimensions and furnishings remain approximate."
+  }
+}

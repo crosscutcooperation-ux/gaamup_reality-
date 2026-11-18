@@ -1,0 +1,81 @@
+{
+  "units": "metres",
+  "towers": [
+    {
+      "id": "C",
+      "floors": 33,
+      "note": "T-shaped plan · 2nd–33rd floors supplied"
+    },
+    {
+      "id": "D",
+      "floors": 33,
+      "note": "Masterplan footprint · height and facade inferred"
+    },
+    {
+      "id": "E",
+      "floors": 33,
+      "note": "Masterplan footprint · height and facade inferred"
+    },
+    {
+      "id": "F",
+      "floors": 33,
+      "note": "33-storey Vivanta tower · brochure plan supplied"
+    },
+    {
+      "id": "G",
+      "floors": 33,
+      "note": "33-storey Vivanta tower · elevation supplied"
+    },
+    {
+      "id": "A",
+      "floors": 33,
+      "note": "T-shaped Vivanta plan · brochure supplied"
+    },
+    {
+      "id": "B",
+      "floors": 33,
+      "note": "Masterplan footprint · height and facade inferred"
+    },
+    {
+      "id": "lavista",
+      "floors": 26,
+      "note": "L-shaped plan · 2nd–26th floors supplied"
+    },
+    {
+      "id": "aristo",
+      "floors": 26,
+      "note": "Linear plan supplied · facade from Aristo render; height estimated"
+    }
+  ],
+  "vertices": 1767364,
+  "triangles": 971836,
+  "meshes": 130,
+  "apartments": [
+    {
+      "area": 395,
+      "beds": 1,
+      "walls": 17
+    },
+    {
+      "area": 436,
+      "beds": 1,
+      "walls": 16
+    },
+    {
+      "area": 522,
+      "beds": 2,
+      "walls": 30
+    },
+    {
+      "area": 572,
+      "beds": 2,
+      "walls": 20
+    },
+    {
+      "area": 872,
+      "beds": 3,
+      "walls": 23
+    }
+  ],
+  "limitations": "Reconstructed from supplied renders and plans. Estimated dimensions, inferred hidden elevations, simplified temple and landscape. Towers B, D and E are conceptual massing. No original architectural model supplied."
+}
