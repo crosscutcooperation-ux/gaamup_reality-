@@ -1,0 +1,25 @@
+// Names follow the supplied project and its published amenity collection.
+// Interior amenities focus on their clubhouse location in the exterior model.
+export const AMENITIES=[
+ {id:'beach',name:'Private beach',view:'poolOverview'},
+ {id:'court',name:'Multipurpose court',view:'court'},
+ {id:'fitness',name:'Fitness centre',view:'clubhouse'},
+ {id:'games',name:'Indoor games room',view:'clubhouse'},
+ {id:'yoga',name:'Rooftop yoga zone',view:'rooftop'},
+ {id:'stargazing',name:'Stargazing zone',view:'rooftop'},
+ {id:'library',name:'Business centre & library',view:'clubhouse'},
+ {id:'banquet',name:'Banquet hall',view:'clubhouse'},
+ {id:'pool',name:'Swimming pool',walk:'pool'},
+ {id:'forest',name:'Forest trail',view:'gardens'},
+ {id:'barbeque',name:'Barbeque area',view:'gardens'},
+ {id:'jogging',name:'Jogging track',view:'gardens'},
+ {id:'kids',name:'Kids play zone',view:'play'},
+ {id:'organic',name:'Organic farming',view:'gardens'},
+ {id:'treehouse',name:'Treehouse',view:'gardens'},
+ {id:'climbing',name:'Rock climbing',view:'play'},
+ {id:'charging',name:'EV charging zone',view:'parking'},
+ {id:'parking',name:'Podium parking',view:'parking'},
+ {id:'clubhouse',name:'Vivanta Clubhouse',view:'clubhouse'},
+ {id:'school',name:'Eva World School',view:'school'},
+ {id:'temple',name:'Vasantdeep Vatika Jain Temple',view:'temple'},
+];
