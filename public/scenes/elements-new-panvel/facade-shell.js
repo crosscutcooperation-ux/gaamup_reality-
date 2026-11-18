@@ -1,0 +1,1 @@
+export function footprintRectangles(s){return [{x0:-s.width/2,x1:s.width/2,z0:-s.depth/2,z1:s.depth/2},{x0:-7,x1:7,z0:7,z1:17}];}
