@@ -1,0 +1,67 @@
+{
+  "accessed": "2026-11-12",
+  "bounds": [
+    72.96,
+    19.1,
+    73.19,
+    19.3
+  ],
+  "elevation": "terrain.json",
+  "architecture": "architecture.json",
+  "osmEndpoint": "https://api.openstreetmap.org/api/0.6/map",
+  "osmLicense": "ODbL 1.0",
+  "extracts": [
+    {
+      "name": "shilphata.osm",
+      "sha256": "09983fc7279fa560e578f6bbfb621a110bce91c52784e8aa95e89d4f5e37a599",
+      "bytes": 3016198
+    },
+    {
+      "name": "ulhas-north.osm",
+      "sha256": "3b5258009fae3cef7b9bce591d77c4bd32abb69a7c4d0b9fa72a0e2e7b487909",
+      "bytes": 3815141
+    },
+    {
+      "name": "ulhas-west.osm",
+      "sha256": "75f4c2d42f7ae5bd09d6224af2569b10b72a1bc8e7cca29cb6c468a4d5154456",
+      "bytes": 1526410
+    },
+    {
+      "name": "diva-east.osm",
+      "sha256": "7d0d81402a250953259a48ce178cd6806569611605e5e17cfa96407c7d79419b",
+      "bytes": 2478386
+    },
+    {
+      "name": "kalyan.osm",
+      "sha256": "3a37cc15301b1c86fcbfbb54985d21bce5e140d8fa39c72f0ddf68d59d5aa075",
+      "bytes": 10141825
+    },
+    {
+      "name": "dombivli.osm",
+      "sha256": "ef921877311f9f4bf95aa111acbc5e6d3b3db36ef7a6bcbf92b2f2552c693908",
+      "bytes": 9779979
+    },
+    {
+      "name": "dombivli-east.osm",
+      "sha256": "7a3c6ae2e300d33ab48ac83c07c8c891cf65f382b8ea03b278fd6af51279d279",
+      "bytes": 6925276
+    },
+    {
+      "name": "shilphata-north.osm",
+      "sha256": "fcda62c87f20797f732521944d7dcb581827ac4abca3ae91212180164bdc1c80",
+      "bytes": 2887493
+    },
+    {
+      "name": "parsik-creek.osm",
+      "sha256": "88ab062e6e047a27e5f56ccf005bb4a44ecf245c33819a96015eae7eab04a22e",
+      "bytes": 6375047
+    }
+  ],
+  "limitations": [
+    "Terrain is sampled from nine zoom-12 Terrarium elevation tiles; not a current survey.",
+    "Region height is exaggerated three times for legibility.",
+    "Building footprints come from OSM; unknown heights are inferred from three storeys. Display heights are exaggerated for an architectural miniature.",
+    "Building detail, trees, stations and train scale are visual interpretations.",
+    "Stations use geographic anchors; the train connection is illustrative, not an operating route."
+  ]
+}

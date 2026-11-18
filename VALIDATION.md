@@ -1,0 +1,36 @@
+# Current validation
+
+- 45 JavaScript tests: station journey ordering/cancellation, train wheel/rail contact, all four viewport corners at the actual three station positions and additional route samples and three aspect ratios, imported colony geometry and eight tower IDs, packaged module/texture references, city filtering; original floor-controller DOM flow; isolated tower/level selection and restoration; exact references for 134 units / 47 furnished families; day/evening/night presets.
+- 6 Rust tests: property lifecycle, authorization and image checks; project publishing and persistence; real GLB storage/bindings/checksum/opening scene; viewer ZIP traversal rejection and sandbox headers; larger scene-upload body limits.
+- `npm run test:uploads`: passed with an 16 MB real GLB through a temporary Next.js → Rust stack. Verified exact downloaded checksum, UTF-8 names, activation, sandboxed HTML, manifest persistence and project page rendering. Live inventory untouched.
+- `npm run test:http`: passed against the running site, including all 18 city catalogs, the full source scene engine, floor/house controllers, drawings, furnished images and house GLBs.
+- Production build: passed.
+- Blender: inspected the rebuilt train preview at `output/blender/mumbai-ac-local-preview.png`; five texture images are embedded and paint materials have roughness and normal maps.
+
+Browser visual and pointer-interaction QA was not run because localhost browser access remains disabled for this session. The imported colony's geometry, dependency paths and HTTP responses were checked, but these checks do not substitute for a browser visual review. The train remains an artistic model, not a scanned photographic replica.
+
+Source sync: `git pull --ff-only` reported already up to date at `26eb058`. All 706 plan/unit files were recovered and verified against Git blob SHA-1 values. The original walk-navigation regression suite also passes for tour paths, pool avoidance and static batching. Source plan and furnished images were inspected as matching layout pairs. DOM flow tests verify state/controller behavior; no browser screenshot or GPU interaction pass is claimed.
+
+November 12 revision: Mumbai AC local exported and inspected in Blender; 12-car/rear-cab geometry and the shorter 3.6-second journey pass the rail/contact and viewport-coverage checks. Sidebar filters pass combined query/range/sort tests. The real satellite JPEG and provenance metadata pass file checks; cloud/star/moon lighting transitions and disposal pass CPU/DOM tests. Public route smoke and production build pass. GLSL atmosphere appearance has not been checked in a browser; browser visual review remains pending.
+
+Latest route/media/apartment revision: 35 JavaScript and 6 Rust tests pass. The added checks match all 134 house entries to the correct complete-apartment file, verify all 71 original SHA-256 checksums and embedded furniture/texture metadata, check in-bounds ground UVs and verify continuous tangent joins for both railway lines. The original floor → house → furnished image → rotating GLB controller test now asserts the new asset URL and Orchard’s shared Spring preview.
+
+Production build and HTTP smoke pass, including supplied project image/film URLs and byte-range MP4 playback. A representative imported whole-apartment GLB was rendered and inspected in Blender at `output/blender/complete-apartment-preview.png`. The rebuilt textured AC train was rendered and inspected separately. No browser visual review is claimed.
+
+Current guided-architecture revision: 39 JavaScript tests, 6 Rust tests, production build, route/media HTTP smoke and large-GLB upload smoke pass. New tests verify geographic station anchors, measured elevation, actual architecture/woodland generation, corridor clearance, deliberate-only guide navigation, guide replay and apartment-light placement. HTTP smoke verifies five unique photographs, visible walking launchers and absence of the City blocks control. The 71 updated GLBs match the current source checksums; versioned URLs prevent stale models.
+
+Blender renders of the updated textured train, regional geometry/materials and updated furnished apartment were inspected. The regional inspection uses the same runtime geometry builder but is not a screenshot of the web renderer. WebGL/SSAO appearance and pointer interaction still require browser visual review; saved localhost browser access restrictions remain in effect. The archived ZIPs from the preceding revision were not regenerated for this request; current source files and local preview are the deliverable.
+
+Sketchfab main-map revision: production build, five journey-ordering/cancellation tests and route/media HTTP smoke pass. HTTP checks verify the supplied model ID, embed URL and visible creator attribution. The main viewer is embedded, not extracted into the Three.js scene. The hosted model’s external playback could not be browser-verified; external automated inspection was rejected. Existing train/catalog logic remains, with background rendering suspended during the idle embedded view.
+
+Local-map correction: the iframe is removed. A frustum test checks all eight landscape corners on desktop, tablet and portrait-phone aspect ratios, and the existing journey tests pass. The full JavaScript suite now has 40 passing tests; production build and HTTP smoke pass. Camera descent was additionally sampled at the fitted start positions for all three stations on wide and portrait views, with monotonic descent and smooth orientation. The requested Riva source model is not yet available for integration; its official metadata disables downloads.
+
+Downloaded-scan integration: all 42 JavaScript tests, production build and HTTP smoke pass. The new GLB is checked through the actual Three.js loader, with its bounds, source attribution, embedded textures and checksum. Grounding validation raycasts both rails of both tracks at 1,200 locations on the exported mesh: zero misses, maximum deviation 0.0054 scene units. The ballast top supports the sleepers and is visible from above. Train coverage and camera-descent tests use the fitted map framing and 3D route. HTTP checks verify local GLB byte-range delivery and visible CC BY credit. Source and combined railway Blender renders were inspected; this is not a browser GPU review.
+
+
+## Moving scenery and replaying project presentation
+
+- `npm test`: 45 tests, including full aerial-corner coverage outside the scan at desktop and phone aspect ratios, world-space cloud movement, reduced-motion stopping, opaque ground under both tracks after silhouette feathering, retained cloud alpha, and scroll-animation exit/re-entry/cleanup.
+- `AERO_NEXT_DIST_DIR=.next-atmosphere-check npm run build`: production compilation checked independently of the live development server.
+- `npm run test:http`: the removed homepage strips and credit overlay are absent; named stations, new local scenery files, host-page credits and all catalog/property/floor/unit flows remain available.
+- Blender inspection renders use the exported scan/train and runtime camera coordinates: `output/blender/journey-aerial.png`, `journey-descent.png`, and `journey-trackside.png`. These are inspection renders, not browser screenshots. Browser GPU appearance has not been independently reviewed in this run.

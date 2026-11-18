@@ -1,0 +1,71 @@
+{
+  "id": "elements-new-panvel",
+  "slug": "elements-new-panvel",
+  "name": "Codename Elements",
+  "location": "New Panvel, Navi Mumbai",
+  "description": "Explore the two residential towers, landscaped podium, pool and floor plans in an interactive 3D scene. Apartment assignments use the supplied typical layouts.",
+  "price": "Price on request",
+  "constructionStatus": "under-construction",
+  "configuration": "1 & 2 BHK",
+  "citySlugs": [
+    "panvel"
+  ],
+  "coverImage": "/scenes/elements-new-panvel/assets/marketing/Front View.jpg",
+  "published": true,
+  "viewer": {
+    "kind": "builtin",
+    "url": "/scenes/elements-new-panvel/index.html",
+    "assetId": ""
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "projectId": "elements-new-panvel",
+    "nodes": [
+      {
+        "id": "elements-new-panvel",
+        "type": "project",
+        "name": "Codename Elements"
+      },
+      {
+        "id": "elements-T1",
+        "type": "building",
+        "parentId": "elements-new-panvel",
+        "name": "Tower 1"
+      },
+      {
+        "id": "elements-T2",
+        "type": "building",
+        "parentId": "elements-new-panvel",
+        "name": "Tower 2"
+      }
+    ],
+    "catalog": {
+      "developer": "Today Group",
+      "bhk": [
+        "1",
+        "2"
+      ],
+      "propertyType": "Apartment",
+      "amenities": [
+        "Swimming pool",
+        "Gymnasium",
+        "Kids play area",
+        "Landscaped garden",
+        "Multipurpose court",
+        "Sky deck",
+        "Open to sky garden",
+        "Walking track",
+        "Reflexology pathway"
+      ],
+      "photos": [
+        "/scenes/elements-new-panvel/assets/marketing/Front View.jpg",
+        "/scenes/elements-new-panvel/assets/marketing/Podium View.jpg",
+        "/scenes/elements-new-panvel/assets/marketing/Entrance Lobby.jpg",
+        "/scenes/elements-new-panvel/assets/marketing/Elevation.jpg"
+      ],
+      "sources": [
+        "supplied Codename Elements brochure and renders"
+      ]
+    }
+  }
+}

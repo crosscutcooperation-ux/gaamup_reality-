@@ -1,0 +1,62 @@
+{
+  "project": "Sai World Dreams",
+  "providedFolder": "https://drive.google.com/drive/folders/1-1CuJxA6qSO_H0XTvI590hOnokmxTOpe",
+  "files": [
+    {
+      "name": "lifestyle-film",
+      "source": "https://drive.google.com/file/d/1CJGbuHsJ0utzRkyvve7T_3p9BYmCtjVv/view",
+      "originalBytes": 6069547,
+      "sha256": "6f09fa60960f0bd290ef26ef88f3967f59447c9a6aff32bd00d67d746c6f9e75",
+      "kind": "Provided project promotional film"
+    },
+    {
+      "name": "aerial",
+      "source": "https://drive.google.com/file/d/17Ffw6WkiQ0ElFqsz5jKHV13Ot9mQnlA8/view",
+      "originalBytes": 71614190,
+      "sha256": "2b3cc95893bd29cf213cfde71dcbba9392540536d54ada954b0968d557265e5f",
+      "kind": "Provided architectural render"
+    },
+    {
+      "name": "night-courtyard",
+      "source": "https://drive.google.com/file/d/1uCNzlzeuIoRQ0hrtC75pNiGvS5ueajtj/view",
+      "originalBytes": 73228484,
+      "sha256": "ca05f7e1360db0518b18648f4621928275c56ba68d5a01facfd7c484651958e5",
+      "kind": "Provided architectural render"
+    },
+    {
+      "name": "pool",
+      "source": "https://drive.google.com/file/d/1LqbCDqJc0v5GIkz9917KBmj9ZYh-VBcj/view",
+      "originalBytes": 67529388,
+      "sha256": "55f17a33532e8097f78abd6526236bd4103e5882b4c551da84fc499e77a5ffbe",
+      "kind": "Provided architectural render"
+    },
+    {
+      "name": "courtyard",
+      "source": "https://drive.google.com/file/d/1Fx3KrLPYKCwKGFN_kc9bKZTJ6D1xHCX6/view",
+      "originalBytes": 73197804,
+      "sha256": "7ca2f5a0189c56f33e1f3456e2830057af713cfeee4a9990c66f7415b959ce12",
+      "kind": "Provided architectural render"
+    },
+    {
+      "name": "entrance",
+      "source": "https://drive.google.com/file/d/1wnO-b_GiVsYE0XrQeDHnEIYPSdD03vAl/view",
+      "originalBytes": 74736816,
+      "sha256": "75006bc4063b385d0c1d37f1f5c39b367aea0ff63dd0abae66194b5f5a6514e8",
+      "kind": "Provided architectural render"
+    },
+    {
+      "name": "project-film",
+      "source": "https://drive.google.com/file/d/1oxfgMoHvZj1c54lSeYjMswvl2OQ5y14N/view",
+      "originalBytes": 117153827,
+      "sha256": "c9aa9203809ffe82ed6e2065f943dd5da819e16eff0e766098827e6262b8b77f",
+      "kind": "Provided project promotional film"
+    },
+    {
+      "name": "balcony",
+      "source": "https://drive.google.com/file/d/1anIbkWInGFX7Ldk9S0yGkg8DFlcq5t8m/view",
+      "originalBytes": 104486288,
+      "sha256": "eb40212e604f5c2238330b6a69b925f2ff51a88a0e626901e20c14ca326d770f",
+      "kind": "Provided architectural render"
+    }
+  ]
+}

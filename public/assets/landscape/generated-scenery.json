@@ -1,0 +1,16 @@
+{
+  "tool": "Built-in image_gen",
+  "generatedOn": "2026-11-16",
+  "use": "Illustrative scenery around the user-supplied landscape. Not satellite or location-accurate imagery.",
+  "assets": [
+    {
+      "url": "/assets/landscape/woodland-surroundings.webp",
+      "prompt": "Use case: photorealistic-natural. Asset type: aerial ground texture for the surroundings of an existing 3D scanned forest landscape in a real-estate website. Generate a seamless-looking very wide orthographic directly overhead aerial photograph of lush western Indian countryside: irregular dense green tree canopies, softly rolling meadow clearings, fine scrub, small earth footpaths. The whole image is land and vegetation, edge to edge, no horizon and no sky. Natural soft daylight, realistic drone photogrammetry detail, muted sage and forest greens with warm olive grass, matched to a real wooded field scan. Uniform scale across frame, no tilt, no depth-of-field blur. No buildings, railway, trains, stations, labels, symbols, text, watermarks, border or framing. This is background scenery only, not a real geographic map. Wide landscape composition."
+    },
+    {
+      "url": "/assets/landscape/journey-cloud-cumulus.webp",
+      "transparent": true,
+      "use": "Generated photographic cumulus banks in world space and layered along the train camera descent."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your interactive scene</title>
+<style>body{margin:0;background:#e8ebe3;color:#263c35;font:16px system-ui;display:grid;place-content:center;min-height:100vh;text-align:center}button{padding:14px 20px;border:1px solid #263c35;background:none;cursor:pointer}</style></head>
+<body><h1>Your interactive property scene</h1><p>Replace this document with your finished viewer.</p><button id="view">Change perspective</button><p id="status" role="status">Courtyard</p>
+<script>document.querySelector('#view').onclick=()=>{const status=document.querySelector('#status');status.textContent=status.textContent==='Courtyard'?'Aerial view':'Courtyard';};</script></body></html>

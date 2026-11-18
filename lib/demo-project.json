@@ -1,0 +1,92 @@
+{
+  "id": "sai-world-dreams",
+  "slug": "sai-world-dreams",
+  "name": "Sai World Dreams",
+  "location": "Dombivli, Mumbai Metropolitan Region",
+  "description": "Explore the residential towers, landscaped courtyard and pool terrace in an interactive 3D colony. This is a reference-led exterior study from the supplied project.",
+  "price": "Price on request",
+  "constructionStatus": "under-construction",
+  "configuration": "Residential township",
+  "citySlugs": ["dombivli"],
+  "coverImage": "/scenes/sai-world-dreams/assets/exteriors/courtyard-1280.webp",
+  "published": true,
+  "viewer": {
+    "kind": "builtin",
+    "url": "/scenes/sai-world-dreams/index.html",
+    "assetId": ""
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "projectId": "sai-world-dreams",
+    "units": "illustrative scene units",
+    "axis": "Y-up",
+    "provenance": {
+      "repository": "https://github.com/crosscutcooperation-ux/New-SAI-WORLD-REPO",
+      "commit": "26eb058b3fea387a2e55b360e7697de4c094a903",
+      "scope": "Reference-led exterior reconstruction with complete furnished apartment GLBs imported from the validated backend-program library. Exterior dimensions and repeated floor assignments remain approximate. Orchard uses the neighbouring Spring model and plan as requested."
+    },
+    "nodes": [
+      {
+        "id": "sai-world-dreams",
+        "type": "project",
+        "name": "Sai World Dreams"
+      },
+      {
+        "id": "tower-A",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Castle",
+        "objectName": "Residential tower A \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-B",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Vista",
+        "objectName": "Residential tower B \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-C",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Mist",
+        "objectName": "Residential tower C \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-D",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Spring",
+        "objectName": "Residential tower D \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-E",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Orchard",
+        "objectName": "Residential tower E \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-F",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Meadows",
+        "objectName": "Residential tower F \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-G",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Heaven",
+        "objectName": "Residential tower G \u2014 textured architectural exterior"
+      },
+      {
+        "id": "tower-H",
+        "type": "building",
+        "parentId": "sai-world-dreams",
+        "name": "Breeze",
+        "objectName": "Residential tower H \u2014 textured architectural exterior"
+      }
+    ]
+  }
+}

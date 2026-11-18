@@ -1,0 +1,121 @@
+{
+  "id": "venus-skky-city",
+  "slug": "venus-skky-city",
+  "name": "Venus Skky City",
+  "location": "Dombivli East, Mumbai Metropolitan Region",
+  "description": "Explore Venus Skky City\u2019s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
+  "price": "Price on request",
+  "constructionStatus": "under-construction",
+  "configuration": "1 & 2 BHK",
+  "citySlugs": [
+    "dombivli"
+  ],
+  "coverImage": "/scenes/venus-skky-city/assets/elevation.webp",
+  "published": true,
+  "viewer": {
+    "kind": "builtin",
+    "url": "/scenes/venus-skky-city/index.html",
+    "assetId": ""
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "projectId": "venus-skky-city",
+    "nodes": [
+      {
+        "id": "venus-skky-city",
+        "type": "project",
+        "name": "Venus Skky City"
+      },
+      {
+        "id": "venus-A",
+        "type": "building",
+        "name": "Tower A",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-B",
+        "type": "building",
+        "name": "Tower B",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-C",
+        "type": "building",
+        "name": "Tower C",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-D",
+        "type": "building",
+        "name": "Tower D",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-E",
+        "type": "building",
+        "name": "Tower E",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-F",
+        "type": "building",
+        "name": "Tower F",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-G",
+        "type": "building",
+        "name": "Tower G",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-lavista",
+        "type": "building",
+        "name": "Lavista",
+        "parentId": "venus-skky-city"
+      },
+      {
+        "id": "venus-aristo",
+        "type": "building",
+        "name": "Aristo",
+        "parentId": "venus-skky-city"
+      }
+    ],
+    "catalog": {
+      "developer": "Venus Nirvana LLP",
+      "bhk": [
+        "1",
+        "2"
+      ],
+      "propertyType": "Apartment",
+      "amenities": [
+        "Private beach",
+        "Multipurpose court",
+        "Fitness centre",
+        "Indoor games room",
+        "Rooftop yoga zone",
+        "Stargazing zone",
+        "Business centre & library",
+        "Banquet hall",
+        "Swimming pool",
+        "Forest trail",
+        "Barbeque area",
+        "Jogging track",
+        "Kids play zone",
+        "Organic farming",
+        "Treehouse",
+        "Rock climbing",
+        "EV charging",
+        "Podium parking"
+      ],
+      "photos": [
+        "/scenes/venus-skky-city/assets/elevation.webp",
+        "/scenes/venus-skky-city/assets/gardens.webp",
+        "/scenes/venus-skky-city/assets/clubhouse.webp"
+      ],
+      "sources": [
+        "https://venusskkycity.com/"
+      ]
+    }
+  }
+}

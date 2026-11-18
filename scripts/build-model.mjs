@@ -1,0 +1,10 @@
+import {existsSync} from 'node:fs';
+import {spawn} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+const blender=process.env.AERO_BLENDER||(existsSync('/Applications/Blender.app/Contents/MacOS/Blender')?'/Applications/Blender.app/Contents/MacOS/Blender':'blender');
+const args=['--background','--python',fileURLToPath(new URL('./build-ac-local.py',import.meta.url))];
+if(!process.argv.includes('--render'))args.push('--','--skip-preview');
+const child=spawn(blender,args,{stdio:'inherit'});
+child.on('error',error=>{console.error(`Blender could not start: ${error.message}. Set AERO_BLENDER to your Blender executable.`);process.exitCode=1;});
+child.on('exit',code=>{process.exitCode=code||0;});
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill(signal));

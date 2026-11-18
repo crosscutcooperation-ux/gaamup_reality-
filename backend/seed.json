@@ -1,0 +1,84 @@
+{
+  "cities": [
+    {
+      "name": "Dombivli",
+      "native": "डोंबिवली",
+      "index": 0,
+      "slug": "dombivli"
+    },
+    {
+      "name": "Panvel",
+      "native": "पनवेल",
+      "index": 1,
+      "slug": "panvel"
+    }
+  ],
+  "properties": [
+    {
+      "id": "sai-world-dreams",
+      "name": "Sai World Dreams",
+      "city": "Dombivli",
+      "locality": "Dombivli",
+      "price": "Price on request",
+      "area": "Area on request",
+      "bhk": "1, 2, 2.5 & 3 BHK",
+      "developer": "Paradise Group",
+      "image": "/scenes/sai-world-dreams/assets/exteriors/courtyard-1280.webp",
+      "featured": true,
+      "published": true,
+      "archived": false,
+      "description": "Explore the residential towers, landscaped courtyard and pool terrace in an interactive 3D colony. This is a reference-led exterior study from the supplied project.",
+      "constructionStatus": "under-construction"
+    },
+    {
+      "id": "venus-skky-city",
+      "name": "Venus Skky City",
+      "city": "Dombivli",
+      "locality": "Dombivli East",
+      "price": "Price on request",
+      "area": "Area on request",
+      "bhk": "1 & 2 BHK",
+      "developer": "Venus Nirvana LLP",
+      "image": "/scenes/venus-skky-city/assets/elevation.webp",
+      "featured": true,
+      "published": true,
+      "archived": false,
+      "description": "Explore Venus Skky City’s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
+      "constructionStatus": "under-construction"
+    },
+    {
+      "id": "elements-new-panvel",
+      "name": "Codename Elements",
+      "city": "Panvel",
+      "locality": "New Panvel",
+      "price": "Price on request",
+      "area": "Area on request",
+      "bhk": "1 & 2 BHK",
+      "developer": "Today Group",
+      "image": "/scenes/elements-new-panvel/assets/marketing/Front View.jpg",
+      "featured": true,
+      "published": true,
+      "archived": false,
+      "description": "Explore the two residential towers, landscaped podium, pool and floor plans in an interactive 3D scene. Apartment assignments use the supplied typical layouts.",
+      "constructionStatus": "under-construction"
+    }
+  ],
+  "builders": [
+    {
+      "logo": "Paradise",
+      "style": "paradise",
+      "name": "Paradise Group",
+      "city": "Dombivli",
+      "project": "Sai World Dreams",
+      "projectHref": "/projects/sai-world-dreams?city=dombivli"
+    },
+    {
+      "logo": "Venus Nirvana",
+      "style": "venus",
+      "name": "Venus Nirvana LLP",
+      "city": "Dombivli",
+      "project": "Venus Skky City",
+      "projectHref": "/projects/venus-skky-city?city=dombivli"
+    }
+  ]
+}
