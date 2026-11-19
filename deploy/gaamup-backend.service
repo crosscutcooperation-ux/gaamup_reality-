@@ -1,0 +1,20 @@
+[Unit]
+Description=Gaamup property API
+After=network.target
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/var/www/gaamup-current
+Environment=AERO_DATA_DIR=/var/lib/gaamup
+Environment=AERO_BACKEND_PORT=4000
+ExecStart=/var/www/gaamup-current/backend/target/release/aero-backend
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/gaamup
+UMask=0027
+[Install]
+WantedBy=multi-user.target

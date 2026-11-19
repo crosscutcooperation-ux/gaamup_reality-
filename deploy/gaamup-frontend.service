@@ -1,0 +1,17 @@
+[Unit]
+Description=Gaamup Next.js frontend
+After=network.target gaamup-backend.service
+Requires=gaamup-backend.service
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/var/www/gaamup-current
+Environment=NODE_ENV=production
+Environment=AERO_BACKEND_URL=http://127.0.0.1:4000
+ExecStart=/usr/local/bin/node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 4173
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target

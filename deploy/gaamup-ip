@@ -1,0 +1,15 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name 16.176.182.103;
+    include /etc/nginx/snippets/gaamup-locations.conf;
+}
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name 16.176.182.103;
+    ssl_certificate /etc/letsencrypt/live/16.176.182.103/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/16.176.182.103/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    include /etc/nginx/snippets/gaamup-locations.conf;
+}

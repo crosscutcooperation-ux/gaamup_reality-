@@ -876,7 +876,7 @@ mod tests {
         );
         let glb = std::fs::read(
             PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-                .join("../public/models/mumbai-ac-local.glb"),
+                .join("../public/models/mumbai-ac-local-optimized.glb"),
         )
         .unwrap();
         let (status, asset, _) = call(
