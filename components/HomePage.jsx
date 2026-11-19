@@ -14,6 +14,7 @@ export default function HomePage({catalog,backendOffline=false}){
   const filtered=useMemo(()=>filterProperties(display,filters),[display,filters]);
   useEffect(()=>setProperties(display),[display,setProperties]);
   return <main id="home">
+    <link rel="preload" href="/models/nature-landscape-draco-v1.bin?release=1" as="fetch" type="model/gltf-binary" crossOrigin="anonymous" fetchPriority="high"/>
     <section className="hero hero-film" aria-label="Architectural time-lapse"><video autoPlay muted loop playsInline preload="metadata" aria-hidden="true"><source src="/assets/video/architectural-time-lapse.mp4" type="video/mp4"/></video></section>
     <div className="home-discovery">
     <PropertyFilters value={filters} onChange={setFilters}/>

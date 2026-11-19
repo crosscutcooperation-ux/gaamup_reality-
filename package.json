@@ -29,6 +29,9 @@
     "three": "0.170.0"
   },
   "devDependencies": {
+    "@gltf-transform/core": "^4.5.1",
+    "@gltf-transform/extensions": "^4.5.1",
+    "draco3dgltf": "^1.5.9",
     "happy-dom": "^21.0.4"
   }
 }

@@ -1,0 +1,19 @@
+server {
+ listen 80;
+ listen [::]:80;
+ server_name gaamupproperties.com www.gaamupproperties.com;
+ location ^~ /.well-known/acme-challenge/ {
+  root /var/www/panvibes-acme;
+  try_files $uri =404;
+ }
+ location / { return 301 https://gaamupproperties.com$request_uri; }
+}
+server {
+ listen 443 ssl http2;
+ listen [::]:443 ssl http2;
+ server_name gaamupproperties.com www.gaamupproperties.com;
+ ssl_certificate /etc/letsencrypt/live/gaamupproperties.com/fullchain.pem;
+ ssl_certificate_key /etc/letsencrypt/live/gaamupproperties.com/privkey.pem;
+ ssl_protocols TLSv1.2 TLSv1.3;
+ include /etc/nginx/snippets/gaamup-locations.conf;
+}
