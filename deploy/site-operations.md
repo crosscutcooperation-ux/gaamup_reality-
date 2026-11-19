@@ -31,3 +31,5 @@ The colony viewers request versioned `.bin` URLs containing GLB data. Cloudflare
 Baseline cold transfers from the development machine before release: Venus base 12.63s / 32.3 MB, Venus facades 3.33s / 7.63 MB, Elements 2.88s / 6.57 MB, Sai facades 5.83s / 5.38 MB. These are transfer times on one connection, not promises about total ready time. Measure production browser readiness on target devices after cache warm-up.
 
 Run `npm test`, `npm run test:backend`, `npm run build`, `npm audit`. Do not include `.next`, `node_modules`, `.env`, key files, render previews, backups or Blender source in Git. Retain the previous deployment for rollback, keeping databases and environment outside releases.
+
+HTML responses append `no-transform` to prevent Cloudflare email rewriting from changing React markup during hydration. The shared security-header snippet must be installed alongside the locations snippet. Cloudflare documents this behavior at https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/.
