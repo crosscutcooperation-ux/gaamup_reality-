@@ -33,3 +33,13 @@ Baseline cold transfers from the development machine before release: Venus base 
 Run `npm test`, `npm run test:backend`, `npm run build`, `npm audit`. Do not include `.next`, `node_modules`, `.env`, key files, render previews, backups or Blender source in Git. Retain the previous deployment for rollback, keeping databases and environment outside releases.
 
 HTML responses append `no-transform` to prevent Cloudflare email rewriting from changing React markup during hydration. The shared security-header snippet must be installed alongside the locations snippet. Cloudflare documents this behavior at https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation/.
+
+## Live verification (2026-11-20)
+
+- Release: `/var/www/gaamup-releases/site-20261120`; previous release retained for rollback.
+- 74 JavaScript tests, 6 Rust tests, production builds and dependency audit passed (0 known vulnerabilities).
+- SMTP authentication and one saved test enquiry to the configured recipient passed; repeated submission did not duplicate the row or delivery.
+- All main pages and three project routes return 200; unauthenticated lead reads return 401.
+- All four colony binaries returned Cloudflare HIT and matching decoded SHA-256 checksums. Warm transfers on the test connection: Venus base 344,375 compressed bytes / 0.94s, Venus detailed facades 2,542,062 / 1.68s, Elements 5,451,420 / 2.01s, Sai facades 3,561,526 / 1.99s. These are HTTP transfers, not measured browser-ready times.
+- Enquiry timer active, origin throttling installed, security headers and HTML no-transform confirmed publicly.
+- **Outstanding:** browser control reports `cgWindowNotFound` / local browser access unavailable. Production Turnstile keys are not installed; custom Cloudflare edge rate-limit rule and a real PC/mobile visual pass still require dashboard/browser access. The reconstructed forest remains a static photogrammetry mesh; clouds and train remain animated.
