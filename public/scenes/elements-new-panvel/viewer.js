@@ -109,10 +109,12 @@ function bind(){
   document.addEventListener('tower-detail-state',e=>{elevationOpen=e.detail.open;send('view',{view:elevationOpen?'building':planOpen?'floor':'colony'});if(!elevationOpen)$('#tower').value='';controls.enabled=!walk&&!planOpen&&!elevationOpen;invalidate();});
 }
 async function init(){try{
-  const dayEnvironment=await prepareMaterials(renderer,invalidate),built=buildSite();site=built.root;towers=built.towers;scene.add(site);atmosphere=createAtmosphere(scene,invalidate);setInterval(()=>{if(!document.hidden&&viewportVisible&&atmosphere?.update(performance.now()))invalidate();},100);
+  const materialsRequest=prepareMaterials(renderer,invalidate);
+
   const decoder=new DRACOLoader().setDecoderPath('shared/vendor/draco/').setDecoderConfig({type:'wasm'}).setWorkerLimit(2);
   const loader=new GLTFLoader().setDRACOLoader(decoder);
-  const detailed=await loader.loadAsync('assets/elements-towers.glb?v=facades-1');decoder.dispose();
+  const [dayEnvironment,detailed]=await Promise.all([materialsRequest,loader.loadAsync('assets/elements-towers-v2.bin?release=2')]).finally(()=>decoder.dispose());
+  const built=buildSite();site=built.root;towers=built.towers;scene.add(site);atmosphere=createAtmosphere(scene,invalidate);setInterval(()=>{if(!document.hidden&&viewportVisible&&atmosphere?.update(performance.now()))invalidate();},100);
   const byId=new Map();detailed.scene.traverse(object=>{if(object.userData.id)byId.set(object.userData.id,object);});
   detailed.scene.traverse(object=>{if(!object.isMesh)return;for(const material of Array.isArray(object.material)?object.material:[object.material])for(const texture of Object.values(material))if(texture?.isTexture)texture.anisotropy=renderer.capabilities.getMaxAnisotropy();});
   for(const tower of towers){const source=byId.get(tower.userData.id);if(!source)throw Error('Detailed facade missing for '+tower.userData.id);

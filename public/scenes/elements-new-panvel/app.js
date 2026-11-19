@@ -1,1 +1,1 @@
-import './viewer.js?v=daylight-1';
+import './viewer.js?v=fast-models-2';

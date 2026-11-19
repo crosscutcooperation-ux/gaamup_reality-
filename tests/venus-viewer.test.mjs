@@ -14,7 +14,7 @@ test('the rebuilt controller initializes and opens the same building and floor d
  const data=code=>'data:text/javascript,'+encodeURIComponent(code);
  const actualThree=new URL('../node_modules/three/build/three.module.js',import.meta.url).href;
  const mockThree=data(`export * from ${JSON.stringify(actualThree)};export class WebGLRenderer{constructor(){this.shadowMap={};this.info={render:{calls:0}};this.capabilities={getMaxAnisotropy:()=>4};}setPixelRatio(){}setSize(){}setClearAlpha(){}render(){}dispose(){}}export class PMREMGenerator{fromScene(){return {texture:{},dispose(){}};}dispose(){}}`);
- const mockLoader=data('export class GLTFLoader{setDRACOLoader(){return this;}async loadAsync(url){return url.includes("detailed-facades")?{scene:globalThis.__venusRuntimeAsset.scene.clone(true)}:globalThis.__venusRuntimeAsset;}}');
+ const mockLoader=data('export class GLTFLoader{setDRACOLoader(){return this;}async loadAsync(url){return url.includes("facades")?{scene:globalThis.__venusRuntimeAsset.scene.clone(true)}:globalThis.__venusRuntimeAsset;}}');
  const mockHDR=data('export class RGBELoader{async loadAsync(){throw Error("HDR omitted in controller test");}}');
  const mockSurfaces=data(`import {restoreMaterialRoles} from '${new URL('surface-materials.js',base).href}';export async function finishSurfaces(root){return {...restoreMaterialRoles(root),dispose(){}};}`);
  const mockAtmosphere=data('export async function createSiteEnvironment(){return {update:()=>false,dispose(){}};}');

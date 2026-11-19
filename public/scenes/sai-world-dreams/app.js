@@ -1,5 +1,6 @@
 import {createSceneGuidance} from './scene-guidance.js';
 import {createSiteEnvironment} from './site-environment.js';
+import {DRACOLoader} from '../venus-skky-city/vendor/DRACOLoader.js';
 import {GLTFLoader} from './vendor/addons/loaders/GLTFLoader.js';
 import {mergeGeometries} from './vendor/addons/utils/BufferGeometryUtils.js';
 import * as T from './vendor/three.module.js';
@@ -42,6 +43,9 @@ async function init(){
   let pixelRatio=Math.min(devicePixelRatio,mobile?1:1.25);
   renderer.setPixelRatio(pixelRatio);renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate=false;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
+  const decoder=new DRACOLoader().setDecoderPath('../venus-skky-city/vendor/draco/').setWorkerLimit(2);
+  const facadeRequest=new GLTFLoader().setDRACOLoader(decoder).loadAsync('assets/residential-facades-v2.bin?release=2').then(asset=>({asset}),error=>({error})).finally(()=>decoder.dispose());
+  const hdrRequest=new RGBELoader().loadAsync('assets/environment.hdr').catch(()=>null);
   const loader=new T.TextureLoader();
   const load=async(name,color=true,repeat=null)=>{const tex=await loader.loadAsync('assets/'+name);tex.colorSpace=color?T.SRGBColorSpace:T.NoColorSpace;tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());if(repeat){tex.wrapS=tex.wrapT=T.RepeatWrapping;tex.repeat.set(...repeat);}return tex;};
   const entries=await Promise.all([
@@ -61,7 +65,7 @@ async function init(){
   const controls=new OrbitControls(camera,canvas);controls.enableDamping=false;controls.dampingFactor=.095;controls.maxPolarAngle=Math.PI/2-.025;controls.minPolarAngle=.025;controls.minDistance=38;controls.maxDistance=690;controls.autoRotateSpeed=.62;controls.zoomSpeed=.72;controls.rotateSpeed=.65;
   const sky=new Sky();sky.scale.setScalar(1300);const u=sky.material.uniforms;u.turbidity.value=4;u.rayleigh.value=1.4;u.mieCoefficient.value=.004;u.mieDirectionalG.value=.78;u.sunPosition.value.set(-.5,.8,.6).normalize();scene.add(sky);
   const pmrem=new T.PMREMGenerator(renderer);
-  try{const hdr=await new RGBELoader().loadAsync('assets/environment.hdr');hdr.mapping=T.EquirectangularReflectionMapping;scene.environment=pmrem.fromEquirectangular(hdr).texture;scene.environmentIntensity=.5;hdr.dispose();}catch(e){scene.environment=pmrem.fromScene(sky,.04).texture;scene.environmentIntensity=.7;}pmrem.dispose();
+  try{const hdr=await hdrRequest;if(!hdr)throw Error('Environment unavailable');hdr.mapping=T.EquirectangularReflectionMapping;scene.environment=pmrem.fromEquirectangular(hdr).texture;scene.environmentIntensity=.5;hdr.dispose();}catch(e){scene.environment=pmrem.fromScene(sky,.04).texture;scene.environmentIntensity=.7;}pmrem.dispose();
   const daylightSky=new T.Mesh(new T.SphereGeometry(1050,48,24),new T.ShaderMaterial({
     side:T.BackSide,depthWrite:false,toneMapped:false,
     uniforms:{horizon:{value:new T.Color(0xd7ecf1)},skyBlue:{value:new T.Color(0x369bef)}},
@@ -80,7 +84,7 @@ async function init(){
   const fill=new T.DirectionalLight(0xd6eaff,.28);fill.position.set(100,100,-200);scene.add(fill);
   const model=buildSite(),fineDetails=[];
   try {
-    const imported=await new GLTFLoader().loadAsync('assets/residential-facades.glb');
+    const result=await facadeRequest;if(result.error)throw result.error;const imported=result.asset;
     for(const tower of model.towers){
       const facade=tower.getObjectByName('Plan-shaped facade with projecting wings and recessed courts');
       const source=imported.scene.getObjectByName(tower.userData.sharedReference||tower.userData.name);
