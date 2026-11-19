@@ -1,0 +1,12 @@
+[Unit]
+Description=Retry deferred Gaamup enquiry emails
+After=network-online.target
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/var/www/gaamup-current
+EnvironmentFile=/etc/gaamup/enquiries.env
+ExecStart=/usr/local/bin/node scripts/retry-enquiries.mjs
+NoNewPrivileges=true
+PrivateTmp=true
+UMask=0077
