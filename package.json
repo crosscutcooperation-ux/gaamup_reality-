@@ -23,7 +23,8 @@
     "test:uploads": "node scripts/smoke-uploads.mjs"
   },
   "dependencies": {
-    "next": "16.4.4",
+    "next": "16.4.6",
+    "nodemailer": "10.6.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "three": "0.170.0"

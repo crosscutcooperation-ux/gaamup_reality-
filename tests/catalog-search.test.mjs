@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {projectFacts,priceRange,searchCatalog} from '../lib/catalog-search.js';
+import {projectFacts,priceRange,searchCatalog,catalogFiltersFromQuery} from '../lib/catalog-search.js';
 const a={id:'a',name:'Garden Home',location:'Dombivli, Thane',configuration:'2 & 3 BHK',price:'₹75 L – ₹1.2 Cr',manifest:{catalog:{status:'under-construction',area:'700–1,200 sq.ft',developer:'Builder A',propertyType:'Apartment'}}};
 const b={id:'b',name:'Bay Villa',location:'Kalyan, Thane',configuration:'4 BHK',price:'₹3 Cr',manifest:{catalog:{status:'ready-to-move',area:'2,000 sq.ft',developer:'Builder B',propertyType:'Villa'}}};
 const unknown={id:'unknown',name:'The Preview',location:'Dombivli',configuration:'Residential township',price:'Price on request'};
@@ -16,3 +16,12 @@ test('sorting keeps unknown prices last and search finds names and developers',(
 test('the bundled project uses its supplied bedroom types and honest request-only prices',()=>{const p=projectFacts({...unknown,id:'sai-world-dreams'});assert.deepEqual(p.bhk,['1','2','2.5','3']);assert.equal(p.price,null);assert.equal(p.areaRange,null);assert.equal(p.developer,'Paradise Group');});
 
 test('the Venus catalog exposes the real developer and the complete published amenity collection',()=>{const facts=projectFacts({id:'venus-skky-city',configuration:'1 & 2 BHK'});assert.equal(facts.developer,'Venus Nirvana LLP');assert.equal(facts.amenities.length,18);assert.ok(facts.amenities.includes('Private beach'));assert.ok(facts.amenities.includes('EV charging'));});
+
+test('homepage multi-location searches match alternatives and reject unknown city paths',async()=>{
+ const {locationSearchUrl}=await import('../lib/location-search.js');
+ assert.equal(locationSearchUrl('panvel',[' New Panvel ','New Panvel']),'/locations/panvel?place=New+Panvel');
+ assert.equal(locationSearchUrl('../admin',['Venus']),'/locations?place=Venus');
+ const source=[{id:'v',name:'Venus',location:'Dombivli East',configuration:'1 & 2 BHK'},{id:'e',name:'Elements',location:'New Panvel',configuration:'1 & 2 BHK'},{id:'s',name:'Sai',location:'Dombivli',configuration:'1 BHK'}];
+ assert.deepEqual(searchCatalog(source,{searchTerms:['Venus','New Panvel']}).map(p=>p.id).sort(),['e','v']);
+ assert.deepEqual(catalogFiltersFromQuery({place:['Venus','New Panvel']}).searchTerms,['Venus','New Panvel']);
+});

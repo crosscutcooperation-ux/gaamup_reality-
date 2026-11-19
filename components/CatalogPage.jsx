@@ -16,7 +16,7 @@ export default async function CatalogPage({city, query}) {
       </div></div>
       <p className="catalog-note">Explore homes, compare details and step inside in 3D.</p>
       {offline&&<p className="catalog-note" role="status">Showing the saved collection while the property service reconnects.</p>}
-      <ProjectCatalog key={`${city?.slug||'all'}:${initialFilters.bhk}:${initialFilters.statuses}`} projects={collection} citySlug={city?.slug} cityName={city?.name||'All locations'} initialFilters={initialFilters}/>
+      <ProjectCatalog key={`${city?.slug||'all'}:${JSON.stringify(initialFilters)}`} projects={collection} citySlug={city?.slug} cityName={city?.name||'All locations'} initialFilters={initialFilters}/>
     </main>
   );
 }

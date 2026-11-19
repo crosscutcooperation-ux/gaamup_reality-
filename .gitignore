@@ -17,3 +17,7 @@ output/
 backend/target/
 backend/data/*
 !backend/data/scene-assets/
+
+.data/
+*.pem
+*.sqlite3*

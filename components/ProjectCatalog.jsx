@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {cities} from '../lib/catalog.js';
 import {searchCatalog,projectFacts,catalogStatusLabels} from '../lib/catalog-search.js';
-const initial={query:'',localities:[],bhk:[],types:[],statuses:[],developers:[],minPrice:'',maxPrice:'',minArea:'',maxArea:'',sort:'location'};
+const initial={searchTerms:[],query:'',localities:[],bhk:[],types:[],statuses:[],developers:[],minPrice:'',maxPrice:'',minArea:'',maxArea:'',sort:'location'};
 const budgets=[['','Any'],['5000000','₹50 L'],['7500000','₹75 L'],['10000000','₹1 Cr'],['15000000','₹1.5 Cr'],['20000000','₹2 Cr'],['30000000','₹3 Cr'],['50000000','₹5 Cr'],['100000000','₹10 Cr']];
 export default function ProjectCatalog({projects,citySlug,cityName,initialFilters={}}){
   const router=useRouter();
@@ -29,7 +29,7 @@ export default function ProjectCatalog({projects,citySlug,cityName,initialFilter
         <span>Location</span>
         <select value={citySlug||''} onChange={event=>{
           const slug=event.target.value;
-          const query=new URLSearchParams();
+          const query=new URLSearchParams();filters.searchTerms.forEach(t=>query.append('place',t));
           if(filters.bhk.length===1)query.set('bhk',filters.bhk[0]);
           if(filters.statuses.length===1)query.set('status',filters.statuses[0]);
           const suffix=query.size?`?${query}`:'';

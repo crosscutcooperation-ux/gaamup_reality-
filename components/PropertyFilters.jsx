@@ -1,13 +1,15 @@
 'use client';
-import {useLayoutEffect,useRef} from 'react';
-import Link from 'next/link';
-export default function PropertyFilters({value,onChange}){
-  const panel=useRef(null);
-  useLayoutEffect(()=>{
-    const element=panel.current;
-    const measure=()=>element.style.setProperty('--finder-height',`${element.getBoundingClientRect().height}px`);
-    measure();const observer=new ResizeObserver(measure);observer.observe(element);
-    return ()=>observer.disconnect();
-  },[]);
-  return <section ref={panel} className="home-filters" aria-label="Find a home"><div className="filter-label"><p>Find your <em>kind of home.</em></p></div><div className="filter-controls"><fieldset><legend>Bedrooms</legend><div className="bhk-options">{[['','All'],['1','1 BHK'],['2','2 BHK'],['2.5','2.5 BHK'],['3','3 BHK'],['4+','4+ BHK']].map(([key,label])=><button type="button" key={key} aria-pressed={value.bhk===key} onClick={()=>onChange({...value,bhk:key})}>{label}</button>)}</div></fieldset><label className="construction-filter"><span>Construction status</span><select value={value.constructionStatus} onChange={event=>onChange({...value,constructionStatus:event.target.value})}><option value="">Any stage</option><option value="under-construction">Under construction</option><option value="ready-to-move">Ready to move</option><option value="new-launch">New launch</option></select></label><Link className="filter-explore" href={{pathname:'/locations',query:{...(value.bhk?{bhk:value.bhk}:{}),...(value.constructionStatus?{status:value.constructionStatus}:{})}}} prefetch={false}>Find home</Link></div></section>;
+import {useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
+import {useRouter} from 'next/navigation';
+import {useSite} from './SiteProvider.jsx';
+import {cities} from '../lib/catalog.js';
+import {locationSearchUrl} from '../lib/location-search.js';
+export default function PropertyFilters(){
+ const router=useRouter(),{properties}=useSite(),panel=useRef(null),[city,setCity]=useState(''),[query,setQuery]=useState(''),[places,setPlaces]=useState([]),[recent,setRecent]=useState(null),[suggesting,setSuggesting]=useState(false);
+ useLayoutEffect(()=>{const el=panel.current,measure=()=>el.style.setProperty('--finder-height',`${el.getBoundingClientRect().height}px`);measure();const observer=new ResizeObserver(measure);observer.observe(el);return()=>observer.disconnect();},[]);
+ useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem('gaamup-last-search'));if(saved&&typeof saved.href==='string'&&/^\/locations(?:\/[a-z-]+)?(?:\?|$)/.test(saved.href)&&typeof saved.label==='string')setRecent(saved);}catch{}},[]);
+ const suggestions=useMemo(()=>[...new Set(properties.filter(p=>!city||p.city?.toLowerCase()===city).flatMap(p=>[p.name,p.locality,p.city]).filter(Boolean))].filter(p=>!places.includes(p)&&p.toLowerCase().includes(query.trim().toLowerCase())).slice(0,7),[properties,city,query,places]);
+ function choose(value){if(places.length>=3)return;setPlaces(current=>[...current,value]);setQuery('');setSuggesting(false);}
+ function search(event){event.preventDefault();const terms=[...places,...(query.trim()?[query.trim()]:[])].slice(0,3),href=locationSearchUrl(city,terms),label=terms.join(', ')||cities.find(c=>c.slug===city)?.name||'All properties';try{localStorage.setItem('gaamup-last-search',JSON.stringify({href,label}));}catch{}router.push(href);}
+ return <section className="home-filters location-finder" ref={panel} aria-label="Search properties"><form onSubmit={search} className="location-finder-form"><label className="finder-city"><span className="sr-only">City</span><select value={city} onChange={e=>{setCity(e.target.value);setPlaces([]);}}><option value="">All locations</option>{cities.map(c=><option key={c.slug} value={c.slug}>{c.name}</option>)}</select></label><div className="finder-query"><div className="finder-chips">{places.map(place=><button type="button" key={place} aria-label={`Remove ${place}`} onClick={()=>setPlaces(p=>p.filter(v=>v!==place))}>{place} ×</button>)}</div><label className="sr-only" htmlFor="home-property-search">Search up to three localities, projects or landmarks</label><input id="home-property-search" type="search" autoComplete="off" maxLength={150} placeholder={places.length>=3?'3 locations selected':'Search up to 3 localities, projects or landmarks'} value={query} disabled={places.length>=3} onChange={e=>{setQuery(e.target.value);setSuggesting(true);}} onFocus={()=>setSuggesting(true)} onBlur={e=>{if(!e.currentTarget.parentElement.contains(e.relatedTarget))setSuggesting(false);}} onKeyDown={e=>{if(e.key==='Escape')setSuggesting(false);}}/>{suggesting&&suggestions.length>0&&places.length<3&&<div className="finder-suggestions" aria-label="Suggested localities and projects">{suggestions.map(s=><button type="button" key={s} onMouseDown={e=>e.preventDefault()} onClick={()=>choose(s)}>{s}<span>＋</span></button>)}</div>}</div><button className="finder-submit" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15 15 5 5"/></svg>Search</button></form>{recent&&<button type="button" className="finder-recent" onClick={()=>router.push(recent.href)}><span>↻</span><span><small>Continue last search</small><strong>{recent.label}</strong></span><span>↗</span></button>}</section>;
 }
