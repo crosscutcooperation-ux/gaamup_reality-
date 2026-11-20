@@ -125,3 +125,12 @@ Verification: all 98 JavaScript tests passed. Both local and server production b
 - Existing About one-time motion, photo visibility, apartment loaders, sales data, enquiry configuration and security settings are unchanged.
 
 Verification: 98 JavaScript tests and the local production build passed. The fixed-camera tests cover every station and desktop, portrait and wide framing.
+
+
+## Constant train speed (3.0.8, 2026-11-20)
+
+- Release: `site-20261120-train-speed`; rollback: `site-20261120-fixed-camera`.
+- The 3.0.6 pass advanced only 1.8m in 2s (0.9m/s), while the approach covers 21m in 3.6s (5.833m/s). The pass now uses the same shared speed/distance constants as the approach and covers 11.667m in 2s.
+- Regression checks measure distance per time just before, across and after the phase boundary and throughout the pass. Camera position, target and rotation remain fixed; closer framing is retained as successive carriages pass through. The same speed continues during the final page-cover transition; the overview retains its original speed. No other behavior or settings changed.
+
+Verification: all 99 JavaScript tests passed, including the new constant-speed boundary regression.

@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.8 — 2026-11-20
+
+### Fixed
+- The train maintains its approach speed throughout the two-second pass instead of slowing down beside the fixed camera.
+
 ## 3.0.7 — 2026-11-20
 
 ### Fixed
