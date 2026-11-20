@@ -65,6 +65,12 @@
       ],
       "sources": [
         "supplied Codename Elements brochure and renders"
+      ],
+      "address": "Codename Elements, Akurli, New Panvel East, Maharashtra 410206.",
+      "addressSource": "/scenes/elements-new-panvel/assets/Elements-brochure.pdf",
+      "nearby": [
+        "Akurli, New Panvel",
+        "CIDCO Town Planning Scheme 1 (NAINA)"
       ]
     }
   }

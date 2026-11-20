@@ -3,8 +3,8 @@
   "slug": "venus-skky-city",
   "name": "Venus Skky City",
   "location": "Dombivli East, Mumbai Metropolitan Region",
-  "description": "Explore Venus Skky City\u2019s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
-  "price": "Price on request",
+  "description": "Explore Venus Skky City’s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
+  "price": "₹42.25 L onwards",
   "constructionStatus": "under-construction",
   "configuration": "1 & 2 BHK",
   "citySlugs": [
@@ -115,6 +115,64 @@
       ],
       "sources": [
         "https://venusskkycity.com/"
+      ],
+      "address": "Venus Skky City Sales Office, near Vasantdeep Vatika Jain Temple, Bhopar, Dombivli East, Thane, Maharashtra 421204.",
+      "addressSource": "https://www.venusskkycity.com/",
+      "nearby": [
+        "Vasantdeep Vatika Jain Temple",
+        "EVA World School within the premises",
+        "Near DMart"
+      ],
+      "area": "436–572 sq.ft",
+      "possession": "December 2027 – December 2028",
+      "status": "under-construction",
+      "pricingUpdated": "2026-11-20",
+      "pricingSource": "Gaamup Reality sales update",
+      "offers": [
+        {
+          "tower": "Tower A",
+          "phase": "",
+          "possession": "December 2028",
+          "status": "Under construction",
+          "bhk": "1",
+          "carpet": "436",
+          "price": "₹42.25 L*",
+          "amount": 4225000
+        },
+        {
+          "tower": "Tower A",
+          "phase": "",
+          "possession": "December 2028",
+          "status": "Under construction",
+          "bhk": "2",
+          "carpet": "522",
+          "price": "₹52.00 L*",
+          "amount": 5200000
+        },
+        {
+          "tower": "Tower F",
+          "phase": "",
+          "possession": "December 2027",
+          "status": "Nearing possession",
+          "bhk": "2",
+          "carpet": "572",
+          "price": "₹61.50 L + taxes",
+          "amount": 6150000
+        }
+      ],
+      "highlights": [
+        "20-acre township with 3 phases",
+        "Balcony homes with open views",
+        "EVA World School (ICSE), operational within the premises",
+        "Jain temple, operational within the premises",
+        "Near DMart · spaces to work from home",
+        "The Walk retail spaces",
+        "Beach pool",
+        "Jodi options available"
+      ],
+      "salesHighlights": [
+        "2-minute drive from Manpada Metro Station",
+        "Phases 1 & 2 sold out; limited inventory in Phase 3 towers G, F & C"
       ]
     }
   }

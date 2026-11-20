@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.5 — 2026-11-20
+
+### Changed
+- The train journey now approaches a branded carriage closely, with its roof and wheels visible.
+- The glass home search includes BHK and construction-status selectors and a Find my home action; all choices combine in the listing filters.
+- Added project addresses, lazy maps and directions for all three projects.
+- Added supplied tower-specific Venus and Sai World Dreams prices, carpet areas, possession timelines and Venus highlights. Starting prices now appear in the collection.
+- Cost-sheet enquiries carry the selected project into the contact form.
+
 ## 3.0.4 — 2026-11-20
 
 ### Fixed

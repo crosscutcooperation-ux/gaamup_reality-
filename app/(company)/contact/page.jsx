@@ -6,7 +6,9 @@ export const metadata = {
   description: 'Speak with Gaamup reality about your next home or a developer partnership.',
 };
 
-export default function ContactPage() {
+export default async function ContactPage({searchParams}) {
+  const query=await searchParams;
+  const project=['Sai World Dreams','Venus Skky City','Codename Elements'].includes(query?.project)?query.project:'';
   return (
     <CompanyShell>
       <main id="destination">
@@ -14,7 +16,7 @@ export default function ContactPage() {
 
 
       <section className="sec"><div className="wrap contact-layout"><div><p className="eyebrow">Reach us</p><h2>A conversation. <em>A new beginning.</em></h2><div className="contact-list"><div><small>Call</small><a href="tel:+918655481884">+91 86554 81884</a><em>Let’s talk about your plans.</em></div><div><small>WhatsApp</small><a href="https://wa.me/918655481884" target="_blank" rel="noopener">Chat with us ↗</a><em>A simple way to start a conversation.</em></div><div><small>Email</small><a href="mailto:enquiry@panvibes.com">enquiry@panvibes.com</a><em>For enquiries and partnerships.</em></div><div><small>Our office</small><p>Akshar Business Park, W-2106, Janta Market Road, Sector 25, Vashi, Navi Mumbai, Maharashtra 400703</p><em>Please contact us before visiting.</em><a className="office-map" href="https://www.google.com/maps/search/?api=1&query=Akshar%20Business%20Park%2C%20W-2106%2C%20Janta%20Market%20Road%2C%20Sector%2025%2C%20Vashi%2C%20Navi%20Mumbai%2C%20Maharashtra%20400703" target="_blank" rel="noopener">Get directions ↗</a></div></div></div><div className="enquiry-panel"><p className="eyebrow">Make the first move</p><h2>Tell us what’s <em>on your mind.</em></h2>
-      <EnquiryForm/></div></div></section>
+      <EnquiryForm key={project} project={project}/></div></div></section>
       <section className="office-band tint"><div className="wrap"><div><p className="eyebrow">Find us in Navi Mumbai</p><h2>Let’s connect <em>in person.</em></h2><p>Akshar Business Park, W-2106, Janta Market Road, Sector 25, Vashi, Navi Mumbai, Maharashtra 400703</p></div><a href="https://www.google.com/maps/search/?api=1&query=Akshar%20Business%20Park%2C%20W-2106%2C%20Janta%20Market%20Road%2C%20Sector%2025%2C%20Vashi%2C%20Navi%20Mumbai%2C%20Maharashtra%20400703" className="btn btn--ink" target="_blank" rel="noopener">Open in Google Maps <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" /></svg></a></div></section>
       </main>
 

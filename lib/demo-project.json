@@ -4,10 +4,12 @@
   "name": "Sai World Dreams",
   "location": "Dombivli, Mumbai Metropolitan Region",
   "description": "Explore the residential towers, landscaped courtyard and pool terrace in an interactive 3D colony. This is a reference-led exterior study from the supplied project.",
-  "price": "Price on request",
+  "price": "₹52.50 L onwards",
   "constructionStatus": "under-construction",
-  "configuration": "Residential township",
-  "citySlugs": ["dombivli"],
+  "configuration": "1, 2, 2.5 & 3 BHK",
+  "citySlugs": [
+    "dombivli"
+  ],
   "coverImage": "/scenes/sai-world-dreams/assets/exteriors/courtyard-1280.webp",
   "published": true,
   "viewer": {
@@ -36,57 +38,179 @@
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Castle",
-        "objectName": "Residential tower A \u2014 textured architectural exterior"
+        "objectName": "Residential tower A — textured architectural exterior"
       },
       {
         "id": "tower-B",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Vista",
-        "objectName": "Residential tower B \u2014 textured architectural exterior"
+        "objectName": "Residential tower B — textured architectural exterior"
       },
       {
         "id": "tower-C",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Mist",
-        "objectName": "Residential tower C \u2014 textured architectural exterior"
+        "objectName": "Residential tower C — textured architectural exterior"
       },
       {
         "id": "tower-D",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Spring",
-        "objectName": "Residential tower D \u2014 textured architectural exterior"
+        "objectName": "Residential tower D — textured architectural exterior"
       },
       {
         "id": "tower-E",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Orchard",
-        "objectName": "Residential tower E \u2014 textured architectural exterior"
+        "objectName": "Residential tower E — textured architectural exterior"
       },
       {
         "id": "tower-F",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Meadows",
-        "objectName": "Residential tower F \u2014 textured architectural exterior"
+        "objectName": "Residential tower F — textured architectural exterior"
       },
       {
         "id": "tower-G",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Heaven",
-        "objectName": "Residential tower G \u2014 textured architectural exterior"
+        "objectName": "Residential tower G — textured architectural exterior"
       },
       {
         "id": "tower-H",
         "type": "building",
         "parentId": "sai-world-dreams",
         "name": "Breeze",
-        "objectName": "Residential tower H \u2014 textured architectural exterior"
+        "objectName": "Residential tower H — textured architectural exterior"
       }
-    ]
+    ],
+    "catalog": {
+      "address": "Sai World Dreams, Kalyan–Shil Road, Dombivli East, Thane, Maharashtra.",
+      "addressSource": "https://saiworlddreams.in/",
+      "nearby": [
+        "Kalyan–Shil Road",
+        "Dombivli East"
+      ],
+      "area": "450–1322 sq.ft",
+      "possession": "December 2026 – June 2029",
+      "bhk": [
+        "1",
+        "2",
+        "2.5",
+        "3"
+      ],
+      "status": "under-construction",
+      "pricingUpdated": "2026-11-20",
+      "pricingSource": "Gaamup Reality sales update",
+      "offers": [
+        {
+          "tower": "Castle / Vista / Mist",
+          "phase": "Phase 1",
+          "possession": "December 2026",
+          "status": "Under construction",
+          "bhk": "2",
+          "carpet": "711–730",
+          "price": "₹84.99 L onwards",
+          "amount": 8499000
+        },
+        {
+          "tower": "Castle / Vista / Mist",
+          "phase": "Phase 1",
+          "possession": "December 2026",
+          "status": "Under construction",
+          "bhk": "3",
+          "carpet": "1194 / 1322",
+          "price": "₹1.39 Cr onwards",
+          "amount": 13900000
+        },
+        {
+          "tower": "Spring / Breeze",
+          "phase": "",
+          "possession": "June 2028",
+          "status": "Under construction",
+          "bhk": "1",
+          "carpet": "473 / 477",
+          "price": "₹55.50 L onwards",
+          "amount": 5550000
+        },
+        {
+          "tower": "Spring / Breeze",
+          "phase": "",
+          "possession": "June 2028",
+          "status": "Under construction",
+          "bhk": "2",
+          "carpet": "609",
+          "price": "₹70.99 L onwards",
+          "amount": 7099000
+        },
+        {
+          "tower": "Spring / Breeze",
+          "phase": "",
+          "possession": "June 2028",
+          "status": "Under construction",
+          "bhk": "2",
+          "carpet": "733",
+          "price": "₹84.99 L onwards",
+          "amount": 8499000
+        },
+        {
+          "tower": "Spring / Breeze",
+          "phase": "",
+          "possession": "June 2028",
+          "status": "Under construction",
+          "bhk": "2.5",
+          "carpet": "975",
+          "price": "₹1.10 Cr onwards",
+          "amount": 11000000
+        },
+        {
+          "tower": "Spring / Breeze",
+          "phase": "",
+          "possession": "June 2028",
+          "status": "Under construction",
+          "bhk": "3",
+          "carpet": "1194 / 1313",
+          "price": "₹1.39 Cr onwards",
+          "amount": 13900000
+        },
+        {
+          "tower": "Meadows",
+          "phase": "",
+          "possession": "June 2029",
+          "status": "Under construction",
+          "bhk": "1",
+          "carpet": "450",
+          "price": "₹52.50 L onwards",
+          "amount": 5250000
+        },
+        {
+          "tower": "Meadows",
+          "phase": "",
+          "possession": "June 2029",
+          "status": "Under construction",
+          "bhk": "2",
+          "carpet": "720",
+          "price": "₹83.99 L onwards",
+          "amount": 8399000
+        },
+        {
+          "tower": "Meadows",
+          "phase": "",
+          "possession": "June 2029",
+          "status": "Under construction",
+          "bhk": "2.5",
+          "carpet": "825",
+          "price": "₹95.99 L onwards",
+          "amount": 9599000
+        }
+      ],
+      "developer": "Paradise Group"
+    }
   }
 }
