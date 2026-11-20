@@ -49,3 +49,12 @@ section[id]{scroll-margin-top:28px}
 @media(hover:hover) and (pointer:fine){.btn:hover{transform:none}.director-photo:hover img{transform:scale(1.03)}}
 @media(prefers-reduced-motion:reduce){.company-motion-ready .company-reveal,.company-motion-ready .company-reveal .company-word{opacity:1;transform:none;clip-path:none;transition:opacity 120ms ease;transition-delay:0ms}.company-motion-ready :is(.panel,.portrait,.director-photo),.company-motion-ready :is(.panel,.portrait,.director-photo) img{clip-path:none;transform:none;transition:opacity 120ms ease}}
 }
+
+@scope (.company-page){
+.phero h1{word-spacing:.055em;letter-spacing:-.025em}.sec h2,.sec h3{word-spacing:.04em}.company-word-group{word-spacing:.065em}
+.company-motion-ready .company-reveal .company-word{transition-duration:850ms,400ms}
+.company-motion-ready :is(.panel,.portrait,.director-photo){clip-path:inset(14% 0 14% 0);transition-duration:1000ms,500ms,750ms}
+.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view{clip-path:inset(0)}
+.dark .eyebrow,.dark .pillar__word em{color:#dce6cb}.panel__cap{color:#ffffff}.panel__cap small{color:#ffffff}.portrait__tag{color:#ffffff}
+@media(prefers-reduced-motion:reduce){.company-motion-ready .company-reveal .company-word{transition-duration:120ms;transition-delay:0ms}.company-motion-ready :is(.panel,.portrait,.director-photo){clip-path:none;transition-duration:120ms}}
+}

@@ -54,3 +54,17 @@ HTML responses append `no-transform` to prevent Cloudflare email rewriting from 
 - Viewer JavaScript is bundled into hashed shared chunks with one Three.js runtime. Critical module preloads avoid serial dependency discovery; original editable scene modules remain the source. Nginx caches hashed bundles for one year, supports gzip, and revalidates scene HTML. Keep original module files for tests and maintenance.
 - Browser testing found DevTools Fast 4G simulation active: an initial Elements run took 27.690s; after runtime packaging/preload fixes, a warm-cache run took 2.983s. A subsequent fresh-download test with DevTools cache disabled and throttling off reached the full rendered Elements scene at 5.980s; a warm run reached 2.983s. Device and network conditions still affect readiness. Desktop and 400px mobile emulation were visually checked, including the contact form. Turnstile renders its managed human-verification checkbox. Real handset and reduced-motion filmstrip review remain unverified because native browser control is intermittent. No claim of completed motion review.
 - The reconstructed forest remains a static photogrammetry mesh; clouds and train remain animated.
+
+
+## Visible interaction follow-up (3.0.2, 2026-11-20)
+
+- Solid dark return controls use a new CSS revision to avoid reusing a cached stylesheet. Primary site navigation remains reachable during scrolling and is hidden during the full-screen train journey.
+- Company entrance setup waits for a painted initial pose and reruns on pathname changes. Text/photo motion preserves all content; reduced motion removes displacement.
+- Forest motion adds an attribute and a small vertex-shader offset only for green canopy above local ground. The original scan position arrays, photographic maps, track grounding and topology remain unchanged. Preparation measured 187ms on the development computer; motion pauses offscreen, in hidden tabs and through its pause control.
+- Navigation, home search and secure-form preparation show actual pending state. No artificial delay was added. CAPTCHA has an explicit instruction while the Send button waits for verification.
+- 82 JavaScript tests, production builds and native dependency audit passed. The enquiry environment and admin key retain 0600 permissions. Delivery test aggregate: one sent enquiry, zero failed/retry rows. Private enquiry reads return 401; both canonical domains use clean company URLs.
+- Original supplied building geometry and texture detail are unchanged. The 3.0.1 Elements browser measurements remain 5.980s with local cache disabled and no throttling, 2.983s warm; no universal timing guarantee on other devices or connections.
+
+Admin-key persistence was removed from browser session storage in 3.0.2. A legacy stored key is cleared when the property desk loads; the active credential exists only in page memory and is cleared on Lock or authentication failure. Refreshing requires the key again. Server bearer authorization and role scope are unchanged.
+
+Final live verification: release `site-20261120-visible` serves all seven checked page routes with HTTP 200, legacy company routes redirect, all three viewer documents reference the new return-control CSS revision, and the private admin key authenticates successfully. New forest/navigation/typography were inspected in the local production preview. Final native-browser access failed with `cgWindowNotFound`; a fresh post-deployment visual pass and real-phone timing are unverified.

@@ -23,3 +23,11 @@
 - Clear back controls, clean About/Contact URLs, readable company pages with word/photo entrances and reduced-motion support.
 - Route, model and floor-plan loading feedback; overlapping asset preparation, lossless ground texture delivery and bundled shared 3D runtime.
 - Production Cloudflare asset caching, enquiry rate limiting and Managed Turnstile installed; server admin key rotated privately.
+
+## 3.0.2 — 2026-11-20
+
+- Return controls now use solid green buttons with white arrows; navigation stays reachable while scrolling.
+- Company text/photo entrances replay across routes and begin after the starting pose is painted; captions, muted text and developer cards have clearer contrast.
+- Added page-opening, property-search and secure-form feedback, plus a live forest breeze with a pause control. Original scan positions and textures are preserved.
+- Pulled the train camera farther back to retain all twelve coaches on wide and portrait screens.
+- Stopped persisting the administrator credential in browser storage; legacy stored values are cleared when the admin screen loads.

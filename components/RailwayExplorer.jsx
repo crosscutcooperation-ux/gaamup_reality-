@@ -10,6 +10,7 @@ export default function RailwayExplorer({cities}){
   const canvas=useRef(null),world=useRef(null),frame=useRef(null),stations=useRef([]),scene=useRef(null),active=useRef(null),locked=useRef(false);
   const [status,setStatus]=useState('loading'),[phase,setPhase]=useState('idle'),[destination,setDestination]=useState(null),[error,setError]=useState(''),[retry,setRetry]=useState(0),[paused,setPaused]=useState(false),[guided,setGuided]=useState(false);
   const busy=phase!=='idle';
+  useEffect(()=>{document.body.classList.toggle('railway-travelling',busy);return()=>document.body.classList.remove('railway-travelling');},[busy]);
   useEffect(()=>{
     const abort=new AbortController();let controller;
     setStatus('loading');setError('');
@@ -62,6 +63,7 @@ export default function RailwayExplorer({cities}){
         <div id="stations" className="station-layer">{cities.map(city=><button type="button" className="station station-arrow" ref={node=>{stations.current[city.index]=node;}} data-city={city.name} data-index={city.index} key={city.slug} aria-label={`Travel to ${city.name}`} disabled={status!=='ready'||busy} onClick={()=>startTravel(city)}><span className="station-marker"><span><span lang="hi">{city.native}</span><strong>{city.name}</strong></span></span>{city.index===1&&status==='ready'&&!guided&&!busy&&<span className="station-click-guide" aria-hidden="true"><svg viewBox="0 0 32 36" fill="none"><path d="M12 17V5a3 3 0 0 1 6 0v9l2-1 4 3 3 3v7c0 5-4 8-8 8h-2c-3 0-5-2-7-5L4 20c-2-3 2-5 4-3l4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="var(--paper)"/></svg></span>}</button>)}</div>
         {status!=='ready'&&<div id="scene-loading" className="scene-loading">{status==='loading'?<><span className="loading-line"/><p>Preparing your journey</p></>:<><p>The 3D railway is unavailable.</p><button type="button" className="scene-retry" onClick={retryScene}>Retry railway </button></>}</div>}
       </div></div>
+      {status==='ready'&&!busy&&<button type="button" className="forest-motion-control" aria-pressed={!paused} onClick={()=>setPaused(scene.current.togglePause())}>{paused?'Play live landscape':'Pause live landscape'}</button>}
       {destination&&<div className="journey-caption" key={destination.slug}><span className="eyebrow">NEXT STOP</span><p>{destination.name}</p></div>}
     </div></div>
     <p className="map-attribution"><a href="https://sketchfab.com/3d-models/photogrammetry-3d-scan-nature-landscape-e0050374e75347929017942fe761670f" target="_blank" rel="noreferrer">Photogrammetry | 3D scan nature landscape</a> by <a href="https://sketchfab.com/Laslo.S" target="_blank" rel="noreferrer">Laslo.S</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Adapted for this illustrative railway journey.</p>

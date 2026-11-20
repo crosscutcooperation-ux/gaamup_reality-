@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {projectProperties,getDisplayProperties} from '../lib/property-collection.js';
 import SiteFooter from './SiteFooter.jsx';
+import NavigationFeedback from './NavigationFeedback.jsx';
 import ProjectAssistant from './ProjectAssistant.jsx';
 import Brand from './Brand.jsx';
 import {propertyImage} from '../lib/backend.js';
@@ -38,6 +39,7 @@ export default function SiteProvider({children}){
       <details className="nav-dropdown" ref={locationsMenu}><summary>Locations <span aria-hidden="true">⌄</span></summary><div className="location-menu"><Link href="/locations" onClick={()=>setMenuOpen(false)}>All properties</Link>{cities.map(city=><Link href={`/locations/${city.slug}`} key={city.slug} prefetch={false} onClick={()=>setMenuOpen(false)}>{city.name}<span aria-hidden="true"></span></Link>)}</div></details>
       <Link href="/contact" onClick={()=>setMenuOpen(false)}>Contact</Link>
     </nav><div className="header-actions"><button type="button" className="saved-button" aria-label="View saved homes" onClick={()=>setModal({type:'saved'})}>♡ <span id="saved-count">{saved.length}</span></button><span className="brokerage-badge"><strong>0%</strong><span>brokerage</span></span><button type="button" className="menu-button" aria-label={menuOpen?'Close menu':'Open menu'} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={()=>setMenuOpen(!menuOpen)}><i/><i/></button></div></header>
+    <NavigationFeedback/>
     {children}
     <SiteFooter/>
     {!pathname.startsWith('/admin')&&<ProjectAssistant/>}

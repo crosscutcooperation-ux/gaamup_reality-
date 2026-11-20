@@ -1,15 +1,15 @@
 /* A consistent return control in every building and apartment view. */
 #leave-elevation,#apartment-back,#floor-back,#detail-back{
  display:inline-flex;align-items:center;justify-content:center;gap:10px;
- min-height:46px;padding:11px 17px!important;border:1px solid #71866d!important;
- border-radius:8px;background:#edf2e6!important;color:#263e2e!important;
- font:600 12px/1.4 ReposeSans,Arial,sans-serif!important;letter-spacing:.025em!important;
+ min-height:48px;padding:12px 19px!important;border:1px solid #304d3e!important;
+ border-radius:8px;background:#304d3e!important;color:#ffffff!important;box-shadow:0 3px 12px #17372622;
+ font:600 14px/1.4 ReposeSans,Arial,sans-serif!important;letter-spacing:.025em!important;
  text-transform:none;cursor:pointer;text-decoration:underline;text-underline-offset:4px;
  transition:background-color 150ms ease,color 150ms ease;
 }
 #leave-elevation svg,#apartment-back svg,#floor-back svg,#detail-back svg{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 #leave-elevation:focus-visible,#apartment-back:focus-visible,#floor-back:focus-visible,#detail-back:focus-visible{outline:3px solid #42664a;outline-offset:4px}
-@media(hover:hover) and (pointer:fine){#leave-elevation:hover,#apartment-back:hover,#floor-back:hover,#detail-back:hover{background:#dce7d3!important}}
+@media(hover:hover) and (pointer:fine){#leave-elevation:hover,#apartment-back:hover,#floor-back:hover,#detail-back:hover{background:#42694e!important}}
 #floor-back[hidden],#apartment-back[hidden],#detail-back[hidden],#leave-elevation[hidden]{display:none!important}
 #floor-busy:not([hidden])::before,#plan-loading:not([hidden])::before{content:'';display:block;width:30px;height:30px;margin:0 auto 18px;border:2px solid #bdc9b7;border-top-color:#36583e;border-radius:50%;animation:scene-loader-spin .8s linear infinite}
 #floor-busy:not([hidden]),#plan-loading:not([hidden]){display:grid;place-content:center;min-height:100px}
