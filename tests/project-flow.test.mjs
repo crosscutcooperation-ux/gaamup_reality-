@@ -58,6 +58,28 @@ test('the original floor controller completes floor → house → furnished imag
   }finally{await win.happyDOM.close();}
 });
 
+test('Sai floor, apartment and furnished loaders cover old pixels outside the hidden 3D container',async()=>{
+  const win=new Window({url:'http://localhost/scenes/sai-world-dreams/index.html',settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true,disableJavaScriptEvaluation:true}});
+  win.document.write(await readFile(new URL('index.html',base),'utf8'));
+  const pending=[],frames=[];
+  Object.assign(globalThis,{window:win,document:win.document,Image:win.Image,Event:win.Event,CustomEvent:win.CustomEvent,ResizeObserver:class{observe(){}disconnect(){}},getComputedStyle:win.getComputedStyle.bind(win),matchMedia:()=>({matches:true}),requestAnimationFrame:fn=>{frames.push(fn);return frames.length;},cancelAnimationFrame:clearTimeout,parent:{postMessage(){}},addEventListener:win.addEventListener.bind(win)});
+  win.HTMLImageElement.prototype.decode=function(){return new Promise(resolve=>pending.push(resolve));};
+  for(const d of win.document.querySelectorAll('dialog')){d.showModal=function(){this.open=true;};d.close=function(){this.open=false;this.dispatchEvent(new win.Event('close'));};}
+  win.HTMLCanvasElement.prototype.getContext=()=>({drawImage(){}});
+  globalThis.fetch=async path=>new Response(await readFile(new URL(String(path).split('?')[0],base)));
+  let source=await readFile(new URL('floor-plans.js',base),'utf8');
+  source=source.replace(/from '([^']+)'/g,(_,p)=>`from '${new URL(p,base).href}'`);
+  await import('data:text/javascript,'+encodeURIComponent(source+'\n// Sai pending-image regression'));
+  const doc=win.document,status=doc.querySelector('#plan-loading'),stage=status.closest('.plan-stage'),tick=()=>new Promise(r=>setTimeout(r,20)),finish=async()=>{pending.splice(0).forEach(resolve=>resolve());for(let frame=0;frame<8;frame++){await new Promise(resolve=>setImmediate(resolve));frames.splice(0).forEach(fn=>fn(performance.now()));}};
+  const covered=()=>{assert.equal(status.hidden,false);assert.equal(status.closest('[hidden]'),null);assert.equal(stage.dataset.planLoading,'true');assert.notEqual(status.parentElement.id,'plan-3d');};
+  try{
+    doc.dispatchEvent(new win.CustomEvent('open-block-floor',{detail:{id:'A',floor:9}}));covered();assert.match(status.textContent,/2D floor/);await tick();await finish();assert.equal(status.hidden,true);
+    doc.querySelector('#apartment-list button').click();covered();assert.match(status.textContent,/2D house/);await finish();assert.equal(status.hidden,true);assert.equal(stage.dataset.planLoading,undefined);
+    doc.querySelector('[data-plan-mode="3d"]').click();covered();assert.match(status.textContent,/furnished/);await finish();assert.equal(status.hidden,true);assert.equal(doc.querySelector('.unit-cutaway').hidden,false);assert.equal(doc.querySelector('.unit-cutaway').style.opacity,'1');assert.equal(doc.querySelector('#floor-plan-image').style.opacity,'0');
+    doc.querySelector('#apartment-back').click();covered();doc.querySelector('#close-floor-plan').click();await finish();assert.equal(status.hidden,true);assert.equal(stage.dataset.planLoading,undefined);
+  }finally{await win.happyDOM.close();}
+});
+
 test('building selection isolates the original tower, exposes all levels and restores the colony on return',async()=>{
   const {buildSite}=await import('../public/scenes/sai-world-dreams/model.js');
   const {createTowerElevation}=await import('../public/scenes/sai-world-dreams/tower-elevation.js');

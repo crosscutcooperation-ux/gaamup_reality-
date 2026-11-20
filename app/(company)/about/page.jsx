@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <CompanyShell>
+    <CompanyShell once>
       <main id="destination">
       <section className="phero"><div className="wrap"><p className="crumb"><a href="/">Home</a> &nbsp;/&nbsp; About us</p><h1>A few words about <em>our company.</em></h1><p className="lead">A personal approach to real estate. Bringing people, property and possibility together, with trust at the heart of every conversation.</p></div><span className="phero__num" aria-hidden="true">01</span></section>
 

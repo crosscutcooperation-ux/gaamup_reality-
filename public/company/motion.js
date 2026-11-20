@@ -1,5 +1,5 @@
 /** Word entrances preserve the original text nodes so cleanup restores React's DOM. */
-export function observeCompanyMotion(root,Observer=IntersectionObserver,schedule=globalThis.requestAnimationFrame||((cb)=>cb())){
+export function observeCompanyMotion(root,Observer=IntersectionObserver,schedule=globalThis.requestAnimationFrame||((cb)=>cb()),{once=false}={}){
  let active=true;
  const selectors='.phero .crumb,.phero h1,.phero .lead,.sec h2,.sec h3,.sec p,.contact-list>div,.enquiry-panel,.panel,.portrait,.director-photo,.founder-principles,.office-band .wrap>*,.cta__act';
  const targets=[...root.querySelectorAll(selectors)],restorations=[],counts=new Map();
@@ -15,7 +15,13 @@ export function observeCompanyMotion(root,Observer=IntersectionObserver,schedule
    original.replaceWith(group);restorations.push([group,original]);
   }
  }
- const observer=new Observer(entries=>{for(const entry of entries){entry.target.style.setProperty('--company-exit-y',entry.boundingClientRect.top<0?'-20px':'20px');entry.target.classList.toggle('company-in-view',entry.isIntersecting&&entry.intersectionRatio>=.05);}},{threshold:[0,.05],rootMargin:'0px 0px -2% 0px'});
+ const revealed=new WeakSet();
+ const observer=new Observer(entries=>{for(const entry of entries){
+  if(once&&revealed.has(entry.target))continue;
+  const visible=entry.isIntersecting&&entry.intersectionRatio>=.05;
+  entry.target.style.setProperty('--company-exit-y',entry.boundingClientRect.top<0?'-20px':'20px');entry.target.classList.toggle('company-in-view',visible);
+  if(once&&visible){revealed.add(entry.target);observer.unobserve(entry.target);}
+ }},{threshold:[0,.05],rootMargin:'0px 0px -2% 0px'});
  targets.forEach((target,index)=>{target.classList.add('company-reveal');target.dataset.motionSide=index%2?'right':'left';target.style.setProperty('--company-delay',`${Math.min(index%3*50,100)}ms`);});
  root.classList.add('company-motion-ready');
  schedule(()=>schedule(()=>{if(active)targets.forEach(target=>observer.observe(target));}));

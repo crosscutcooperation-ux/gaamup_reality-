@@ -67,10 +67,11 @@ section[id]{scroll-margin-top:28px}
 :scope.company-motion-ready .company-reveal .company-word{transform:translateX(-110%);transition:transform 850ms var(--ease),opacity 400ms ease;transition-delay:var(--word-delay,0ms)}
 :scope.company-motion-ready .company-reveal[data-motion-side=right] .company-word{transform:translateX(110%)}
 :scope.company-motion-ready .company-in-view .company-word,:scope.company-motion-ready .company-in-view[data-motion-side=right] .company-word{transform:none;opacity:1}
-:scope.company-motion-ready :is(.panel,.portrait,.director-photo){transform:translateY(-40px);clip-path:inset(0 0 100% 0);transition:clip-path 1000ms var(--ease),transform 1000ms var(--ease),opacity 500ms ease}
-:scope.company-motion-ready :is(.panel,.portrait,.director-photo) img{transform:translateY(-7%) scale(1.03);transition:transform 1000ms var(--ease)}
-:scope.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view{transform:none;clip-path:inset(0)}
-:scope.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view img{transform:none}
+/* Keep the observed container measurable; clipping it shut prevents intersection. */
+:scope.company-motion-ready :is(.panel,.portrait,.director-photo){transform:translateY(-40px);clip-path:none;transition:transform 1000ms var(--ease),opacity 500ms ease}
+:scope.company-motion-ready :is(.panel,.portrait,.director-photo) img{transform:translateY(-7%) scale(1.03);clip-path:inset(0 0 100% 0);transition:transform 1000ms var(--ease),clip-path 1000ms var(--ease)}
+:scope.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view{transform:none;clip-path:none}
+:scope.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view img{transform:none;clip-path:inset(0)}
 .btn:hover,.gal figure:hover img{transform:none}
 @media(prefers-reduced-motion:reduce){:scope.company-motion-ready .company-reveal .company-word,:scope.company-motion-ready .company-reveal[data-motion-side=right] .company-word,:scope.company-motion-ready :is(.panel,.portrait,.director-photo),:scope.company-motion-ready :is(.panel,.portrait,.director-photo) img{transform:none;clip-path:none;opacity:1;transition:opacity 120ms ease;transition-delay:0ms}}
 }

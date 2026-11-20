@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.6 — 2026-11-20
+
+### Fixed
+- About photos reveal reliably; sections animate once and remain visible until the page is reloaded.
+- Venus and Sai floor, apartment and furnished views cover old content with a visible spinner until replacement pixels and layout are ready.
+- Sai furnished view swaps cleanly instead of revealing the previous plan through the construction transition.
+- The train camera is slightly closer and follows the branded carriage for two seconds before navigation.
+
 ## 3.0.5 — 2026-11-20
 
 ### Changed

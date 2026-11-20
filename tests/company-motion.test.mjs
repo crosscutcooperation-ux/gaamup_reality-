@@ -29,3 +29,17 @@ test('word motion preserves text, emphasis, forms and the original DOM after cle
  assert.equal(root.querySelector('input').value,'Buyer');stop();
  assert.equal(root.querySelector('h1').firstChild,original);assert.equal(root.querySelectorAll('.company-word-group').length,0);assert.equal(root.textContent,text);
 });
+
+test('About entrances reveal once, stay visible on scroll and reset after a new page load',()=>{
+ const win=new Window(),root=win.document.body;
+ root.innerHTML='<section class="phero"><h1>Our company.</h1></section><div class="portrait"><img src="/founder.webp"></div>';
+ let deliver;const unobserved=[];
+ class Observer{constructor(callback){deliver=callback;}observe(){}unobserve(target){unobserved.push(target);}disconnect(){}}
+ const setup=()=>observeCompanyMotion(root,Observer,fn=>fn(),{once:true});
+ let cleanup=setup();const portrait=root.querySelector('.portrait');
+ const send=(visible,top)=>deliver([{target:portrait,isIntersecting:visible,intersectionRatio:visible?.5:0,boundingClientRect:{top}}]);
+ send(false,900);assert.equal(portrait.classList.contains('company-in-view'),false);
+ send(true,100);assert.ok(portrait.classList.contains('company-in-view'));assert.deepEqual(unobserved,[portrait]);
+ send(false,-900);send(false,900);assert.ok(portrait.classList.contains('company-in-view'));
+ cleanup();cleanup=setup();assert.equal(portrait.classList.contains('company-in-view'),false);send(true,100);assert.ok(portrait.classList.contains('company-in-view'));cleanup();
+});

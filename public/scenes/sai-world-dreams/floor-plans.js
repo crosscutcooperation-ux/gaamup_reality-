@@ -98,7 +98,7 @@ async function load3d(key,request,furnishedModel){
       await viewer.loadModel(model.url);
       if(request===revision)$('#plan-view-help').textContent='Complete furnished apartment · drag to orbit · scroll to zoom'+(model.sharedReference?' · Spring shared preview':'');
     }else await viewer.load(key);
-    if(request===revision)status.hidden=true;
+    if(request===revision)feedback.cancel();
   }catch(error){
     if(request===revision){
       status.hidden=false;status.dataset.loading='false';status.textContent='The apartment model could not load. Choose Furnished view or 2D house plan to return.';
@@ -109,6 +109,7 @@ async function load3d(key,request,furnishedModel){
 function showFloor(){
   const building=BUILDINGS.find(item=>item.id===buildingSelect.value),floor=Number(floorSelect.value);
   if(!building||floorSelect.value==='')return;
+  feedback.begin('Opening the floor panel…');
   $('#open-floor-plan').disabled=false;$('#dialog-floor').value=String(floor);$('#dialog-building').value=building.id;
   selectedApartment=null;mode='2d';apartments.clear();
   current=resolvePlan(building.id,floor,$('#plan-kind').value);const request=++revision;
@@ -135,7 +136,7 @@ function showFloor(){
   $('.plan-modes').hidden=!current.available;
   $('#plan-empty').hidden=current.available;$('#plan-content').hidden=!current.available;
   $('#plan-empty-message').textContent=current.reason??'';
-  $('#plan-loading').hidden=true;viewer?.setActive(false);
+  if(!current.available)feedback.cancel();viewer?.setActive(false);
   sendView('floor',{building:building.id,floor,unit:null,mode:'2d'});
   if(current.available){
     const image=$('#floor-plan-image');zoom=1;image.style.transform='';

@@ -12,7 +12,7 @@ test('Venus is a persistent Dombivli project with all nine supplied GLB tower id
 });
 test('Venus floor and house selection opens matching supplied apartment GLBs',async()=>{
  const win=new Window({url:'http://localhost/scenes/venus-skky-city/index.html',settings:{disableCSSFileLoading:true,disableJavaScriptFileLoading:true,disableJavaScriptEvaluation:true}});
- Object.assign(globalThis,{window:win,document:win.document,Option:function(text,value){const o=win.document.createElement('option');o.text=text;o.value=value;return o;},Event:win.Event,CustomEvent:win.CustomEvent,ResizeObserver:class{observe(){}},requestAnimationFrame:()=>0,parent:{postMessage(){}},fetch:async p=>new Response(await readFile(new URL(p,base)))});
+ Object.assign(globalThis,{window:win,document:win.document,Option:function(text,value){const o=win.document.createElement('option');o.text=text;o.value=value;return o;},Event:win.Event,CustomEvent:win.CustomEvent,ResizeObserver:class{observe(){}},requestAnimationFrame:fn=>setTimeout(fn,0),parent:{postMessage(){}},fetch:async p=>new Response(await readFile(new URL(p,base)))});
  win.HTMLImageElement.prototype.decode=async function(){};
  win.HTMLDialogElement.prototype.showModal=function(){this.open=true;};win.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new win.Event('close'));};
  const stub='data:text/javascript,'+encodeURIComponent('export class PlanViewer{constructor(){this.controls={autoRotate:true};}setActive(){}setMode(){}async load(){return true;}async loadModel(url){globalThis.__venusLoadedModel=url;return true;}resize(){}reset(){}}');

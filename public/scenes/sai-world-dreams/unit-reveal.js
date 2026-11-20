@@ -1,4 +1,4 @@
-/** Reversible registered-image transition, with the timings of the reference viewer. */
+/** Keep paired images registered; decoded view changes are covered by the plan loader. */
 export class UnitReveal {
   constructor(flat){
     this.flat=flat;
@@ -26,16 +26,7 @@ export class UnitReveal {
       if(key!==this.key||this.destination!==target)return;
     }
     cancelAnimationFrame(this.frame);
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const duration=reduced?320:1400;
-    const start=performance.now(),from=this.progress;
-    const step=now=>{
-      const distance=(now-start)/duration*(solid?1:1.25);
-      this.progress=solid?Math.min(1,from+distance):Math.max(0,from-distance);
-      this.paint(reduced);
-      if(this.progress!==target)this.frame=requestAnimationFrame(step);
-    };
-    this.frame=requestAnimationFrame(step);
+    this.progress=target;this.paint(true);
   }
   paint(reduced){
     const t=this.progress*1.4;

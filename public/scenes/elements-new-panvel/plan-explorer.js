@@ -78,7 +78,7 @@ async function setPlanMode(value){
  viewer??=new PlanViewer($('#floor-3d'),{pick:id=>chooseFlat(id),rotate:()=>setPlanMode('rotate')});viewer.setActive(true);viewer.setMode(mode);
  const key=selected?.model||layout.id+'/'+(selected?.id||'floor');
  if(loadedKey!==key){feedback.begin('Loading your furnished apartment…');
-  try{const ok=selected?.model?await viewer.loadModel(selected.model):await viewer.load(layout,selected);if(request!==revision||!dialog.open)return;if(ok){loadedKey=key;$('#floor-busy').hidden=true;viewer.setMode(mode);}}
+  try{const ok=selected?.model?await viewer.loadModel(selected.model):await viewer.load(layout,selected);if(request!==revision||!dialog.open)return;if(ok){loadedKey=key;feedback.cancel();viewer.setMode(mode);}}
   catch(e){if(request===revision){$('#floor-busy').hidden=false;$('#floor-busy').dataset.loading='false';$('#floor-busy').textContent='This apartment could not load. Choose 2D house plan to return, or retry 3D rotate model.';}console.error(e);return;}
  }
  $('#floor-spin').textContent=viewer.controls.autoRotate?'Pause rotation':'Start rotation';

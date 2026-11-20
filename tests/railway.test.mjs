@@ -6,7 +6,7 @@ import {createImportedCoach,createImportedTrain} from '../lib/imported-train.js'
 import {loadTrainGeometry} from './helpers/load-model.mjs';
 const modelAsset=await loadTrainGeometry();
 function createCoach({cab=false}={}){return createImportedCoach(modelAsset.scene.getObjectByName(cab?'AC_Driving_Cab':'AC_Local_Coach'),{cab});}
-import {createCameraFlight,JOURNEY_DURATION} from '../lib/camera-flight.js';
+import {createCameraFlight,JOURNEY_DURATION,APPROACH_DURATION,BRAND_PASS_DURATION} from '../lib/camera-flight.js';
 import {fitLockedMap} from '../lib/map-framing.js';
 const mapCamera=new THREE.PerspectiveCamera(44,16/9,.2,1000);
 const framing=fitLockedMap(mapCamera,new THREE.Box3(new THREE.Vector3(-130,0,-107.05),new THREE.Vector3(130,20,107.05)));
@@ -24,25 +24,25 @@ test('the train makes one local approach instead of circling the map',()=>{
   }
 });
 test('camera descends smoothly from the current aerial view to the opposite side at every station',()=>{
-  const route=makeRoute();assert.ok(JOURNEY_DURATION===3600);
+  const route=makeRoute();assert.equal(APPROACH_DURATION,3600);assert.equal(BRAND_PASS_DURATION,2000);assert.equal(JOURNEY_DURATION,5600);
   for(let index=0;index<16;index++){
     const station=railPose(route,stationDistance(index,16)),flight=createCameraFlight({start,startTarget,station});
     assert.ok(flight.sample(0).position.distanceTo(start)<1e-9);assert.ok(flight.sample(0).target.distanceTo(startTarget)<1e-9);
     let last=flight.sample(0);for(let i=1;i<=500;i++){const view=flight.sample(i/500);assert.ok(view.position.y<=last.position.y+1e-8);assert.ok(view.position.y>=station.point.y+1.6-1e-8);assert.ok(last.quaternion.angleTo(view.quaternion)<.08,'No sudden camera spin');last=view;}
-    const end=flight.sample(1);assert.ok(Math.abs(end.position.y-station.point.y-1.6)<1e-8);assert.ok(start.clone().sub(station.point).dot(station.normal)*end.position.clone().sub(station.point).dot(station.normal)<=0,'Finish on the other side');assert.ok(flight.sample(.8).position.distanceTo(end.position)>1,'Keep the descent timing and remove the final one-second hold');assert.ok(flight.sample(.997).position.distanceTo(end.position)<.00001);
+    const end=flight.sample(1);assert.ok(Math.abs(end.position.y-station.point.y-1.6)<1e-8);assert.ok(start.clone().sub(station.point).dot(station.normal)*end.position.clone().sub(station.point).dot(station.normal)<=0,'Finish on the other side');const arrival=flight.sample(APPROACH_DURATION/JOURNEY_DURATION);assert.ok(Math.abs(arrival.position.distanceTo(end.position)-1.8)<1e-8,'Track the moving carriage for two seconds after arrival');assert.ok(arrival.quaternion.angleTo(end.quaternion)<1e-7);
   }
 });
 test('journey ends on a close broadside of a complete branded coach with roof and wheels visible',()=>{
   const route=makeRoute(),length=route.getLength();
-  for(const stop of [.27,.5,.73])for(const aspect of [18/9,16/9,9/19.5,2.4]){
-    const view=createCameraFlight({start,startTarget,station:railPose(route,stop),aspect}).sample(1);
+  for(const stop of [.27,.5,.73])for(const aspect of [18/9,16/9,9/19.5,2.4])for(const progress of [APPROACH_DURATION/JOURNEY_DURATION,.8,1]){
+    const view=createCameraFlight({start,startTarget,station:railPose(route,stop),aspect}).sample(progress);
     const camera=new THREE.PerspectiveCamera(44,aspect,.2,1000);camera.position.copy(view.position);camera.quaternion.copy(view.quaternion);camera.updateMatrixWorld();
-    const pose=railPose(route,transitionHead(stop,1,length)-3*6.05/length),xs=[];
+    const pose=railPose(route,transitionHead(stop,view.approach,length)+(view.passDistance-3*6.05)/length),xs=[];
     for(const x of [-3,3])for(const y of [0,2.2])for(const z of [-.6,.6]){
       const p=new THREE.Vector3(x,y,z).applyQuaternion(pose.quaternion).add(pose.point).project(camera);xs.push(p.x);
       assert.ok(Math.abs(p.x)<.96&&Math.abs(p.y)<.96&&p.z<1,`Roof, wheels and sides visible at ${aspect}`);
     }
-    if(aspect>=1.7&&aspect<=2)assert.ok(Math.max(...xs)-Math.min(...xs)>1.4,'Branded carriage fills at least 70% of the frame width');
+    if(aspect>=1.7&&aspect<=2)assert.ok(Math.max(...xs)-Math.min(...xs)>1.5,'Branded carriage fills at least 75% of the frame width');
   }
 });
 
