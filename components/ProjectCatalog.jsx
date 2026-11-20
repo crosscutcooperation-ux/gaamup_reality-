@@ -70,7 +70,7 @@ function ListingCard({project,citySlug,saved,onSave}){
     {facts.description&&<div className="listing-description"><p className={more?'expanded':''}>{facts.description}</p><button type="button" aria-expanded={more} onClick={()=>setMore(!more)}>{more?'Show less':'Show more'} {more?'−':'＋'}</button></div>}
     <div className="listing-card-footer"><div>
       {project.viewer?.kind&&<Link href={`${href}&explore=floors`} prefetch={false} className="listing-outline">View floor plans</Link>}
-      {href?<Link href={href} prefetch={false} className="listing-primary">View details</Link>:<Link href="/company/contact.html" prefetch={false} className="listing-primary">Enquire</Link>}
+      {href?<Link href={href} prefetch={false} className="listing-primary">View details</Link>:<Link href="/contact" prefetch={false} className="listing-primary">Enquire</Link>}
     </div></div>
   </article>;
 }

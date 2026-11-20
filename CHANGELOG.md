@@ -17,3 +17,9 @@
 - Updated vulnerable dependencies; native dependency audit reports no known vulnerabilities.
 - Validated and bounded enquiries, admin-only lead access, persistent request limits, protected server mail settings and CSP.
 - Server-side Turnstile verification is ready for production widget keys; see deployment status before claiming CAPTCHA is active.
+
+## 3.0.1 — 2026-11-20
+
+- Clear back controls, clean About/Contact URLs, readable company pages with word/photo entrances and reduced-motion support.
+- Route, model and floor-plan loading feedback; overlapping asset preparation, lossless ground texture delivery and bundled shared 3D runtime.
+- Production Cloudflare asset caching, enquiry rate limiting and Managed Turnstile installed; server admin key rotated privately.

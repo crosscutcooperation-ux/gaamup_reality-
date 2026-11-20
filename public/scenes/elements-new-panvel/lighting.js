@@ -16,14 +16,12 @@ export const LIGHTING = {
 
 export async function prepareMaterials(renderer,invalidate){
   const loader=new T.TextureLoader();
+  const hdrRequest=new RGBELoader().loadAsync('./shared/assets/environment.hdr');
+  const pavingRequest=Promise.all([loader.loadAsync('assets/elements-podium-pavers.png'),loader.loadAsync('assets/elements-podium-normal.png')]);
   async function load(name,color=true,repeat=[1,1]){const t=await loader.loadAsync('./shared/assets/'+name);t.colorSpace=color?T.SRGBColorSpace:T.NoColorSpace;t.wrapS=t.wrapT=T.RepeatWrapping;t.repeat.set(...repeat);t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;}
-  const [grass,asphalt,stone,bump,water,wood,canopy,terrainMap]=await Promise.all([load('grass.jpg',true,[25,25]),load('asphalt.jpg',true,[12,2]),load('stone.jpg',true,[3,3]),load('stone-bump.jpg',false,[3,3]),load('water-bump.jpg',false,[4,4]),load('wood-deck.jpg',true,[4,2]),load('canopy-spray.webp'),loader.loadAsync('assets/illustrative-panvel-ground.png')]);
+  const [[grass,asphalt,stone,bump,water,wood,canopy,terrainMap],[pavers,paverNormal],hdr]=await Promise.all([Promise.all([load('grass.jpg',true,[25,25]),load('asphalt.jpg',true,[12,2]),load('stone.jpg',true,[3,3]),load('stone-bump.jpg',false,[3,3]),load('water-bump.jpg',false,[4,4]),load('wood-deck.jpg',true,[4,2]),load('canopy-spray.webp'),loader.loadAsync('assets/illustrative-panvel-ground-lossless.webp')]),pavingRequest,hdrRequest]);
   materials.lawn.map=grass;materials.lawn.color.set(0xa3b18a);materials.road.map=asphalt;materials.road.color.set(0x8b8d8e);
   terrainMap.colorSpace=T.SRGBColorSpace;terrainMap.wrapS=terrainMap.wrapT=T.MirroredRepeatWrapping;terrainMap.anisotropy=renderer.capabilities.getMaxAnisotropy();
-  const [pavers, paverNormal] = await Promise.all([
-    loader.loadAsync('assets/elements-podium-pavers.png'),
-    loader.loadAsync('assets/elements-podium-normal.png'),
-  ]);
   pavers.colorSpace = T.SRGBColorSpace;
   for (const texture of [pavers, paverNormal]) {
     texture.wrapS = texture.wrapT = T.RepeatWrapping;
@@ -56,7 +54,6 @@ export async function prepareMaterials(renderer,invalidate){
   }
   materials.retail=null;
   materials.dark.color.set(0x424c60);materials.court.color.set(0x4f766d);materials.water.color.set(0x327d8e);
-  const hdr=await new RGBELoader().loadAsync('./shared/assets/environment.hdr');
   hdr.mapping=T.EquirectangularReflectionMapping;
   const generator=new T.PMREMGenerator(renderer),environment=generator.fromEquirectangular(hdr);hdr.dispose();generator.dispose();return environment;
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,stat} from 'node:fs/promises';
-import {Window} from 'happy-dom';
+import {Window} from './helpers/scene-dom.mjs';
 import {bundledProjects,projectsForCity} from '../lib/projects.js';
 const base=new URL('../public/scenes/venus-skky-city/',import.meta.url);
 test('Venus is a persistent Dombivli project with all nine supplied GLB tower identities',async()=>{

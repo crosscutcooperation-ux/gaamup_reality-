@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,readdir,stat} from 'node:fs/promises';
 import {BUILDINGS,resolvePlan} from '../public/scenes/sai-world-dreams/floor-plan-data.js';
 import {LIGHTING_PRESETS} from '../public/scenes/sai-world-dreams/architectural-lighting.js';
-import {Window} from 'happy-dom';
+import {Window} from './helpers/scene-dom.mjs';
 const base=new URL('../public/scenes/sai-world-dreams/',import.meta.url),plans=new URL('assets/plans/',base);
 test('every selectable floor preserves the source availability rules',()=>{
   for(const building of BUILDINGS){assert.equal(resolvePlan(building.id,0).available,false);assert.equal(resolvePlan(building.id,-1).available,false);assert.equal(resolvePlan(building.id,building.floors+1).available,false);}

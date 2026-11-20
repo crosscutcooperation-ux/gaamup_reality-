@@ -1,14 +1,21 @@
-/** Match the residence pages: reveal on entry, reset on exit in either direction. */
+/** Word entrances preserve the original text nodes so cleanup restores React's DOM. */
 export function observeCompanyMotion(root,Observer=IntersectionObserver){
- const selectors='.phero .crumb,.phero h1,.phero .lead,.split>*,.sec-head>*,.portrait,.leader>div:not(.portrait),.team-heading,.directors article,.pillar,.cta__in>*,.contact-layout>*,.office-band .wrap>*,.ftr__top>*,.ftr__bot';
- const targets=[...root.querySelectorAll(selectors)];
- const observer=new Observer(entries=>{
-  for(const entry of entries){
-   entry.target.style.setProperty('--company-exit-y',entry.boundingClientRect.top<0?'-40px':'40px');
-   entry.target.classList.toggle('company-in-view',entry.isIntersecting&&entry.intersectionRatio>=.08);
+ const selectors='.phero .crumb,.phero h1,.phero .lead,.sec h2,.sec h3,.sec p,.contact-list>div,.enquiry-panel,.panel,.portrait,.director-photo,.founder-principles,.office-band .wrap>*,.cta__act';
+ const targets=[...root.querySelectorAll(selectors)],restorations=[],counts=new Map();
+ for(const block of targets.filter(el=>el.matches('h1,h2,h3,p'))){
+  const walker=root.ownerDocument.createTreeWalker(block,4),nodes=[];while(walker.nextNode())if(walker.currentNode.data.trim())nodes.push(walker.currentNode);
+  for(const original of nodes){
+   const group=root.ownerDocument.createElement('span');group.className='company-word-group';
+   for(const token of original.data.match(/\s+|\S+/g)||[]){
+    if(!token.trim()){group.append(token);continue;}
+    const mask=root.ownerDocument.createElement('span'),word=root.ownerDocument.createElement('span');mask.className='company-word-mask';word.className='company-word';word.textContent=token;
+    const index=counts.get(block)||0;word.style.setProperty('--word-delay',`${Math.min(index*24,240)}ms`);counts.set(block,index+1);mask.append(word);group.append(mask);
+   }
+   original.replaceWith(group);restorations.push([group,original]);
   }
- },{threshold:[0,.08],rootMargin:'0px 0px -2% 0px'});
- targets.forEach((target,index)=>{target.classList.add('company-reveal');target.style.setProperty('--company-delay',`${index%3*65}ms`);observer.observe(target);});
+ }
+ const observer=new Observer(entries=>{for(const entry of entries){entry.target.style.setProperty('--company-exit-y',entry.boundingClientRect.top<0?'-20px':'20px');entry.target.classList.toggle('company-in-view',entry.isIntersecting&&entry.intersectionRatio>=.05);}},{threshold:[0,.05],rootMargin:'0px 0px -2% 0px'});
+ targets.forEach((target,index)=>{target.classList.add('company-reveal');target.style.setProperty('--company-delay',`${Math.min(index%3*50,100)}ms`);observer.observe(target);});
  root.classList.add('company-motion-ready');
- return ()=>{observer.disconnect();root.classList.remove('company-motion-ready');targets.forEach(target=>target.classList.remove('company-reveal','company-in-view'));};
+ return ()=>{observer.disconnect();root.classList.remove('company-motion-ready');targets.forEach(t=>t.classList.remove('company-reveal','company-in-view'));for(const [group,original] of restorations)group.replaceWith(original);};
 }

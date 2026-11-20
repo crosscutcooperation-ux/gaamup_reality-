@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {Window} from 'happy-dom';
+import {Window} from './helpers/scene-dom.mjs';
 import project from '../lib/elements-project.json' with {type:'json'};
 
 const scene = new URL('../public/scenes/elements-new-panvel/', import.meta.url);

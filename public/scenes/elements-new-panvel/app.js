@@ -1,1 +1,1 @@
-import './viewer.js?v=fast-models-2';
+import './viewer.js?v=navigation-fast-3';

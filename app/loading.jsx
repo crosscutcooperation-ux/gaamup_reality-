@@ -1,0 +1,1 @@
+export default function Loading(){return <main id="destination" className="route-loading" aria-busy="true" aria-label="Loading page"><div role="status"><span className="loading-spinner" aria-hidden="true"/><p>Opening your next perspective…</p></div><div className="route-skeleton" aria-hidden="true"><i/><i/><div/></div></main>;}

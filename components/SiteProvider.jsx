@@ -31,12 +31,12 @@ export default function SiteProvider({children}){
   const selectedBuilder=modal?.type==='builder'?builders.find(b=>b.name===modal.name):null;
   return <SiteContext.Provider value={{properties,setProperties,saved,toggleSaved,showProperty:id=>setModal({type:'property',id}),showBuilder:name=>setModal({type:'builder',name}),showSaved:()=>setModal({type:'saved'}),registerTravel,travel,notify,setCovered}}>
     <span id="top"/><a className="skip" href={pathname==='/'?'#locations':'#destination'}>Skip to content</a>
-    <header className={`header${pathname==='/' || pathname.startsWith('/company/') ? ' hero-header' : ''}`}><Brand/><nav id="main-navigation" aria-label="Main navigation" className={menuOpen?'open':''}>
+    <header className={`header${pathname==='/' || ['/about','/contact'].includes(pathname) ? ' hero-header' : ''}`}><Brand/><nav id="main-navigation" aria-label="Main navigation" className={menuOpen?'open':''}>
       <Link href="/#home" onClick={()=>setMenuOpen(false)}>Home</Link>
-      <Link href="/company/about.html" onClick={()=>setMenuOpen(false)}>About</Link>
+      <Link href="/about" onClick={()=>setMenuOpen(false)}>About</Link>
       <Link href="/#projects" onClick={()=>setMenuOpen(false)}>Projects</Link>
       <details className="nav-dropdown" ref={locationsMenu}><summary>Locations <span aria-hidden="true">⌄</span></summary><div className="location-menu"><Link href="/locations" onClick={()=>setMenuOpen(false)}>All properties</Link>{cities.map(city=><Link href={`/locations/${city.slug}`} key={city.slug} prefetch={false} onClick={()=>setMenuOpen(false)}>{city.name}<span aria-hidden="true"></span></Link>)}</div></details>
-      <Link href="/company/contact.html" onClick={()=>setMenuOpen(false)}>Contact</Link>
+      <Link href="/contact" onClick={()=>setMenuOpen(false)}>Contact</Link>
     </nav><div className="header-actions"><button type="button" className="saved-button" aria-label="View saved homes" onClick={()=>setModal({type:'saved'})}>♡ <span id="saved-count">{saved.length}</span></button><span className="brokerage-badge"><strong>0%</strong><span>brokerage</span></span><button type="button" className="menu-button" aria-label={menuOpen?'Close menu':'Open menu'} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={()=>setMenuOpen(!menuOpen)}><i/><i/></button></div></header>
     {children}
     <SiteFooter/>

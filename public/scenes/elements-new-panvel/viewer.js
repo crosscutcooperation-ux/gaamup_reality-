@@ -111,7 +111,7 @@ function bind(){
 async function init(){try{
   const materialsRequest=prepareMaterials(renderer,invalidate);
 
-  const decoder=new DRACOLoader().setDecoderPath('shared/vendor/draco/').setDecoderConfig({type:'wasm'}).setWorkerLimit(2);
+  const decoder=new DRACOLoader().setDecoderPath('shared/vendor/draco/').setDecoderConfig({type:'wasm'}).setWorkerLimit(2).preload();
   const loader=new GLTFLoader().setDRACOLoader(decoder);
   const [dayEnvironment,detailed]=await Promise.all([materialsRequest,loader.loadAsync('assets/elements-towers-v2.bin?release=2')]).finally(()=>decoder.dispose());
   const built=buildSite();site=built.root;towers=built.towers;scene.add(site);atmosphere=createAtmosphere(scene,invalidate);setInterval(()=>{if(!document.hidden&&viewportVisible&&atmosphere?.update(performance.now()))invalidate();},100);
@@ -128,8 +128,8 @@ async function init(){try{
   stage.append($('#labels'));$('#labels').hidden=false;towerSpecs.forEach(label);
   const mat=new T.MeshStandardMaterial({color:0xa7ac9f,roughness:1});for(let i=0;i<18;i++){const h=8+(i%5)*4,b=new T.Mesh(new T.BoxGeometry(18,h,24),mat);b.position.set(i%2?-205:205,h/2,-175+Math.floor(i/2)*40);context.add(b);}
   bind();resize();camera.position.copy(fitted(presets.courtyard.p,presets.courtyard.t));controls.target.set(...presets.courtyard.t);controls.update();
-  $('#loading-message').textContent='Preparing facade reflections and lightingâ€¦';
-  renderer.compile(scene,camera);renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);
-  $('#loading').hidden=true;ready=true;setRotation(!matchMedia('(prefers-reduced-motion: reduce)').matches);send('ready',{playing:controls.autoRotate});invalidate();
+  $('#loading-message').textContent='Preparing facade reflections and lighting…';
+  if(renderer.compileAsync)await renderer.compileAsync(scene,camera);else renderer.compile(scene,camera);renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);
+  canvas.dataset.readyMs=String(Math.round(performance.now()));$('#loading').hidden=true;ready=true;setRotation(!matchMedia('(prefers-reduced-motion: reduce)').matches);send('ready',{playing:controls.autoRotate});invalidate();
 }catch(error){console.error(error);$('#loading').hidden=true;$('#error').hidden=false;send('error',{message:'The 3D view could not start.'});}}
 init();

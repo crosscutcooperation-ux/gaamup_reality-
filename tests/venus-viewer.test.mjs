@@ -1,4 +1,4 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFile,stat} from 'node:fs/promises';import * as T from 'three';import {Window} from 'happy-dom';
+import test from 'node:test';import assert from 'node:assert/strict';import {readFile,stat} from 'node:fs/promises';import * as T from 'three';import {Window} from './helpers/scene-dom.mjs';
 import {loadTrainGeometry} from './helpers/load-model.mjs';import {prepareTownship,VIEWS,frameView} from '../public/scenes/venus-skky-city/scene-settings.js';
 const base=new URL('../public/scenes/venus-skky-city/',import.meta.url);
 test('removing the green base retains all towers and raised landscape',async()=>{const {scene}=await loadTrainGeometry(new URL('assets/venus-skky-city-web.glb',base));const result=prepareTownship(scene);assert.equal(result.removedGroundTriangles,12);assert.equal(result.towers.length,9);const lawn=scene.getObjectByName('lawn'),p=lawn.geometry.attributes.position,index=lawn.geometry.index,v=new T.Vector3();for(let i=0;i<index.count;i++){v.fromBufferAttribute(p,index.getX(i)).applyMatrix4(lawn.matrixWorld);assert.ok(v.y>6,'Raised podium lawns remain, without the below-grade base');}});
@@ -15,11 +15,12 @@ test('the rebuilt controller initializes and opens the same building and floor d
  const actualThree=new URL('../node_modules/three/build/three.module.js',import.meta.url).href;
  const mockThree=data(`export * from ${JSON.stringify(actualThree)};export class WebGLRenderer{constructor(){this.shadowMap={};this.info={render:{calls:0}};this.capabilities={getMaxAnisotropy:()=>4};}setPixelRatio(){}setSize(){}setClearAlpha(){}render(){}dispose(){}}export class PMREMGenerator{fromScene(){return {texture:{},dispose(){}};}dispose(){}}`);
  const mockLoader=data('export class GLTFLoader{setDRACOLoader(){return this;}async loadAsync(url){return url.includes("facades")?{scene:globalThis.__venusRuntimeAsset.scene.clone(true)}:globalThis.__venusRuntimeAsset;}}');
+ const mockDraco=data('export class DRACOLoader{setDecoderPath(){return this;}setWorkerLimit(){return this;}preload(){return this;}dispose(){}}');
  const mockHDR=data('export class RGBELoader{async loadAsync(){throw Error("HDR omitted in controller test");}}');
  const mockSurfaces=data(`import {restoreMaterialRoles} from '${new URL('surface-materials.js',base).href}';export async function finishSurfaces(root){return {...restoreMaterialRoles(root),dispose(){}};}`);
  const mockAtmosphere=data('export async function createSiteEnvironment(){return {update:()=>false,dispose(){}};}');
  let source=await readFile(new URL('app.js',base),'utf8');source=source.replace(/from '([^']+)'/g,(_,p)=>`from '${new URL(p,base).href}'`).replace(JSON.stringify('unused'),'');
- for(const [path,url] of [['vendor/three.module.js',mockThree],['vendor/GLTFLoader.js',mockLoader],['../sai-world-dreams/vendor/addons/loaders/RGBELoader.js',mockHDR],['site-environment.js',mockAtmosphere],['surface-materials.js',mockSurfaces]])source=source.replace("'"+new URL(path,base).href+"'",JSON.stringify(url));
+ for(const [path,url] of [['vendor/DRACOLoader.js',mockDraco],['vendor/three.module.js',mockThree],['vendor/GLTFLoader.js',mockLoader],['../sai-world-dreams/vendor/addons/loaders/RGBELoader.js',mockHDR],['site-environment.js',mockAtmosphere],['surface-materials.js',mockSurfaces]])source=source.replace("'"+new URL(path,base).href+"'",JSON.stringify(url));
  await import(data(source));await new Promise(r=>setTimeout(r,30));assert.equal(win.document.querySelector('#error').hidden,true);assert.equal(win.venusExplorer?.ready,true);assert.equal(win.venusExplorer.report().removedGroundTriangles,12);
  const amenityButtons=win.document.querySelectorAll('[data-amenity]');assert.equal(amenityButtons.length,21);
  win.document.querySelector('[data-amenity="pool"]').click();

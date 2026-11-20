@@ -1,6 +1,6 @@
 {
   "name": "aero-property-discovery",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -20,7 +20,8 @@
     "admin:key": "node scripts/admin-key.mjs",
     "model:export": "node scripts/build-model.mjs",
     "model:render": "node scripts/build-model.mjs --render",
-    "test:uploads": "node scripts/smoke-uploads.mjs"
+    "test:uploads": "node scripts/smoke-uploads.mjs",
+    "build:scenes": "node scripts/bundle-scenes.mjs"
   },
   "dependencies": {
     "next": "16.4.6",
@@ -33,6 +34,7 @@
     "@gltf-transform/core": "^4.5.1",
     "@gltf-transform/extensions": "^4.5.1",
     "draco3dgltf": "^1.5.9",
+    "esbuild": "0.28.2",
     "happy-dom": "^21.0.4"
   }
 }

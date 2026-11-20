@@ -43,7 +43,7 @@ async function init(){
   let pixelRatio=Math.min(devicePixelRatio,mobile?1:1.25);
   renderer.setPixelRatio(pixelRatio);renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
   renderer.shadowMap.autoUpdate=false;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
-  const decoder=new DRACOLoader().setDecoderPath('../venus-skky-city/vendor/draco/').setWorkerLimit(2);
+  const decoder=new DRACOLoader().setDecoderPath('../venus-skky-city/vendor/draco/').setWorkerLimit(2).preload();
   const facadeRequest=new GLTFLoader().setDRACOLoader(decoder).loadAsync('assets/residential-facades-v2.bin?release=2').then(asset=>({asset}),error=>({error})).finally(()=>decoder.dispose());
   const hdrRequest=new RGBELoader().loadAsync('assets/environment.hdr').catch(()=>null);
   const loader=new T.TextureLoader();
@@ -304,7 +304,7 @@ async function init(){
     frames++;canvas.dataset.frames=String(frames);canvas.dataset.drawCalls=String(renderer.info.render.calls);canvas.dataset.mode=mode;
     if(frames%3===0){canvas.dataset.azimuth=controls.getAzimuthalAngle().toFixed(3);canvas.dataset.distance=camera.position.distanceTo(controls.target).toFixed(1);}
     updateHotspots();dirty=drawnRevision!==invalidation||!!flight||controls.autoRotate||!!(walk.active&&(walk.keys.size||walk.path.length||walk.tour?.running));
-    if(!ready){ready=true;$('#loading').hidden=true;canvas.dataset.modelReady='true';canvas.dataset.towers=String(model.towers.length);canvas.dataset.textured='true';announce('3D scene ready. Tap the pool or courtyard to enter a walkthrough.');}
+    if(!ready){ready=true;$('#loading').hidden=true;canvas.dataset.modelReady='true';canvas.dataset.readyMs=String(Math.round(performance.now()));canvas.dataset.towers=String(model.towers.length);canvas.dataset.textured='true';announce('3D scene ready. Tap the pool or courtyard to enter a walkthrough.');}
   }
   addEventListener('pagehide',()=>guidance.dispose(),{once:true});
   document.fonts.ready.then(()=>{labelSizesDirty=true;invalidate();});

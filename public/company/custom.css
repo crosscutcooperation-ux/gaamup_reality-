@@ -27,3 +27,25 @@ section[id]{scroll-margin-top:28px}
 .company-story-lead{margin-top:28px}
 .company-cta-lead{margin-top:24px}
 }
+
+@scope (.company-page){
+:scope{--text:#505b49;--text-inv:#e3e8db;--ease:cubic-bezier(.23,1,.32,1)}
+.dark{color:#e3e8db;--head:#f6f4f1;--gold:#d4ddbf;--text:#e3e8db}
+.dark h2,.dark h3,.dark .pillar__word{color:#f6f4f1}.dark p,.dark .lead,.dark .eyebrow{color:#e3e8db}.dark h2 em{color:#d4ddbf}
+.contact-list em,.contact-list small,.crumb,.phero .lead,.director-caption p,.leader__role{color:#505b49}
+.company-word-group{word-spacing:.04em}
+.company-word-mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em}
+.company-word{display:inline-block;transform:none;opacity:1}
+.company-motion-ready .company-reveal{opacity:0;transform:translate3d(0,var(--company-exit-y,20px),0);transition:opacity 450ms ease,transform 700ms var(--ease)}
+.company-motion-ready :is(h1,h2,h3,p).company-reveal{transform:none}
+.company-motion-ready .company-reveal .company-word{transform:translateY(105%);opacity:0;transition:transform 700ms var(--ease),opacity 350ms ease;transition-delay:var(--word-delay,0ms)}
+.company-motion-ready .company-in-view,.company-motion-ready .company-reveal:focus-within{opacity:1;transform:none}
+.company-motion-ready .company-in-view .company-word{transform:none;opacity:1}
+.company-motion-ready :is(.panel,.portrait,.director-photo){clip-path:inset(10% 0 10% 0);transition:clip-path 800ms var(--ease),opacity 500ms ease,transform 700ms var(--ease)}
+.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view{clip-path:inset(0)}
+.company-motion-ready :is(.panel,.portrait,.director-photo) img{transform:scale(1.07);transition:transform 1000ms var(--ease)}
+.company-motion-ready :is(.panel,.portrait,.director-photo).company-in-view img{transform:scale(1)}
+.btn{transition:background-color 180ms ease,color 180ms ease}.btn:active{transform:scale(.98)}
+@media(hover:hover) and (pointer:fine){.btn:hover{transform:none}.director-photo:hover img{transform:scale(1.03)}}
+@media(prefers-reduced-motion:reduce){.company-motion-ready .company-reveal,.company-motion-ready .company-reveal .company-word{opacity:1;transform:none;clip-path:none;transition:opacity 120ms ease;transition-delay:0ms}.company-motion-ready :is(.panel,.portrait,.director-photo),.company-motion-ready :is(.panel,.portrait,.director-photo) img{clip-path:none;transform:none;transition:opacity 120ms ease}}
+}

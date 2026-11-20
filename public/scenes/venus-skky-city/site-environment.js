@@ -4,8 +4,7 @@ export const SITE_SURROUNDINGS={center:[73.0909,19.1859],bounds:[73.0699,19.1659
 /** Real regional imagery, with an illustrative site alignment and animated atmospheric layers. */
 export async function createSiteEnvironment({scene,renderer,model,invalidate}){
   const group=new T.Group();group.name='Dombivli satellite surroundings and atmosphere';scene.add(group);
-  const detail=await new T.TextureLoader().loadAsync('../sai-world-dreams/assets/grass.jpg');detail.colorSpace=T.SRGBColorSpace;detail.wrapS=detail.wrapT=T.RepeatWrapping;detail.anisotropy=4;
-  const landscape=await new GLTFLoader().loadAsync('assets/venus-surroundings.glb');
+  const [detail,landscape]=await Promise.all([new T.TextureLoader().loadAsync('../sai-world-dreams/assets/grass.jpg'),new GLTFLoader().loadAsync('assets/venus-surroundings.glb')]);detail.colorSpace=T.SRGBColorSpace;detail.wrapS=detail.wrapT=T.RepeatWrapping;detail.anisotropy=4;
   const terrain=landscape.scene;terrain.name='Blender terrain with regional satellite and woodland';
   terrain.traverse(o=>{if(!o.isMesh)return;o.receiveShadow=true;for(const m of Array.isArray(o.material)?o.material:[o.material]){
     if(m.map){m.map.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());}

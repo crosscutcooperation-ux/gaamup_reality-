@@ -28,19 +28,18 @@ async function init(){
  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-240,right:240,top:240,bottom:-240,near:10,far:800});sun.shadow.bias=-.00015;sun.shadow.normalBias=.15;sun.shadow.radius=2;
  const sky=new T.Mesh(new T.SphereGeometry(1600,48,24),new T.ShaderMaterial({side:T.BackSide,depthWrite:false,toneMapped:false,uniforms:{horizon:{value:new T.Color(0xd7ecf1)},skyBlue:{value:new T.Color(0x369bef)}},vertexShader:'varying vec3 direction;void main(){direction=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec3 direction;uniform vec3 horizon;uniform vec3 skyBlue;void main(){float t=1.-exp(-5.5*max(normalize(direction).y+.018,0.));gl_FragColor=vec4(mix(horizon,skyBlue,t),1.);\n#include <colorspace_fragment>\n}'}));sky.renderOrder=-10;scene.add(sky);
  // Download geometry and HDR together; never serialize the large scene requests.
- const draco=new DRACOLoader().setDecoderPath('vendor/draco/').setWorkerLimit(2);
+ const draco=new DRACOLoader().setDecoderPath('vendor/draco/').setWorkerLimit(2).preload();
  const loader=new GLTFLoader().setDRACOLoader(draco);
  const hdrRequest=new RGBELoader().loadAsync('../sai-world-dreams/assets/environment.hdr').catch(()=>null);
  const [asset,facadeAsset]=await Promise.all([
-  loader.loadAsync('assets/venus-site-v2.bin?release=2',e=>{if(e.total)$('#loading-message').textContent='Loading Venus architecture · '+Math.round(e.loaded/e.total*100)+'%';}),
+  loader.loadAsync('assets/venus-site-v2.bin?release=2',e=>{if(e.total)$('#loading-message').textContent='Loading Venus architecture · '+Math.min(100,Math.round(e.loaded/e.total*100))+'%';}),
   loader.loadAsync('assets/venus-facades-v2.bin?release=2'),
  ]).finally(()=>draco.dispose());
  replaceFacades(asset.scene,facadeAsset.scene);
- const site=asset.scene,{towers,removedGroundTriangles}=prepareTownship(site);scene.add(site);const surfaces=await finishSurfaces(site);
+ const site=asset.scene,{towers,removedGroundTriangles}=prepareTownship(site);scene.add(site);const [surfaces,atmosphere]=await Promise.all([finishSurfaces(site),createSiteEnvironment({scene,renderer,model:{context:site},invalidate})]);
  const pmrem=new T.PMREMGenerator(renderer);let environment;const environmentCache=new Map();
  try{const hdr=await hdrRequest;if(!hdr)throw Error('Environment unavailable');environment=pmrem.fromEquirectangular(hdr);scene.environment=environment.texture;hdr.dispose();}catch{environment=pmrem.fromScene(sky,.04);scene.environment=environment.texture;}pmrem.dispose();
  let composer=null,ssao=null;if(innerWidth>=900){try{const [{EffectComposer},{RenderPass},{SSAOPass},{OutputPass}]=await Promise.all([import('../sai-world-dreams/vendor/addons/postprocessing/EffectComposer.js'),import('../sai-world-dreams/vendor/addons/postprocessing/RenderPass.js'),import('../sai-world-dreams/vendor/addons/postprocessing/SSAOPass.js'),import('../sai-world-dreams/vendor/addons/postprocessing/OutputPass.js')]);composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));ssao=new SSAOPass(scene,camera,viewport.clientWidth,viewport.clientHeight,12);ssao.kernelRadius=2.4;ssao.minDistance=.0004;ssao.maxDistance=.025;composer.addPass(ssao);composer.addPass(new OutputPass());}catch{composer?.dispose?.();composer=null;}}
- const atmosphere=await createSiteEnvironment({scene,renderer,model:{context:site},invalidate});
  const windowMaterials=surfaces.windows,lightFixtures=new T.Group();lightFixtures.name='Venus courtyard luminaires';scene.add(lightFixtures);const localLights=[];for(const [x,z] of [[-45,24],[30,24],[-30,-56],[20,-44],[0,-2]]){const light=new T.PointLight(0xffd59a,0,65,2);light.position.set(x,10,z);lightFixtures.add(light);localLights.push(light);}for(const tower of towers.filter((_,i)=>[0,3,5].includes(i))){const light=new T.SpotLight(0xffd6a3,0,140,.5,.85,2);light.position.set(tower.position.x,8,tower.position.z+15);light.target.position.set(tower.position.x,58,tower.position.z);lightFixtures.add(light,light.target);localLights.push(light);}
  function setLighting(name){const p=LIGHTING_PRESETS[name];if(!p)return;lighting=name;sun.position.set(...p.sun);sun.color.set(p.color);sun.intensity=p.sunPower;ambient.intensity=p.ambient;fill.intensity=p.fill;renderer.toneMappingExposure=p.exposure;scene.environmentIntensity=p.environment;if(name==='day')scene.environment=environment.texture;else{if(!environmentCache.has(name)){const generator=new T.PMREMGenerator(renderer),backdrop=new T.Scene();backdrop.background=new T.Color(name==='night'?0x23314d:0xb9a39a);environmentCache.set(name,generator.fromScene(backdrop,.035));generator.dispose();}scene.environment=environmentCache.get(name).texture;}scene.fog.color.set(p.fog);scene.fog.density=p.density;
   sky.material.uniforms.horizon.value.set(name==='night'?0x182b48:name==='evening'?0xe8b391:0xd7ecf1);sky.material.uniforms.skyBlue.value.set(name==='night'?0x050b1c:name==='evening'?0x7886b4:0x369bef);
@@ -81,6 +80,9 @@ async function init(){
   if(walking.update(dt))dirty=true;else if(controls.update(dt))dirty=true;if(atmosphere.update(now))dirty=true;
   if(now-lastRender<1000/30)return;if(dirty||controls.autoRotate){const renderStart=performance.now();if(composer)composer.render();else renderer.render(scene,camera);renderSamples++;if(composer&&renderSamples>24){slowFrames=performance.now()-renderStart>50?slowFrames+1:0;if(slowFrames>=12){composer.dispose();ssao?.dispose();composer=null;ssao=null;}}labels(now);lastRender=now;dirty=false;}
  }
+ if(renderer.compileAsync)await renderer.compileAsync(scene,camera);
+ if(composer)composer.render();else renderer.render(scene,camera);
+ canvas.dataset.readyMs=String(Math.round(performance.now()));
  $('#loading').hidden=true;ready=true;controls.autoRotate=!reduced;syncRotation();canvas.dataset.modelReady='true';canvas.dataset.view='courtyard';renderer.shadowMap.needsUpdate=true;raf=requestAnimationFrame(animate);send({type:'ready',playing:controls.autoRotate});
  addEventListener('message',e=>{if(e.source!==parent||e.data?.source!=='aero-controls')return;if(e.data.action==='floor-picker'){setDrawer(true);planBuilding.focus();}});
  $('#close-reference').onclick=()=>$('#references').close();$$('[data-ref]').forEach(b=>b.onclick=()=>{$('#reference-image').src='assets/'+b.dataset.ref+'.webp';$('#reference-image').alt=b.textContent;});
