@@ -15,3 +15,7 @@
 #floor-busy:not([hidden]),#plan-loading:not([hidden]){display:grid;place-content:center;min-height:100px}
 @keyframes scene-loader-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){#floor-busy::before,#plan-loading::before{animation-duration:2s}}
+
+/* Loading feedback covers old content until each new image is ready. */
+#floor-busy:not([hidden]),#plan-loading:not([hidden]){z-index:20;position:absolute;inset:0;gap:0;background:#f6f4f1f2;text-align:center;padding:24px;pointer-events:auto;align-content:center;justify-items:center;color:#304d3e;font:14px/1.6 ReposeSans,Arial,sans-serif}
+#floor-busy[data-loading=false]::before,#plan-loading[data-loading=false]::before{display:none}

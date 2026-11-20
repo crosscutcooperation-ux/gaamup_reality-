@@ -1,3 +1,4 @@
+import {createPlanFeedback} from '../sai-world-dreams/plan-feedback.js';
 import {towerSpecs} from './model.js';
 import {PlanViewer} from '../venus-skky-city/plan-viewer.js';
 import {GUIDE_HAND} from '../venus-skky-city/scene-guidance.js';
@@ -13,6 +14,7 @@ dialog.innerHTML=`
  <footer class="floor-footer plan-footer"><span id="floor-note"></span><a id="floor-source" target="_blank" rel="noopener">Original source</a></footer>`;
 document.body.appendChild(dialog);const hint=document.createElement('span');hint.className='unit-guide';hint.innerHTML=GUIDE_HAND+'<span>Tap a coloured home</span>';dialog.querySelector('#floor-2d').append(hint);
 const $=s=>dialog.querySelector(s),$$=s=>[...dialog.querySelectorAll(s)];
+const feedback=createPlanFeedback($('#floor-busy'));
 let layout=null,selected=null,mode='2d',viewer=null,zoom=1,revision=0,loadedKey='',building='T1',floor=2;
 let layoutsPromise;
 async function readLayout(id){
@@ -52,36 +54,36 @@ function fitImage(){
  const base=Math.min((host.clientWidth-40)/im.naturalWidth,(host.clientHeight-35)/im.naturalHeight),s=Math.max(.02,base)*zoom;
  $('#floor-drawing').style.width=im.naturalWidth*s+'px';$('#floor-drawing').style.height=im.naturalHeight*s+'px';
 }
-new ResizeObserver(()=>fitImage()).observe($('#floor-2d'));$('#floor-image').onload=fitImage;$('#floor-image').onerror=()=>{$('#floor-busy').hidden=false;$('#floor-busy').textContent='This drawing could not load. Choose another view or reopen this floor to retry.';};
+new ResizeObserver(()=>fitImage()).observe($('#floor-2d'));
 function updateSelection(){
  dialog.classList.toggle('apartment',!!selected);$('#floor-apartment-level').textContent=`${layout.name} / LEVEL ${String(floor).padStart(2,'0')}`;$('#floor-apartment-type').textContent=selected?`${selected.beds} BHK`:'';$('#floor-apartment-number').textContent=selected?'APARTMENT '+String(selected.flat).padStart(2,'0'):'';
  const title=building==='sample'?'Apartment layouts':`${layout.name} · Floor ${String(floor).padStart(2,'0')}`;
  $('#floor-title').textContent=selected?nameOf(selected):title;
  $('#floor-context').textContent=selected?`${title} / ${selected.sample?'Selected layout':'Flat '+selected.flat}`:`${title} / ${layout.kind} floor plan`;
  $('#floor-back').hidden=!selected||building==='sample';$('.floor-switch').hidden=!selected;
- $('#floor-hotspots').toggleAttribute('hidden',!!selected);$('#floor-image').src=selected?selected.image:layout.image;$('#floor-image').alt=selected?nameOf(selected)+' — clean 2D house plan':layout.name+' — clickable original floor drawing';
+ $('#floor-hotspots').toggleAttribute('hidden',!!selected);$('#floor-image').alt=selected?nameOf(selected)+' — clean 2D house plan':layout.name+' — clickable original floor drawing';
  $('#floor-image').tabIndex=selected?0:-1;
  $$('.floor-unit').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.flat===selected?.id)));
  zoom=1;fitImage();
 }
 async function chooseFlat(id){const u=layout?.units.find(u=>u.id===id);if(!u)return;selected=u;loadedKey='';updateSelection();await setPlanMode('2d');}
 async function setPlanMode(value){
- mode=value;const request=++revision;
+ feedback.cancel();mode=value;const request=++revision;
  $$('[data-floor-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.floorMode===mode)));
  const interactive=!['2d','furnished'].includes(mode);$('#floor-2d').hidden=interactive;$('#floor-3d').hidden=!interactive;$('#floor-spin').hidden=mode!=='rotate';$('#floor-export').hidden=!interactive;$('#floor-busy').hidden=true;
  $('#floor-help').textContent=['2d','furnished'].includes(mode)?(selected?'Click the plan to see the furnished view.':'Click a highlighted flat to open its own 2D plan.'):
   mode==='3d'?(selected?'3D wall cutaway · click the model for 360° rotation.':'3D floor cutaway · click a residence to open it.'):'Drag to orbit · scroll to zoom · right-drag to pan · use Pause rotation to stop automatic rotation.';
- if(!interactive){viewer?.setActive(false);if(selected)$('#floor-image').src=mode==='furnished'?selected.furnished:selected.image;$('#floor-help').textContent=mode==='furnished'?'Furnished view · furniture and finishes are illustrative.':'2D plan redrawn from the supplied reference · use + / − to zoom';fitImage();return;}
- if(selected&&!selected.model){viewer?.setActive(false);$('#floor-spin').hidden=true;$('#floor-export').hidden=true;$('#floor-help').textContent='Return to 2D Plan to view the supplied drawing.';$('#floor-busy').hidden=false;$('#floor-busy').textContent='3D view coming soon. Explore the 2D house plan or furnished view for now.';return;}
+ if(!interactive){viewer?.setActive(false);const src=selected?(mode==='furnished'?selected.furnished:selected.image):layout.image;$('#floor-help').textContent=mode==='furnished'?'Furnished view · furniture and finishes are illustrative.':'2D plan redrawn from the supplied reference · use + / − to zoom';await feedback.image($('#floor-image'),src,mode==='furnished'?'Loading the furnished view…':selected?'Loading your 2D house plan…':'Loading the 2D floor plan…',{valid:()=>request===revision&&dialog.open,ready:fitImage});return;}
+ if(selected&&!selected.model){viewer?.setActive(false);$('#floor-spin').hidden=true;$('#floor-export').hidden=true;$('#floor-help').textContent='Return to 2D Plan to view the supplied drawing.';$('#floor-busy').hidden=false;$('#floor-busy').dataset.loading='false';$('#floor-busy').textContent='3D view coming soon. Explore the 2D house plan or furnished view for now.';return;}
  viewer??=new PlanViewer($('#floor-3d'),{pick:id=>chooseFlat(id),rotate:()=>setPlanMode('rotate')});viewer.setActive(true);viewer.setMode(mode);
  const key=selected?.model||layout.id+'/'+(selected?.id||'floor');
- if(loadedKey!==key){$('#floor-busy').hidden=false;$('#floor-busy').textContent='Loading your furnished apartment…';
+ if(loadedKey!==key){feedback.begin('Loading your furnished apartment…');
   try{const ok=selected?.model?await viewer.loadModel(selected.model):await viewer.load(layout,selected);if(request!==revision||!dialog.open)return;if(ok){loadedKey=key;$('#floor-busy').hidden=true;viewer.setMode(mode);}}
-  catch(e){if(request===revision){$('#floor-busy').hidden=false;$('#floor-busy').textContent='This apartment could not load. Choose 2D house plan to return, or retry 3D rotate model.';}console.error(e);return;}
+  catch(e){if(request===revision){$('#floor-busy').hidden=false;$('#floor-busy').dataset.loading='false';$('#floor-busy').textContent='This apartment could not load. Choose 2D house plan to return, or retry 3D rotate model.';}console.error(e);return;}
  }
  $('#floor-spin').textContent=viewer.controls.autoRotate?'Pause rotation':'Start rotation';
 }
-function unavailable(message){
+function unavailable(message){feedback.cancel();
  dialog.classList.remove('apartment');layout=null;selected=null;viewer?.setActive(false);
  $('#floor-empty').hidden=false;$('#floor-empty-note').textContent=message;
  $('#floor-2d').hidden=true;$('#floor-3d').hidden=true;$('#floor-busy').hidden=true;
@@ -92,7 +94,7 @@ function unavailable(message){
  $('#floor-alternatives').replaceChildren();$('#floor-samples').hidden=true;
 }
 async function showFloor(){
- const request=++revision;viewer?.setActive(false);loadedKey='';$('#floor-empty').hidden=true;$('#floor-busy').hidden=false;$('#floor-busy').textContent='Opening the floor drawing…';
+ const request=++revision;viewer?.setActive(false);loadedKey='';$('#floor-empty').hidden=true;feedback.begin('Opening the floor panel…');
  if(floor===0){unavailable('A ground-floor drawing was not supplied. Choose a residential floor to explore the supplied typical plan.');return;}
  try{const next=await readLayout(building);if(request!==revision||!dialog.open)return;
   if(floor<next.start){unavailable(`The supplied ${next.name} drawing covers ${next.rangeVerified?'floors '+next.start+'–'+next.floors:'typical residential floors'}. A drawing for this floor is not included.`);return;}
@@ -105,7 +107,7 @@ export async function openPlanExplorer(id='T1',level=1){
 $('#floor-building').innerHTML=towerSpecs.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');
 $('#floor-building').onchange=()=>openPlanExplorer($('#floor-building').value,floor);
 $('#floor-number').onchange=()=>{floor=Number($('#floor-number').value);syncFloors();showFloor();};
-$('#floor-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{document.dispatchEvent(new CustomEvent('floor-plan-close'));revision++;viewer?.setActive(false);parent.postMessage({source:'aero-scene',type:'view',view:'colony'},'*');document.dispatchEvent(new CustomEvent('plan-explorer-state',{detail:{open:false}}));});
+$('#floor-close').onclick=()=>dialog.close();dialog.addEventListener('close',()=>{feedback.cancel();document.dispatchEvent(new CustomEvent('floor-plan-close'));revision++;viewer?.setActive(false);parent.postMessage({source:'aero-scene',type:'view',view:'colony'},'*');document.dispatchEvent(new CustomEvent('plan-explorer-state',{detail:{open:false}}));});
 dialog.addEventListener('cancel',e=>{if(selected&&building!=='sample'){e.preventDefault();selected=null;loadedKey='';updateSelection();setPlanMode('2d');}});
 $('#floor-back').onclick=()=>{selected=null;loadedKey='';updateSelection();setPlanMode('2d');};
 $('#floor-image').onclick=()=>{if(selected)setPlanMode(mode==='2d'?'furnished':'rotate');};$('#floor-image').onkeydown=e=>{if(selected&&['Enter',' '].includes(e.key)){e.preventDefault();setPlanMode(mode==='2d'?'furnished':'rotate');}};

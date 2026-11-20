@@ -10,11 +10,11 @@ test('company sections animate in, reset outside either edge, and replay on retu
  class Observer{constructor(callback){deliver=callback;}observe(){}disconnect(){disconnected=true;}}
  const cleanup=observeCompanyMotion(root,Observer),heading=root.querySelector('h1');
  const send=(visible,top)=>deliver([{target:heading,isIntersecting:visible,intersectionRatio:visible?.5:0,boundingClientRect:{top}}]);
- send(true,50);assert.ok(heading.classList.contains('company-in-view'));
+ assert.equal(heading.dataset.motionSide,'left');send(true,50);assert.ok(heading.classList.contains('company-in-view'));
  send(false,-90);assert.ok(!heading.classList.contains('company-in-view'));assert.equal(heading.style.getPropertyValue('--company-exit-y'),'-20px');
  send(true,20);assert.ok(heading.classList.contains('company-in-view'));
  send(false,800);assert.equal(heading.style.getPropertyValue('--company-exit-y'),'20px');
- cleanup();assert.ok(disconnected);assert.ok(!root.classList.contains('company-motion-ready'));assert.ok(!heading.classList.contains('company-reveal'));
+ cleanup();assert.ok(disconnected);assert.ok(!root.classList.contains('company-motion-ready'));assert.ok(!heading.classList.contains('company-reveal'));assert.equal(heading.dataset.motionSide,undefined);
 });
 
 

@@ -34,7 +34,7 @@ test('camera descends smoothly from the current aerial view to the opposite side
 });
 test('journey camera frames the entire 12-coach train with margin on desktop and portrait screens',()=>{
   const route=makeRoute(),length=route.getLength();
-  for(const stop of [.27,.5,.73])for(const aspect of [16/9,9/19.5,2.4]){
+  for(const stop of [.27,.5,.73])for(const aspect of [18/9,16/9,9/19.5,2.4]){
     const view=createCameraFlight({start,startTarget,station:railPose(route,stop),aspect}).sample(1);
     const camera=new THREE.PerspectiveCamera(44,aspect,.2,1000);camera.position.copy(view.position);camera.quaternion.copy(view.quaternion);camera.updateMatrixWorld();
     for(let car=0;car<12;car++){

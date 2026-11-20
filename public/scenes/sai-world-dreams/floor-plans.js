@@ -1,9 +1,11 @@
+import {createPlanFeedback} from './plan-feedback.js';
 import {resolveApartmentModel} from './apartment-models.js?v=updated-glbs-2';
 import {ApartmentSelector} from './apartment-selector.js?v=image-rotation-1';
 import {BUILDINGS,resolvePlan,SOURCE_URL} from './floor-plan-data.js?v=block-floors-1';
 const sendView=(view,detail={})=>parent.postMessage({source:'aero-scene',type:'view',view,...detail},'*');
 const $=selector=>document.querySelector(selector);
 const dialog=$('#floor-plan-dialog'),buildingSelect=$('#plan-building'),floorSelect=$('#plan-floor');
+const feedback=createPlanFeedback($('#plan-loading'));
 let viewer=null,selectedApartment=null,mode='2d',revision=0,current=null,zoom=1,viewerModule=null;
 
 
@@ -43,7 +45,7 @@ $('#dialog-floor').onchange=event=>{floorSelect.value=event.target.value;showFlo
 $('#open-floor-plan').onclick=showFloor;
 $('#plan-kind').onchange=showFloor;
 $('#close-floor-plan').onclick=()=>dialog.close();
-dialog.addEventListener('close',()=>{revision++;viewer?.setActive(false);document.dispatchEvent(new CustomEvent('floor-plan-close'));sendView(document.querySelector('#elevation[open]')?'building':'colony',{building:buildingSelect.value});});
+dialog.addEventListener('close',()=>{feedback.cancel();revision++;viewer?.setActive(false);document.dispatchEvent(new CustomEvent('floor-plan-close'));sendView(document.querySelector('#elevation[open]')?'building':'colony',{building:buildingSelect.value});});
 $('#plan-previous').onclick=()=>stepFloor(-1);$('#plan-next').onclick=()=>stepFloor(1);
 function stepFloor(delta){floorSelect.value=String(Number(floorSelect.value)+delta);showFloor();}
 $('#plan-zoom-in').onclick=()=>changeZoom(1.2);$('#plan-zoom-out').onclick=()=>changeZoom(1/1.2);
@@ -51,7 +53,7 @@ $('#plan-fit').onclick=()=>{zoom=1;$('#plan-drawing').style.transform='';viewer?
 function changeZoom(factor){if(mode==='rotate'||(mode==='3d'&&!selectedApartment?.renderPair))viewer?.zoom(1/factor);else{zoom=Math.max(.65,Math.min(4,zoom*factor));$('#plan-drawing').style.transform=`scale(${zoom})`;}}
 for(const button of document.querySelectorAll('[data-plan-mode]'))button.onclick=()=>setMode(button.dataset.planMode);
 function setMode(value){
-  mode=value;
+  feedback.cancel();mode=value;
   for(const button of document.querySelectorAll('[data-plan-mode]')){
     button.setAttribute('aria-pressed',String(mode===button.dataset.planMode));
   }
@@ -70,11 +72,8 @@ function setMode(value){
   if(furnished&&!interactive){
     $('#plan-view-help').textContent=mode==='2d'?'Original supplied drawing · use + / − to zoom':'Photorealistic furnished preview · click to open the 3D model';
     $('.apartment-instruction').textContent=mode==='2d'?'Tap the plan for the furnished 3D image.':'Tap the preview to explore the furnished 3D model.';
-    apartments.reveal.show(mode==='3d').catch(()=>{
-      if(request!==revision)return;
-      setMode('2d');$('#plan-view-help').textContent='The furnished image could not load. Tap to retry.';
-    });
-    apartments.fit();return;
+    feedback.run(()=>Promise.all([$('#floor-plan-image').decode(),apartments.reveal.show(mode==='3d')]),mode==='3d'?'Loading the furnished view…':'Loading your 2D house plan…',{valid:()=>request===revision&&dialog.open,ready:()=>apartments.fit()});
+    return;
   }
   $('#plan-view-help').textContent=mode==='rotate'?'Complete furnished apartment · drag to orbit · scroll to zoom':
     interactive?'Drag to orbit · scroll to zoom · right-drag to pan':'Original supplied drawing · use + / − to zoom';
@@ -82,11 +81,11 @@ function setMode(value){
     mode==='2d'?'Tap the plan for the furnished 3D image.':'Drag to orbit the floor plan.';
   if(interactive&&current?.available){
     load3d(furnished?selectedApartment.renderPair:selectedApartment?.key??current.key,request,mode==='rotate');
-  }else apartments.fit();
+  }else if(current?.available){feedback.run(()=>$('#floor-plan-image').decode(),'Loading the 2D floor plan…',{valid:()=>request===revision&&dialog.open,ready:()=>apartments.fit()});}
 }
 async function load3d(key,request,furnishedModel){
   const status=$('#plan-loading');status.hidden=false;
-  status.textContent=furnishedModel?'Loading the complete furnished apartment…':'Preparing the 3D floor plan…';
+  feedback.begin(furnishedModel?'Loading the complete furnished apartment…':'Preparing the 3D floor plan…');
   try{
     viewerModule??=import('./floor-plan-viewer.js?v=contrast-lighting-2');
     const {FloorPlanViewer}=await viewerModule;
@@ -102,7 +101,7 @@ async function load3d(key,request,furnishedModel){
     if(request===revision)status.hidden=true;
   }catch(error){
     if(request===revision){
-      status.hidden=false;status.textContent='The apartment model could not load. Choose Furnished view or 2D house plan to return.';
+      status.hidden=false;status.dataset.loading='false';status.textContent='The apartment model could not load. Choose Furnished view or 2D house plan to return.';
     }
     console.error(error);
   }

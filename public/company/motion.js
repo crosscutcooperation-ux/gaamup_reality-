@@ -16,8 +16,8 @@ export function observeCompanyMotion(root,Observer=IntersectionObserver,schedule
   }
  }
  const observer=new Observer(entries=>{for(const entry of entries){entry.target.style.setProperty('--company-exit-y',entry.boundingClientRect.top<0?'-20px':'20px');entry.target.classList.toggle('company-in-view',entry.isIntersecting&&entry.intersectionRatio>=.05);}},{threshold:[0,.05],rootMargin:'0px 0px -2% 0px'});
- targets.forEach((target,index)=>{target.classList.add('company-reveal');target.style.setProperty('--company-delay',`${Math.min(index%3*50,100)}ms`);});
+ targets.forEach((target,index)=>{target.classList.add('company-reveal');target.dataset.motionSide=index%2?'right':'left';target.style.setProperty('--company-delay',`${Math.min(index%3*50,100)}ms`);});
  root.classList.add('company-motion-ready');
  schedule(()=>schedule(()=>{if(active)targets.forEach(target=>observer.observe(target));}));
- return ()=>{active=false;observer.disconnect();root.classList.remove('company-motion-ready');targets.forEach(t=>t.classList.remove('company-reveal','company-in-view'));for(const [group,original] of restorations)group.replaceWith(original);};
+ return ()=>{active=false;observer.disconnect();root.classList.remove('company-motion-ready');targets.forEach(t=>{t.classList.remove('company-reveal','company-in-view');delete t.dataset.motionSide;});for(const [group,original] of restorations)group.replaceWith(original);};
 }

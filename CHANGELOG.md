@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.4 — 2026-11-20
+
+### Fixed
+- Restored readable CTA heading/body colours and consistent developer typography.
+- About/Contact scroll entrances now bring words from alternating sides and photographs down from above; decorative hover movement is removed.
+- Floor, apartment 2D and furnished images show loading feedback until decoding completes. Superseded requests cannot clear a newer loader; image failures offer recovery.
+- The train journey uses an 18:9 cinema frame and a closer camera while preserving the complete twelve-coach train in view.
+
+
 ## 3.0.3 — 2026-11-20
 
 ### Fixed
