@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.7 — 2026-11-20
+
+### Fixed
+- The trackside camera stays completely fixed during the two-second train pass.
+- Moved the camera a little closer so the carriage and branding occupy more of the view.
+
 ## 3.0.6 — 2026-11-20
 
 ### Fixed

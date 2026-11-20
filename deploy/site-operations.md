@@ -115,3 +115,13 @@ Final browser verification: the public gaamupproperties.com landscape showed the
 - Rebuilt all 25 current scene runtime modules and revised loader CSS URLs to `plan-feedback-4`; original image/model quality is unchanged. Final test and HTTP verification are recorded below. Browser control is unavailable; no final rendered browser review is claimed.
 
 Verification: all 98 JavaScript tests passed. Both local and server production builds passed. Candidate About, Home, Contact, Venus and Sai routes returned HTTP 200 with the expected content; all three scene documents reference plan-feedback-4. The local About response includes the one-time motion setting and Sai’s loading node is outside the hidden 3D panel.
+
+
+## Fixed trackside camera (3.0.7, 2026-11-20)
+
+- Release: `site-20261120-fixed-camera`; rollback: `site-20261120-visible-feedback`. Only train framing/timing code, regression assertions and release metadata changed.
+- Removes the 3.0.6 camera/target translation during the branding pass. The descent ends in a parked camera; the train alone advances 1.8m over the following 2s before navigation. Camera position, target and quaternion are asserted exactly unchanged at 21 samples over the complete pass and all tested stations.
+- Camera distance at 18:9 is 4.35m instead of 4.65m. The passing carriage fills at least 80% of landscape-frame width; its ends may naturally pass through the edges while the roof, wheels and branded carriage centre remain visible. The fixed-camera request supersedes tracking a complete coach horizontally.
+- Existing About one-time motion, photo visibility, apartment loaders, sales data, enquiry configuration and security settings are unchanged.
+
+Verification: 98 JavaScript tests and the local production build passed. The fixed-camera tests cover every station and desktop, portrait and wide framing.

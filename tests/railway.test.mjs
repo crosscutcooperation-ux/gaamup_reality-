@@ -29,10 +29,10 @@ test('camera descends smoothly from the current aerial view to the opposite side
     const station=railPose(route,stationDistance(index,16)),flight=createCameraFlight({start,startTarget,station});
     assert.ok(flight.sample(0).position.distanceTo(start)<1e-9);assert.ok(flight.sample(0).target.distanceTo(startTarget)<1e-9);
     let last=flight.sample(0);for(let i=1;i<=500;i++){const view=flight.sample(i/500);assert.ok(view.position.y<=last.position.y+1e-8);assert.ok(view.position.y>=station.point.y+1.6-1e-8);assert.ok(last.quaternion.angleTo(view.quaternion)<.08,'No sudden camera spin');last=view;}
-    const end=flight.sample(1);assert.ok(Math.abs(end.position.y-station.point.y-1.6)<1e-8);assert.ok(start.clone().sub(station.point).dot(station.normal)*end.position.clone().sub(station.point).dot(station.normal)<=0,'Finish on the other side');const arrival=flight.sample(APPROACH_DURATION/JOURNEY_DURATION);assert.ok(Math.abs(arrival.position.distanceTo(end.position)-1.8)<1e-8,'Track the moving carriage for two seconds after arrival');assert.ok(arrival.quaternion.angleTo(end.quaternion)<1e-7);
+    const end=flight.sample(1);assert.ok(Math.abs(end.position.y-station.point.y-1.6)<1e-8);assert.ok(start.clone().sub(station.point).dot(station.normal)*end.position.clone().sub(station.point).dot(station.normal)<=0,'Finish on the other side');const arrival=flight.sample(APPROACH_DURATION/JOURNEY_DURATION);for(let step=0;step<=20;step++){const progress=APPROACH_DURATION/JOURNEY_DURATION+(1-APPROACH_DURATION/JOURNEY_DURATION)*step/20,pass=flight.sample(progress);assert.ok(pass.position.equals(arrival.position),'Camera position must remain exactly fixed for the full two seconds');assert.ok(pass.target.equals(arrival.target),'Camera target must remain exactly fixed');assert.ok(pass.quaternion.equals(arrival.quaternion),'No camera rotation while the train passes');assert.equal(pass.approach,1);assert.ok(Math.abs(pass.passDistance-step/20*1.8)<1e-8,'Only the train moves 1.8m during the two seconds');}
   }
 });
-test('journey ends on a close broadside of a complete branded coach with roof and wheels visible',()=>{
+test('fixed closer camera keeps the moving carriage centre, roof and wheels visible',()=>{
   const route=makeRoute(),length=route.getLength();
   for(const stop of [.27,.5,.73])for(const aspect of [18/9,16/9,9/19.5,2.4])for(const progress of [APPROACH_DURATION/JOURNEY_DURATION,.8,1]){
     const view=createCameraFlight({start,startTarget,station:railPose(route,stop),aspect}).sample(progress);
@@ -40,9 +40,10 @@ test('journey ends on a close broadside of a complete branded coach with roof an
     const pose=railPose(route,transitionHead(stop,view.approach,length)+(view.passDistance-3*6.05)/length),xs=[];
     for(const x of [-3,3])for(const y of [0,2.2])for(const z of [-.6,.6]){
       const p=new THREE.Vector3(x,y,z).applyQuaternion(pose.quaternion).add(pose.point).project(camera);xs.push(p.x);
-      assert.ok(Math.abs(p.x)<.96&&Math.abs(p.y)<.96&&p.z<1,`Roof, wheels and sides visible at ${aspect}`);
+      assert.ok(Math.abs(p.y)<.96&&p.z<1,`Roof and wheels stay vertically visible at ${aspect}`);
     }
-    if(aspect>=1.7&&aspect<=2)assert.ok(Math.max(...xs)-Math.min(...xs)>1.5,'Branded carriage fills at least 75% of the frame width');
+    const centre=pose.point.clone().add(new THREE.Vector3(0,1.1,0)).project(camera);assert.ok(Math.abs(centre.x)<.96,'The branded carriage centre stays in the fixed frame');
+    if(aspect>=1.7&&aspect<=2)assert.ok(Math.max(...xs)-Math.min(...xs)>1.6,'Closer carriage fills at least 80% of frame width while its ends pass through');
   }
 });
 
