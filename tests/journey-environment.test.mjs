@@ -22,6 +22,7 @@ test('surrounding scenery fills the aerial camera outside the scan on phone and 
     }
   }
   assert.ok(scenery.sky.isMesh);assert.ok(scenery.clouds.length>=8);
+  assert.ok(scenery.clouds.every(cloud=>!cloud.visible),"The map overview stays clear of white cloud overlays");
   const camera=new T.PerspectiveCamera();camera.position.set(0,250,250);
   scenery.update(10,camera);const start=scenery.clouds[0].position.clone();scenery.update(60,camera);
   assert.ok(start.distanceTo(scenery.clouds[0].position)>1,'Clouds drift in world space');
@@ -31,7 +32,7 @@ test('surrounding scenery fills the aerial camera outside the scan on phone and 
   for(const cloud of scenery.flightClouds){assert.equal(cloud.visible,true);assert.ok(cloud.position.y>70,'Descent wisps occupy aerial flight coordinates');}
   camera.position.copy(scenery.flightClouds[0].position).add(new T.Vector3(0,0,3));scenery.update(99,camera);
   assert.ok(scenery.flightClouds[0].material.opacity>.4,'The camera reaches the visible cloud rather than fading it away on approach');
-  scenery.resetFlight();assert.ok(scenery.flightClouds.every(cloud=>!cloud.visible));
+  scenery.resetFlight();assert.ok(scenery.clouds.every(cloud=>!cloud.visible));
   scenery.group.traverse(object=>{object.geometry?.dispose();object.material?.dispose();});
 });
 

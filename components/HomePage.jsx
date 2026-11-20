@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import {LANDSCAPE_ASSETS} from '../lib/landscape-assets.js';
 import HeroFilm from './HeroFilm.jsx';
 import {useEffect,useMemo} from 'react';
 import PropertyFilters from './PropertyFilters.jsx';
@@ -12,7 +13,7 @@ export default function HomePage({catalog,backendOffline=false}){
   const display=useMemo(()=>getDisplayProperties(catalog.properties),[catalog.properties]);
   useEffect(()=>setProperties(display),[display,setProperties]);
   return <main id="home">
-    <link rel="preload" href="/models/nature-landscape-draco-v1.bin?release=1" as="fetch" type="model/gltf-binary" crossOrigin="anonymous" fetchPriority="high"/>
+    <link rel="preload" href={LANDSCAPE_ASSETS.model} as="fetch" type="model/gltf-binary" crossOrigin="anonymous" fetchPriority="high"/>
     <HeroFilm/>
     <div className="home-discovery">
     <PropertyFilters/>

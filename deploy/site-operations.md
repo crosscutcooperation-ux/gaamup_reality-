@@ -68,3 +68,17 @@ HTML responses append `no-transform` to prevent Cloudflare email rewriting from 
 Admin-key persistence was removed from browser session storage in 3.0.2. A legacy stored key is cleared when the property desk loads; the active credential exists only in page memory and is cleared on Lock or authentication failure. Refreshing requires the key again. Server bearer authorization and role scope are unchanged.
 
 Final live verification: release `site-20261120-visible` serves all seven checked page routes with HTTP 200, legacy company routes redirect, all three viewer documents reference the new return-control CSS revision, and the private admin key authenticates successfully. New forest/navigation/typography were inspected in the local production preview. Final native-browser access failed with `cgWindowNotFound`; a fresh post-deployment visual pass and real-phone timing are unverified.
+
+
+## Discovery consistency release (3.0.3, 2026-11-20)
+
+- Live release: `site-20261120-discovery-final`; previous `site-20261120-visible` retained for rollback. Persistent enquiries, credentials and databases are unchanged.
+- All three homepage pictures now link to their project, with favourite buttons outside the link. Elements loads the same explorer stylesheet and hand guidance as Venus, including its floor hint. Its 360-degree toggle was checked in Brave.
+- White cloud banks are hidden in the railway overview; the photographed terrain and track remain unchanged. Clouds still appear during the train descent and are hidden again on return.
+- About/Contact retain replaying word and photo entrances; observer tests cover leaving through both viewport edges and returning.
+- All 86 JavaScript tests passed locally and both local/server production builds passed. Server unit tests were not runnable in the production dependency-only copy (development packages are omitted); server HTTP checks passed for the candidate and live routes. The public HTML contains three picture links and Elements serves its new hashed bundle.
+- Browser verification showed the clear forest overview and shared Elements walkthrough cards, hand pointer and floor-selection hint in the production-build preview. Final public browser checks are recorded below when complete.
+
+Live-only texture failure diagnosed in Brave: CSP `connect-src` blocked the blob fetches used by GLTFLoader/ImageBitmapLoader for embedded images. The loader recovered with absent maps, creating white terrain. Nginx now allows `blob:` for fetch while retaining the explicit network origins and other security directives. `nginx -t` passed and the public header was verified. The live forest was then visually verified with its full photographic textures and no white terrain. Landscape asset URLs carry content hashes, shared by preloading and loading, to prevent stale browser copies.
+
+Final browser verification: the public gaamupproperties.com landscape showed the restored textured clearing without white patches, and the public Elements route showed the Venus-style walkthrough cards, demonstration hand, replay control and active 360-degree rotation.

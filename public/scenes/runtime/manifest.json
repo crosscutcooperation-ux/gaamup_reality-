@@ -9,10 +9,10 @@
     "sai-plans-G457KY2E.js",
     "sai-bridge-FCHFJTQ4.js",
     "chunk-6GZZHVSH.js",
-    "venus-5IJ4WKXY.js",
+    "venus-BHHULA6G.js",
     "chunk-MFAOZNF4.js",
-    "elements-4XHYWZHS.js",
-    "chunk-ASW6JTUP.js",
+    "elements-NJW2WQ27.js",
+    "chunk-YUKM34YD.js",
     "chunk-6W3Q4ZWE.js",
     "chunk-USQR7VUA.js",
     "chunk-GPX6ANTA.js",
@@ -29,8 +29,8 @@
     "sai": "/scenes/runtime/sai-SG6SAPAV.js",
     "sai-plans": "/scenes/runtime/sai-plans-G457KY2E.js",
     "sai-bridge": "/scenes/runtime/sai-bridge-FCHFJTQ4.js",
-    "venus": "/scenes/runtime/venus-5IJ4WKXY.js",
-    "elements": "/scenes/runtime/elements-4XHYWZHS.js"
+    "venus": "/scenes/runtime/venus-BHHULA6G.js",
+    "elements": "/scenes/runtime/elements-NJW2WQ27.js"
   },
   "sources": {
     "public/scenes/sai-world-dreams/vendor/three.module.js": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
@@ -81,7 +81,7 @@
     "public/scenes/venus-skky-city/vendor/OrbitControls.js": "a6f978dc907dbd5814023bd00a8b97feebd97e72d09ab921ccb49ee401ce9066",
     "public/scenes/venus-skky-city/surface-materials.js": "350b7012a1621fdb0cfb5375f7534f1b9cb22eb7361a4e3d5e2ea5376a4442e2",
     "public/scenes/venus-skky-city/site-environment.js": "502de7e619300a92416e1df56d6dfee5dd52a748730514d37cf1d1e508e6f51e",
-    "public/scenes/venus-skky-city/scene-guidance.js": "cf59c1f37ef9dcb820087d0037eb9d30dbb934ce2d6327aa7f6636d5c41fb0be",
+    "public/scenes/venus-skky-city/scene-guidance.js": "9d76e2a893047ca93686005127a58efc5b9887a7239e80cb62dfef82fb63f741",
     "public/scenes/venus-skky-city/model.js": "51529ddb5077b9173eb64112e7d9b27e91d9789eee316b909fe2812ddedb1321",
     "public/scenes/venus-skky-city/floor-plan-data.js": "006d8946d4b411b8f57c18e382d17dfaf3935af32d820e1b43a22fbadf0200b5",
     "public/scenes/venus-skky-city/tower-elevation.js": "a60ac98e386cc14992ef3782a3e2b489859bbbdd916a70ca70b809f41094d457",
@@ -114,7 +114,7 @@
     "public/scenes/elements-new-panvel/facade-shell.js": "b81ba9720a72dcfe32571b1369b62d7485c987fa69a6fb085f3ac4cb232acb1e",
     "public/scenes/elements-new-panvel/interaction-performance.js": "03e0823d4718f3b08a1b787e3d18c4cffb2471b020cdf99ab03193eaad17df75",
     "public/scenes/elements-new-panvel/finite-light-performance.js": "7bdc3a27b75e87ac806df24cedd8693cfd15b43609f4953ec0b87ffcd671a900",
-    "public/scenes/elements-new-panvel/viewer.js": "3588c5b054c341ec3221e34d620f84dec5f2eebe30c77b4160abcc68d40af6b1",
+    "public/scenes/elements-new-panvel/viewer.js": "662ad9b5c03ccfb0480fa45d8f2e7989310c1ae5f67a82859790b17e305b0acb",
     "public/scenes/elements-new-panvel/app.js": "75407756e60ccfb60af183e72d252721d264892a4d46cd9c665e50746f849f66"
   }
 }

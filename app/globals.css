@@ -337,3 +337,6 @@
 :root{--muted:#59634f}#projects,#about,#locations,#contact{scroll-margin-top:110px}.railway-travelling .header,.railway-travelling .assistant-launcher{visibility:hidden;pointer-events:none}
 .enquiry-verification{display:flex;align-items:center;gap:10px;color:#42583f;font-size:12px;line-height:1.6}.enquiry-verification .loading-spinner,.enquiry-submit .loading-spinner{width:18px;height:18px}.enquiry-submit .solid-button{display:inline-flex;align-items:center;justify-content:center;gap:10px}.enquiry-submit .solid-button .loading-spinner{border-color:#ffffff55;border-top-color:#fff}
 .catalog-back,.experience-back{background:#304d3e;color:#fff;border-color:#304d3e;font-weight:600}.catalog-back::before,.experience-back::before{filter:brightness(0) invert(1)}
+
+/* The picture and text open the same residence; saving stays a separate action. */
+.property-image-link{display:block;width:100%;height:100%;cursor:pointer;text-align:inherit}.property-image-link>img{width:100%;height:100%;object-fit:cover;filter:saturate(.7);transition:transform .75s}.project-card:hover .property-image-link>img{transform:scale(1.025)}.property-image-link:focus-visible{outline:3px solid var(--forest);outline-offset:-5px}.save-property{z-index:2}

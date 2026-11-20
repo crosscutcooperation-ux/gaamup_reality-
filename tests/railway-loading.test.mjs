@@ -13,3 +13,8 @@ test('the CDN railway retains every source photograph and triangle within its do
  const triangles=doc.meshes.flatMap(m=>m.primitives).reduce((n,p)=>n+doc.accessors[p.indices].count/3,0);
  assert.equal(triangles,589799,'Compression retains all source triangles');
 });
+
+ test("landscape cache revisions match the exact deployed asset bytes",async()=>{
+ const {LANDSCAPE_ASSETS}=await import("../lib/landscape-assets.js");
+ for(const url of Object.values(LANDSCAPE_ASSETS)){const bytes=await readFile(new URL("../public"+url,import.meta.url));assert.equal(new URL(url,"https://example.com").searchParams.get("v"),createHash("sha256").update(bytes).digest("hex").slice(0,12));}
+ });

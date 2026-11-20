@@ -71,3 +71,6 @@
 .orbit-buttons{display:grid;grid-template-columns:1fr 1fr;gap:0;min-width:0}
 .scene-tools .orbit-buttons button{width:100%;min-width:0;padding:12px 2px;font-size:10px;white-space:normal}
 #floor-dialog.apartment .unit-guide{display:none}
+
+/* Share Venus discovery and walking controls, including its hand hints. */
+#tower-detail:not([open]) .level-guide{display:none}#tower-detail .level-guide{left:30%;bottom:23%}.scene-help-toggle{max-width:calc(100% - 40px)}

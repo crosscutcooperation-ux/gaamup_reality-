@@ -18,3 +18,6 @@ Scope: gaamupproperties.com, property administration, saved enquiries, SMTP deli
 The CAPTCHA widget renders on the production domain. Automated tests cover validation and rejection; this follow-up did not solve a human CAPTCHA or send another email to the recipient. The existing successful delivery record and configured sender/receiver were checked without displaying stored personal details or credentials.
 
 The specifically named Cloudflare security-audit skill was not found in the installed skill directories. The security-and-hardening workflow was used for this review. This report describes checked controls rather than a guarantee that no unknown vulnerabilities exist.
+
+
+3.0.3 correction: embedded GLB textures use ImageBitmapLoader fetches against browser-created blob URLs. Live CSP previously blocked them despite permitting blob images. `connect-src` now contains self, blob, and the existing Turnstile endpoint only; no wildcard network origin was added. Browser console evidence and restored live forest textures verified this fix. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/connect-src and https://threejs.org/docs/pages/ImageBitmapLoader.html.

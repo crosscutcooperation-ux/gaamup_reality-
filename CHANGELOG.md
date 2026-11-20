@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.0.3 — 2026-11-20
+
+### Fixed
+- Production security policy permits browser-created GLB image blobs, fixing missing white landscape textures on the live site.
+- Property photographs open their residence, with saving kept as an independent button.
+- Elements shares Venus walkthrough controls and replayable building, floor and apartment hints.
+- The railway overview stays clear of white cloud overlays; clouds remain in the train descent.
+- About and Contact retain scroll entrances that reset and replay whenever a section returns.
+
+
 ## Website performance and enquiry release — 2026-11-20
 
 ### Added
