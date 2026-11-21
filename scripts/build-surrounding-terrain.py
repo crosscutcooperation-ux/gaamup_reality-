@@ -59,6 +59,20 @@ for _ in range(24):
         for xi in range(1,size-1):
             i=zi*size+xi
             heights[i]=previous[i]*.4+(previous[i-1]+previous[i+1]+previous[i-size]+previous[i+size])*.15
+# Smoothing canopy heights must not lift the backing terrain through the graded
+# railway. Keep a margin for the 3.1m grid triangles and both station platforms.
+points=json.loads((ROOT/'lib/scan-route-data.json').read_text())['points'][::5]
+xmin,xmax=min(p[0] for p in points)-14,max(p[0] for p in points)+14
+zmin,zmax=min(p[2] for p in points)-14,max(p[2] for p in points)+14
+for zi,z in enumerate(axis):
+    for xi,x in enumerate(axis):
+        if not (xmin<x<xmax and zmin<z<zmax):continue
+        p=min(points,key=lambda p:(p[0]-x)**2+(p[2]-z)**2)
+        distance=math.hypot(p[0]-x,p[2]-z)
+        if distance>=14:continue
+        blend=max(0,min(1,(14-distance)/4));blend=blend*blend*(3-2*blend)
+        i=zi*size+xi
+        heights[i]-=max(0,heights[i]-(p[1]-.35))*blend
 heights=[round(h,4) for h in heights]
 target = ROOT/'public/assets/landscape/surroundings-height.json'
 target.write_text(json.dumps({'axis':axis, 'heights':heights, 'note':'Illustrative hills extended from supplied scan edge heights; not surveyed geography.'}, separators=(',', ':'))+'\n')

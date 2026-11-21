@@ -150,3 +150,12 @@ Verification: all 99 JavaScript tests passed, including the new constant-speed b
 Verification: all 106 JavaScript tests and local/server production builds passed. Native npm audit reports 0 vulnerabilities. Actual Google replies answered a new-home enquiry, recommended Venus Tower A's listed 2 BHK at ₹52 L for a ₹60 L budget, explained Furnished view/Back to floor, and answered an unrelated science question. UI tests cover greeting, pending state, escaped model text, project links, persistent in-page conversation, enquiry preselection, new chat and retry. The private key is absent from selected source and browser assets. Real browser visual review remains unavailable.
 
 Public verification: the deployed Home, About, Contact, Venus and Sai routes returned HTTP 200 with Ask Gaamup AI. A real two-turn conversation retained the home-search context and recommended the listed Venus 2 BHK option; a separate science question received an on-topic answer. Public chat replies took 3–4s, returned no-store, and cross-site requests returned 403. All 11 referenced browser scripts were retrieved and checked for the private key. Frontend/backend/retry services are active and Nginx validation passed.
+
+
+## Railway terrain clearance and footer credit (3.1.1, 2026-11-21)
+
+- Release: `site-20261121-terrain-clearance`; rollback: `site-20261121-ai-chat`.
+- The smoothed woodland backing terrain protruded by up to 0.478 scene units near Dombivli (route 0.27), covering the railway. After smoothing, the generator now lowers only high backing vertices around the existing route, with a 0.35-unit vertical margin and a feather from 10 to 14 units to accommodate the coarse grid and platform edges. Only 142 vertices were lowered. The scan, texture quality, railway, train speed and camera are unchanged.
+- The height asset's content revision changed so the new browser bundle requests fresh terrain from the CDN. No terrain calculation was added to browser startup.
+- Shared footers now include an external “Designed by Aero Technologies” link to https://aerotechnology.in.
+- Verification: the new regression failed on the old terrain and passes on the corrected triangles, checking 3,208 route/offset samples across both tracks and platform width. All 107 tests and the local production build passed. No rendered browser review is claimed.

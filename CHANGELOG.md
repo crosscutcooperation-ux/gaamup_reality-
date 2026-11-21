@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.1 — 2026-11-21
+
+### Fixed
+- Surrounding terrain stays beneath the railway and platforms near Dombivli instead of protruding through the track bed.
+- Every shared site footer links “Designed by Aero Technologies” to aerotechnology.in.
+
 ## 3.1.0 — 2026-11-21
 
 ### Added

@@ -8,6 +8,19 @@ import {fitLockedMap} from '../lib/map-framing.js';
 import sharp from 'sharp';
 import {makeRoute,railPose} from '../lib/railway.js';
 
+test('surrounding terrain stays below both tracks and station platforms',async()=>{
+  const relief=JSON.parse(await readFile(new URL('../public'+JOURNEY_SCENERY.relief,import.meta.url)));
+  const scenery=createJourneyEnvironment({groundTexture:new T.Texture(),cloudTexture:new T.Texture(),relief});
+  scenery.ground.updateMatrixWorld();const route=makeRoute(),ray=new T.Raycaster();
+  for(let i=0;i<=400;i++)for(const side of [-5.3,-2.45,-1.7,-.95,-.75,0,.75,5.3]){
+    const point=railPose(route,i/400,side).point;
+    ray.set(point.clone().add(new T.Vector3(0,100,0)),new T.Vector3(0,-1,0));
+    const hit=ray.intersectObject(scenery.ground)[0];
+    assert.ok(hit&&hit.point.y<point.y-.1,`Terrain protrudes at route ${i/400}, offset ${side}`);
+  }
+  scenery.group.traverse(object=>{object.geometry?.dispose();object.material?.dispose();});
+});
+
 test('surrounding scenery fills the aerial camera outside the scan on phone and desktop',async()=>{
   const relief=JSON.parse(await readFile(new URL('../public'+JOURNEY_SCENERY.relief,import.meta.url)));
   const scenery=createJourneyEnvironment({groundTexture:new T.Texture(),cloudTexture:new T.Texture(),relief});
