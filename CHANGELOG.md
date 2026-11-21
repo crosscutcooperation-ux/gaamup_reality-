@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.0 — 2026-11-21
+
+### Added
+- A Google Gemini conversation assistant that asks helpful follow-up questions, remembers the conversation during the visit, and answers project, website and general questions.
+- Recommendations use current public project prices, floor areas, possession estimates, amenities and addresses, with direct project links and secure enquiry handoff.
+- Server-only API credentials, bounded requests and replies, rate limits, typing feedback, retries and a new-conversation control.
+
 ## 3.0.8 — 2026-11-20
 
 ### Fixed
