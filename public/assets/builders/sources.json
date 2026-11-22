@@ -1,0 +1,17 @@
+{
+  "paradise": {
+    "name": "Paradise Group",
+    "source": "https://www.paradisegroup.co.in/assets/img/logo.png",
+    "website": "https://www.paradisegroup.co.in/"
+  },
+  "venus": {
+    "name": "Venus Nirvana LLP",
+    "source": "https://pub-e6c778994f1a4c219002a8c17aded350.r2.dev/builder-logos/10520-venus-nirvana_logo.jpg",
+    "website": "https://www.mumbaipropertyexchange.com/builders-developers/venus-nirvana/10520"
+  },
+  "today": {
+    "name": "Today Group",
+    "source": "https://www.thetodaygroup.in/resources/assets/media/images/new-tg-logo.png",
+    "website": "https://www.thetodaygroup.in/"
+  }
+}

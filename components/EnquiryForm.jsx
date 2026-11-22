@@ -1,4 +1,5 @@
 'use client';
+import {CONTACT_PHONES} from '../lib/contact.js';
 import {useEffect,useId,useRef,useState} from 'react';
 let challengeScript;
 function loadChallenge(){
@@ -33,7 +34,7 @@ export default function EnquiryForm({project='',source='contact'}){
   {!config&&!error&&<p className="enquiry-wide enquiry-verification" role="status"><span className="loading-spinner" aria-hidden="true"/>Preparing the secure form…</p>}
   <div ref={challenge} className="enquiry-wide"/>
   {config?.siteKey&&!token&&!error&&<p className="enquiry-wide enquiry-verification">Complete the verification above to send your enquiry.</p>}
-  <div className="enquiry-wide enquiry-submit"><button className="solid-button" disabled={busy||!config||Boolean(config.siteKey&&!token)}>{busy&&<span className="loading-spinner" aria-hidden="true"/>}{busy?'Sending…':'Send enquiry ↗'}</button><span>Or call <a href="tel:+918655481884">+91 86554 81884</a></span></div>
+  <div className="enquiry-wide enquiry-submit"><button className="solid-button" disabled={busy||!config||Boolean(config.siteKey&&!token)}>{busy&&<span className="loading-spinner" aria-hidden="true"/>}{busy?'Sending…':'Send enquiry'}</button><span>Or call <span className="enquiry-call-numbers">{CONTACT_PHONES.map(phone=><a key={phone.href} href={phone.href}>{phone.label}</a>)}</span></span></div>
   {error&&<p className="enquiry-wide enquiry-error" role="alert">{error} <button type="button" onClick={()=>{setError('');setRevision(n=>n+1);}}>Retry connection</button></p>}
  </form>;
 }

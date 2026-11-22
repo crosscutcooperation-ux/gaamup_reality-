@@ -1,0 +1,16 @@
+{
+  "landscape": {
+    "sourceBytes": 12170336,
+    "bytes": 5637656,
+    "sourceTriangles": 589799,
+    "triangles": 238607,
+    "url": "/models/nature-landscape-fast-v2.bin?v=930d4496c7a1"
+  },
+  "train": {
+    "sourceBytes": 7223672,
+    "bytes": 641132,
+    "sourceTriangles": 118032,
+    "triangles": 113564,
+    "url": "/models/mumbai-ac-local-fast-v2.bin?v=5d5350bd5aa6"
+  }
+}

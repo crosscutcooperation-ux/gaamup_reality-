@@ -1,8 +1,9 @@
 import {readFile} from 'node:fs/promises';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {TRAIN_MODEL_URL} from '../../lib/landscape-assets.js';
 // Geometry QA runs in Node. Keep the embedded image bytes intact, but skip GPU
 // image decoding; Blender renders verify the textured model separately.
-export async function loadTrainGeometry(url=new URL('../../public/models/mumbai-ac-local.glb',import.meta.url)){
+export async function loadTrainGeometry(url=new URL('../../public'+TRAIN_MODEL_URL,import.meta.url)){
   let bytes=await readFile(url);
   const sourceJSON=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
   if(sourceJSON.extensionsRequired?.includes('KHR_draco_mesh_compression')){

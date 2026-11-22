@@ -1,3 +1,4 @@
+import {CONTACT_PHONE_TEXT} from '../../../lib/contact.js';
 import {allowedOrigin,validateEnquiry,verifyTurnstile} from '../../../lib/enquiry-validation.js';
 import {enquiryStore,isEnquiryAdmin,rateLimited,saveEnquiry,deliverEnquiry} from '../../../lib/enquiries-server.js';
 export const runtime='nodejs';
@@ -20,5 +21,5 @@ export async function POST(request){
   if(process.env.TURNSTILE_SECRET_KEY&&!await verifyTurnstile(raw.turnstileToken,{secret:process.env.TURNSTILE_SECRET_KEY}))return reply({error:'Verification expired. Please try again.'},422);
   const saved=saveEnquiry(data);if(saved.delivery!=='sent')await deliverEnquiry(saved.id);
   return reply({reference:saved.id,message:'Your enquiry has been saved. Our team will contact you shortly.'},201);
- }catch{console.error(JSON.stringify({event:'enquiry_request_failed'}));return reply({error:'We could not save your enquiry. Please try again, or call +91 86554 81884.'},503);}
+ }catch{console.error(JSON.stringify({event:'enquiry_request_failed'}));return reply({error:`We could not save your enquiry. Please try again, or call ${CONTACT_PHONE_TEXT}.`},503);}
 }

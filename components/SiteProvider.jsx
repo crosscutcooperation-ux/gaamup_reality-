@@ -7,6 +7,7 @@ import SiteFooter from './SiteFooter.jsx';
 import NavigationFeedback from './NavigationFeedback.jsx';
 import ProjectAssistant from './ProjectAssistant.jsx';
 import Brand from './Brand.jsx';
+import SmoothScroll from './SmoothScroll.jsx';
 import {propertyImage} from '../lib/backend.js';
 import {builders,cities,railwayStations} from '../lib/catalog.js';
 
@@ -31,6 +32,7 @@ export default function SiteProvider({children}){
   const selectedProperty=modal?.type==='property'?properties.find(p=>p.id===modal.id):null;
   const selectedBuilder=modal?.type==='builder'?builders.find(b=>b.name===modal.name):null;
   return <SiteContext.Provider value={{properties,setProperties,saved,toggleSaved,showProperty:id=>setModal({type:'property',id}),showBuilder:name=>setModal({type:'builder',name}),showSaved:()=>setModal({type:'saved'}),registerTravel,travel,notify,setCovered}}>
+    <SmoothScroll/>
     <span id="top"/><a className="skip" href={pathname==='/'?'#locations':'#destination'}>Skip to content</a>
     <header className={`header${pathname==='/' || ['/about','/contact'].includes(pathname) ? ' hero-header' : ''}`}><Brand/><nav id="main-navigation" aria-label="Main navigation" className={menuOpen?'open':''}>
       <Link href="/#home" onClick={()=>setMenuOpen(false)}>Home</Link>

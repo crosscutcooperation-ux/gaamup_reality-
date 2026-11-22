@@ -21,9 +21,11 @@
     "model:export": "node scripts/build-model.mjs",
     "model:render": "node scripts/build-model.mjs --render",
     "test:uploads": "node scripts/smoke-uploads.mjs",
-    "build:scenes": "node scripts/bundle-scenes.mjs"
+    "build:scenes": "node scripts/bundle-scenes.mjs",
+    "assets:map": "node scripts/optimize-map.mjs"
   },
   "dependencies": {
+    "lenis": "^1.3.17",
     "next": "16.4.6",
     "nodemailer": "10.6.0",
     "react": "19.3.1",
@@ -33,8 +35,11 @@
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",
     "@gltf-transform/extensions": "^4.5.1",
+    "@gltf-transform/functions": "^4.5.1",
     "draco3dgltf": "^1.5.9",
     "esbuild": "0.28.2",
-    "happy-dom": "^21.0.4"
+    "happy-dom": "^21.0.4",
+    "meshoptimizer": "^1.3.0",
+    "sharp": "^0.35.5"
   }
 }
