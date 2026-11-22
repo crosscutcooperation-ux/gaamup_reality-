@@ -159,3 +159,13 @@ Public verification: the deployed Home, About, Contact, Venus and Sai routes ret
 - The height asset's content revision changed so the new browser bundle requests fresh terrain from the CDN. No terrain calculation was added to browser startup.
 - Shared footers now include an external “Designed by Aero Technologies” link to https://aerotechnology.in.
 - Verification: the new regression failed on the old terrain and passes on the corrected triangles, checking 3,208 route/offset samples across both tracks and platform width. All 107 tests and the local production build passed. No rendered browser review is claimed.
+
+
+## Complete public website context (3.1.2, 2026-11-22)
+
+- Release: `site-20261122-chat-website`; rollback: `site-20261121-terrain-clearance`.
+- The assistant context now covers the public About content (founder, directors and values), public navigation, saved homes, collection filters, railway controls, enquiry fields and consent, contact/office details, Maps directions and footer links. Website design questions credit Aero Technologies with https://aerotechnology.in, separately from Gaamup's leadership and the property developers.
+- Dynamic published project context adds area, property type, sales highlights and pricing update dates. No private server data, enquiry records or credentials are added to the prompt.
+- Verification: prompt and route tests assert the website facts reach the Google system context and credentials remain only in the request header. Live replies are checked after deployment.
+
+Release verification: all 107 tests and both production builds passed. Live Google replies correctly credited Aero Technologies and https://aerotechnology.in, identified the founder/directors and values, and explained saved homes and enquiry consent. The private Google key is absent from browser assets; frontend/backend/retry services remain active.

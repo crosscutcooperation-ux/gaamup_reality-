@@ -30,10 +30,12 @@ test('chat rate limits persist without storing IP addresses or message content',
 
 test('the assistant receives public project facts, conversation and website guidance without credentials',async()=>{
  const instruction=chatInstruction(projects);assert.match(instruction,/Ask one useful question at a time/);assert.match(instruction,/general questions too/);assert.match(instruction,/42.25/);assert.match(instruction,/52.50/);assert.match(instruction,/Furnished view/);assert.match(instruction,/not a human/);
+ for(const fact of ['Designed by Aero Technologies','https://aerotechnology.in','Prakash Mewada','Prathamesh Patil','Bhavesh Patil','/locations/panvel','saved homes','Janta Market Road','Honesty, Professionalism and Care'])assert.ok(instruction.includes(fact),fact);
  const secret='test-only-google-secret';let request;
  const result=await generateChatReply([{role:'user',content:'Dombivli'},{role:'assistant',content:'How many bedrooms?'},{role:'user',content:'2 BHK under 60 lakh'}],projects,{key:secret,fetcher:async(url,options)=>{request={url,options};return Response.json({candidates:[{content:{parts:[{thought:true,text:'hidden reasoning'},{text:'Venus Skky City has a listed 2 BHK in Tower A at ₹52.00 L. Does December 2028 work for you?'}]},finishReason:'STOP'}]});}});
  assert.equal(request.options.headers['x-goog-api-key'],secret);assert.equal(request.url,'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent');assert.ok(!request.options.body.includes(secret));
  const body=JSON.parse(request.options.body);assert.deepEqual(body.contents.map(m=>m.role),['user','model','user']);assert.equal(body.contents.at(-1).parts[0].text,'2 BHK under 60 lakh');assert.equal(body.tools,undefined);assert.equal(result.projects[0].href,'/projects/venus-skky-city');assert.ok(!result.reply.includes('hidden reasoning'));
+ assert.ok(body.systemInstruction.parts[0].text.includes('Designed by Aero Technologies'));
  const unsafe=chatProjects([{...bundledProjects[0],slug:'https://attacker.example'},{...bundledProjects[0],published:false}]);assert.equal(unsafe.length,0);
 });
 
