@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.2 — 2026-11-22
+
+### Changed
+- The AI assistant knows the public website sections, leadership, values, saved homes, search, enquiry process and footer links, including the Aero Technologies design credit and website.
+- Current project context also includes carpet area, property type, sales highlights and pricing update dates.
+
 ## 3.1.1 — 2026-11-21
 
 ### Fixed
