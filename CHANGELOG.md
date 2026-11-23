@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.2.0 — 2026-11-23
+
+### Added
+- A 1.5-second building-themed entrance on initial load and refresh, with reduced-motion support and a CSS dismissal fallback.
+
+### Changed
+- Publish the latest GitHub hero, typography, public contact details, builder logos and optimized railway assets.
+
+### Fixed
+- The terrain cache revision matches the deployed height data.
+
 ## 3.1.2 — 2026-11-22
 
 ### Changed

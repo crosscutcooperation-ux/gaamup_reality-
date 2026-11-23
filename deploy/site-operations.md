@@ -169,3 +169,11 @@ Public verification: the deployed Home, About, Contact, Venus and Sai routes ret
 - Verification: prompt and route tests assert the website facts reach the Google system context and credentials remain only in the request header. Live replies are checked after deployment.
 
 Release verification: all 107 tests and both production builds passed. Live Google replies correctly credited Aero Technologies and https://aerotechnology.in, identified the founder/directors and values, and explained saved homes and enquiry consent. The private Google key is absent from browser assets; frontend/backend/retry services remain active.
+
+
+## GitHub refresh and building entrance (3.2.0, 2026-11-23)
+
+- Release: `site-20261123-github-entrance`; rollback: `site-20261122-chat-website`. Includes GitHub main b60b2b8 (hero, typography, contact details, builder logos, optimized map) and the entrance loader.
+- The root layout renders a fixed building SVG and spinner on initial document load. CSS dismisses the cover after 1.5 seconds even without JavaScript; hydration removes it after 1.5 seconds. The persistent root component does not replay on internal navigation. Assets/page content load underneath. Reduced motion removes the building/spinner animation. No dependency was added for the loader.
+- Corrects the stale terrain height URL revision from the upstream update. The old scan-width test now checks original scale exactly and uses the optimized model's existing 5cm envelope (matching map-performance.test); measured width is 259.9763 versus 260. The original 2cm check predates the simplified runtime model.
+- Environment files, credentials, private enquiries and backend data are preserved. No rendered browser review is claimed because the browser access host is unavailable.

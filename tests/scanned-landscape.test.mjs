@@ -16,7 +16,9 @@ test('the downloaded landscape is a local textured GLB with attribution and chec
   const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
   assert.match(json.asset.extras.author,/Laslo.S/);assert.match(json.asset.extras.license,/CC-BY-4.0/);assert.ok(json.images.length>=8);
   const asset=await loadTrainGeometry(new URL('public'+SCAN_MODEL_URL,root)),{group,bounds}=prepareScannedLandscape(asset.scene);
-  assert.ok(Math.abs(bounds.getSize(new T.Vector3()).x-260)<.02);assert.ok(bounds.getSize(new T.Vector3()).y>10);
+  assert.equal(manifest.bounds.max[0]-manifest.bounds.min[0],260);
+  // The new simplified runtime mesh uses the same 5cm envelope as map-performance.test.
+  assert.ok(Math.abs(bounds.getSize(new T.Vector3()).x-260)<.05);assert.ok(bounds.getSize(new T.Vector3()).y>10);
   const route=makeRoute();for(let i=0;i<=100;i++)assert.ok(bounds.containsPoint(route.getPointAt(i/100)),'The track stays within the actual scan');
   for(let i=0;i<3;i++)assert.ok(stationDistance(i,3)>.2&&stationDistance(i,3)<.8);
   const validation=JSON.parse(await readFile(new URL('public/assets/landscape/grounding-validation.json',root)));

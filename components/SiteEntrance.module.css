@@ -1,0 +1,11 @@
+.screen{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:#eeeee6;color:#304d3e;animation:dismiss 1.5s linear both}
+.content{text-align:center;padding:24px}.buildings{display:block;width:96px;height:96px;margin:0 auto 23px;overflow:hidden}
+.tower{animation:rise .6s cubic-bezier(.16,1,.3,1) both}.windows{animation:lights .45s ease-out .25s both}
+.name{font:500 24px/1.2 var(--sans);letter-spacing:.18em}.content p{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:17px;font:13px/1.5 var(--sans);color:#53634e}
+.spinner{width:14px;height:14px;border:1.5px solid #304d3e30;border-top-color:#304d3e;border-radius:50%;animation:spin .75s linear infinite}
+@keyframes rise{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes lights{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* CSS also dismisses the cover if JavaScript is delayed or unavailable. */
+@keyframes dismiss{0%,90%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.tower,.windows,.spinner{animation:none}}
