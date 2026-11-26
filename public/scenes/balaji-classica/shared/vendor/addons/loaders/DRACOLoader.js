@@ -613,4 +613,3 @@ function DRACOWorker() {
 }
 
 export { DRACOLoader };
-
