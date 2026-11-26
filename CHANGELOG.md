@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.3.0 — 2026-11-26
+
+### Added
+- Balaji Classica in Dombivli, with supplied prices, possession estimates, project details, brochure, photos, films and location map.
+- Interactive five-tower exterior, courtyard and pool walks, available floor drawings, apartment plans and furnished views.
+- Forty supplied furnished apartment models and one separately labelled Jodi reference, with loading feedback between plan and model views.
+- Balaji enquiries and current public project facts in the website assistant.
+
 ## 3.2.0 — 2026-11-23
 
 ### Added

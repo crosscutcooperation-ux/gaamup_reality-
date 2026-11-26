@@ -24,7 +24,7 @@ export default function EnquiryForm({project='',source='contact'}){
  const field=(name,label,type='text',extra={})=><div className="enquiry-field"><label htmlFor={`${prefix}-${name}`}>{label}</label><input id={`${prefix}-${name}`} name={name} type={type} required {...extra}/></div>;
  return <form className="enquiry-form" ref={form} onSubmit={submit}>
   <label className="enquiry-field">I am a<select name="type" defaultValue="Home buyer"><option>Home buyer</option><option>Developer</option><option>Other</option></select></label>
-  <label className="enquiry-field">Project<select name="project" defaultValue={project}><option value="">Help me choose</option><option>Sai World Dreams</option><option>Venus Skky City</option><option>Codename Elements</option></select></label>
+  <label className="enquiry-field">Project<select name="project" defaultValue={project}><option value="">Help me choose</option><option>Sai World Dreams</option><option>Venus Skky City</option><option>Codename Elements</option><option>Balaji Classica</option></select></label>
   {field('name','Full name','text',{autoComplete:'name',minLength:2,maxLength:100})}
   {field('phone','Phone','tel',{autoComplete:'tel',pattern:'[+0-9 ()-]{7,20}',maxLength:20,placeholder:'+91'})}
   <div className="enquiry-wide">{field('email','Email','email',{autoComplete:'email',maxLength:150})}</div>

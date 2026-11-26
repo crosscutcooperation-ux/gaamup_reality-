@@ -21,3 +21,5 @@ backend/data/*
 .data/
 *.pem
 *.sqlite3*
+
+backend/data/scene-assets/balaji-apartments/

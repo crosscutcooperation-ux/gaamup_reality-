@@ -83,6 +83,7 @@ pub fn initialize(connection: &mut Connection) -> Result<(), Box<dyn std::error:
         include_str!("../project-seed.json"),
         include_str!("../venus-project-seed.json"),
         include_str!("../elements-project-seed.json"),
+        include_str!("../balaji-project-seed.json"),
     ] {
         let seed: Value = serde_json::from_str(source)?;
         connection.execute(
@@ -751,7 +752,7 @@ mod tests {
     async fn projects_have_stable_ids_and_publish_only_when_requested() {
         let (state, dir) = setup();
         let (_, list, _) = call(state.clone(), "GET", "/api/projects", vec![], None, false).await;
-        assert_eq!(list.as_array().unwrap().len(), 3);
+        assert_eq!(list.as_array().unwrap().len(), 4);
         assert_eq!(list[0]["id"], "sai-world-dreams");
         let mut draft = list[0].clone();
         draft["name"] = json!("A real new project");

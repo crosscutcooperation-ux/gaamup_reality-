@@ -2,13 +2,13 @@
   "cities": [
     {
       "name": "Dombivli",
-      "native": "\u0921\u094b\u0902\u092c\u093f\u0935\u0932\u0940",
+      "native": "डोंबिवली",
       "index": 0,
       "slug": "dombivli"
     },
     {
       "name": "Panvel",
-      "native": "\u092a\u0928\u0935\u0947\u0932",
+      "native": "पनवेल",
       "index": 1,
       "slug": "panvel"
     }
@@ -43,7 +43,7 @@
       "featured": true,
       "published": true,
       "archived": false,
-      "description": "Explore Venus Skky City\u2019s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
+      "description": "Explore Venus Skky City’s nine residential buildings, pool, clubhouse, gardens and Jain temple. Select a tower and floor to see the supplied residential plans.",
       "constructionStatus": "under-construction"
     },
     {
@@ -64,6 +64,14 @@
     }
   ],
   "builders": [
+    {
+      "logo": "SSL",
+      "style": "ssl",
+      "name": "SSL (SS Life Spaces)",
+      "city": "Dombivli",
+      "project": "Balaji Classica",
+      "projectHref": "/projects/balaji-classica?city=dombivli"
+    },
     {
       "logo": "Paradise",
       "style": "paradise",

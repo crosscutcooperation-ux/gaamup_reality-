@@ -6,9 +6,9 @@ test('the collection shows only real inventory without inventing filler cards',(
   const inventory=[{id:'real',name:'Saved home',featured:true,published:true,bhk:'2 & 3 BHK'}],before=JSON.stringify(inventory);
   const display=getDisplayProperties(inventory);assert.equal(display.length,1);assert.equal(display[0].id,'real');assert.equal(JSON.stringify(inventory),before);
   assert.deepEqual(getDisplayProperties([{id:'evara',featured:true},{id:'greenfront',featured:true},{id:'preview-1',featured:true}]),[]);
-  const projects=projectProperties(bundledProjects,inventory);assert.deepEqual(propertyRows(projects).map(row=>row.length),[2,2]);
-  assert.equal(projects.filter(p=>p.projectHref?.startsWith('/projects/')).length,3);
-  assert.deepEqual(projectProperties(bundledProjects,[...inventory,{...projects[0]}]).map(p=>p.id),['sai-world-dreams','venus-skky-city','elements-new-panvel','real']);
+  const projects=projectProperties(bundledProjects,inventory);assert.deepEqual(propertyRows(projects).map(row=>row.length),[3,2]);
+  assert.equal(projects.filter(p=>p.projectHref?.startsWith('/projects/')).length,4);
+  assert.deepEqual(projectProperties(bundledProjects,[...inventory,{...projects[0]}]).map(p=>p.id),['sai-world-dreams','venus-skky-city','balaji-classica','elements-new-panvel','real']);
 });
 test('bedroom and construction filters combine and preserve unknown status',()=>{
   const items=[{id:'two',bhk:'2 & 3 BHK',constructionStatus:'under-construction'},{id:'one',bhk:'1 BHK',constructionStatus:'ready-to-move'},{id:'four',bhk:'4, 5 BHK',constructionStatus:''},{id:'unknown',bhk:'2 BHK'}];

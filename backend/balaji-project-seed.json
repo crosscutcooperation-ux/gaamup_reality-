@@ -1,0 +1,112 @@
+{
+  "id": "balaji-classica",
+  "slug": "balaji-classica",
+  "name": "Balaji Classica",
+  "location": "Dombivli East, Mumbai Metropolitan Region",
+  "description": "Explore SSL’s Balaji Classica on Diva–Manpada Road: five residential towers, landscaped courtyard, pool and supplied apartment plans. The architectural and furnished 3D models are reference visualisations; dimensions, furnishings and tower-to-position assignments remain approximate. Sales information supplied on 26 November 2026 is subject to confirmation.",
+  "price": "₹31.99 L++ onwards",
+  "constructionStatus": "under-construction",
+  "configuration": "1 & 2 BHK · Jodi options",
+  "citySlugs": [
+    "dombivli"
+  ],
+  "coverImage": "/projects/balaji-classica/media/exterior.webp",
+  "published": true,
+  "viewer": {
+    "kind": "builtin",
+    "url": "/scenes/balaji-classica/index.html",
+    "assetId": ""
+  },
+  "manifest": {
+    "schemaVersion": 1,
+    "projectId": "balaji-classica",
+    "nodes": [],
+    "catalog": {
+      "developer": "SSL (SS Life Spaces)",
+      "propertyType": "Apartment",
+      "bhk": [
+        "1",
+        "2"
+      ],
+      "status": "under-construction",
+      "area": "377–856 sq.ft (including Jodi reference)",
+      "possession": "June 2028 (RERA timeline supplied); December 2027 (developer estimate)",
+      "pricingUpdated": "26 November 2026",
+      "address": "Balaji Classica, Diva–Manpada Road, near Parshuram Munde petrol pump and Runwal My City, Dombivli East, Maharashtra",
+      "addressSource": "/projects/balaji-classica/media/balaji-classica-brochure.pdf",
+      "nearby": [
+        "Diva and Dombivli railway stations",
+        "Manpada Metro station (planned connectivity; verify current operations)",
+        "Near Runwal My City and Parshuram Munde petrol pump"
+      ],
+      "highlights": [
+        "Five towers with 23 storeys and 1,500+ homes, as supplied by the sales team",
+        "1 and 2 BHK homes, with a Jodi combined-apartment option",
+        "Swimming pool, landscaped courtyard, jogging track and skating rink",
+        "Sports court, clubhouse and spaces for children"
+      ],
+      "salesHighlights": [
+        "Sales team reports 68% construction progress as of 26 November 2026",
+        "₹1.5 lakh off on spot booking and no floor rise, subject to current offer terms",
+        "Proposed connectivity includes Airoli–Katai tunnel, Thane bullet train station and a 1,300-acre commercial hub; verify project status and travel times"
+      ],
+      "amenities": [
+        "Swimming pool",
+        "Landscaped gardens",
+        "Jogging track",
+        "Skating rink",
+        "Sports court",
+        "Clubhouse",
+        "Children’s play areas"
+      ],
+      "photos": [
+        "/projects/balaji-classica/media/exterior.webp",
+        "/projects/balaji-classica/media/courtyard.webp",
+        "/projects/balaji-classica/media/aerial.webp",
+        "/projects/balaji-classica/media/night.webp",
+        "/projects/balaji-classica/media/construction.webp"
+      ],
+      "offers": [
+        {
+          "tower": "1 BHK residences",
+          "bhk": "1",
+          "carpet": "377 onwards",
+          "price": "₹31.99 L++ onwards",
+          "status": "Under construction",
+          "possession": "June 2028 (RERA timeline supplied)",
+          "amount": 3199000
+        },
+        {
+          "tower": "2 BHK residences",
+          "bhk": "2",
+          "carpet": "528 (brochure typical)",
+          "price": "Request latest cost sheet",
+          "status": "Under construction",
+          "possession": "June 2028 (RERA timeline supplied)"
+        }
+      ],
+      "details": {
+        "Developer / construction": "SSL",
+        "Towers / storeys": "5 towers · 23 storeys (including ground in the supplied model)",
+        "Homes": "1,500+ (sales team)",
+        "Construction progress": "68% (sales team, 26 November 2026)",
+        "RERA possession timeline": "June 2028 (supplied by sales team)",
+        "Developer estimate": "December 2027; confirm separately from the RERA timeline",
+        "MahaRERA number": "Not confirmed for this listing; request the current registration and tower coverage",
+        "Payment plan": "Construction-linked payment plan (CLP)",
+        "Indicative rate": "₹8,500 per sq.ft, subject to cost-sheet confirmation",
+        "Current offer": "₹1.5 lakh off on spot booking; no floor rise. Confirm eligibility and validity.",
+        "Sample flat": "Available, according to sales team",
+        "Parking": "Both types offered; confirm allocation and terms",
+        "Home loans": "Bank assistance available at site; confirm lender and eligibility",
+        "Project contact": "Yash Mahale · +91 9867004872"
+      },
+      "brochure": "/projects/balaji-classica/media/balaji-classica-brochure.pdf"
+    },
+    "provenance": {
+      "source": "Supplied Drive viewer, Balaji Classica Lower Size.pdf and user project details",
+      "driveFolder": "https://drive.google.com/drive/folders/1qIBHDQ0GWPHwGmRsaI976J269ZVu_2T0",
+      "accuracy": "Reference reconstruction. Typical floor plans supplied only for Athena, Iris and Nova at floors 1–7, 9–12, 14–17 and 19–22. Other plans are not invented. Tower mapping is provisional."
+    }
+  }
+}

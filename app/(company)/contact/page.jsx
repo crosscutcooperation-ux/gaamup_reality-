@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function ContactPage({searchParams}) {
   const query=await searchParams;
-  const project=['Sai World Dreams','Venus Skky City','Codename Elements'].includes(query?.project)?query.project:'';
+  const project=['Sai World Dreams','Venus Skky City','Codename Elements','Balaji Classica'].includes(query?.project)?query.project:'';
   return (
     <CompanyShell>
       <main id="destination">

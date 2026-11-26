@@ -35,7 +35,7 @@ test('published sales updates retain every tower-specific amount, carpet area an
  assert.equal(v.offers[2].price,'₹61.50 L + taxes');assert.equal(v.offers[2].status,'Nearing possession');
  assert.equal(elements.price,'Price on request');
  for(const p of bundledProjects){assert.ok(projectFacts(p).address);assert.ok(projectFacts(p).addressSource);}
- assert.deepEqual(searchCatalog(bundledProjects,{maxPrice:'5000000'}).map(p=>p.id),['venus-skky-city']);
+ assert.deepEqual(searchCatalog(bundledProjects,{maxPrice:'5000000'}).map(p=>p.id),['balaji-classica','venus-skky-city']);
 });
 
 test('project pages render supplied offers and a lazy map with real directions for every address',async()=>{

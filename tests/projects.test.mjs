@@ -9,10 +9,10 @@ import * as T from '../public/scenes/sai-world-dreams/vendor/three.module.js';
 test('the homepage filter searches all projects and every station lists only its local projects',()=>{
   const all=projectsForCity([...bundledProjects].reverse());
   const filter=catalogFiltersFromQuery({bhk:'2',status:'under-construction'});
-  assert.deepEqual(searchCatalog(all,filter).map(project=>project.id),['sai-world-dreams','venus-skky-city','elements-new-panvel']);
+  assert.deepEqual(searchCatalog(all,filter).map(project=>project.id),['sai-world-dreams','balaji-classica','venus-skky-city','elements-new-panvel']);
   assert.deepEqual(searchCatalog(all,{...filter,bhk:['2.5']}).map(project=>project.id),['sai-world-dreams']);
   assert.equal(searchCatalog(all,{...filter,statuses:['ready-to-move']}).length,0);
-  assert.deepEqual(projectsForCity(all,'dombivli').map(project=>project.id),['venus-skky-city','sai-world-dreams']);
+  assert.deepEqual(projectsForCity(all,'dombivli').map(project=>project.id),['balaji-classica','venus-skky-city','sai-world-dreams']);
   assert.deepEqual(projectsForCity(all,'panvel').map(project=>project.id),['elements-new-panvel']);
   assert.equal(projectsForCity(all,'kalyan').length,0);
   assert.equal(projectsForCity([{...demoProject,published:false}],'dombivli').length,0);
