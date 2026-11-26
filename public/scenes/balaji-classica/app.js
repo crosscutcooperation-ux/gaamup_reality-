@@ -1,1 +1,1 @@
-import './viewer.js?v=textured-finishes-1';
+import './viewer.js?v=local-refinement-3';

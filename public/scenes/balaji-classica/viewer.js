@@ -1,17 +1,18 @@
-import {spaceWalkHotspots} from './shared/overlay-layout.js';
+import {createSceneGuidance} from '../venus-skky-city/scene-guidance.js';
+import {createAtmosphere} from '../elements-new-panvel/site-atmosphere.js';
 import * as T from './vendor/three.module.js?v=shared-runtime-12';
 import {OrbitControls} from './vendor/OrbitControls.js';
-import {buildSite,towerSpecs,materials} from './model.js?v=balaji-2';
-import {createLighting,prepareMaterials} from './lighting.js?v=approved-materials-1';
-import {createTowerDetail} from './tower-detail.js?v=natural-smooth-1';
-import {openPlanExplorer} from './plan-explorer.js?v=balaji-rooms-1';
+import {buildSite,towerSpecs,materials} from './model.js?v=local-refinement-3';
+import {createLighting,prepareMaterials} from './lighting.js?v=local-refinement-3';
+import {createTowerDetail} from './tower-detail.js?v=local-refinement-3';
+import {openPlanExplorer} from './plan-explorer.js?v=local-refinement-3';
 import {createTours} from './tours.js?v=balaji-2';
 import {hasTypicalPlan} from './plan-data.js';
 import {canWalk} from './walk-navigation.js?v=balaji-2';
 import {GLTFLoader} from './shared/vendor/addons/loaders/GLTFLoader.js';
 import {DRACOLoader} from './shared/vendor/addons/loaders/DRACOLoader.js';
 import {createSmoothRenderer} from './adaptive-renderer.js?v=natural-smooth-1';
-import {createModelLOD,createSceneMaterialLOD} from './model-lod.js?v=natural-smooth-1';
+import {createModelLOD,createSceneMaterialLOD} from './model-lod.js?v=local-refinement-3';
 import {createRenderProfile} from './render-profile.js?v=balaji-2';
 import {createMotionResolution,createTowerPicker} from './interaction-performance.js?v=approved-materials-1';
 import {partitionFacadeFaces,createFacadeCuller} from './facade-performance.js?v=balaji-2';
@@ -24,7 +25,7 @@ const scene=new T.Scene();scene.background=new T.Color(0xb5d6e7);scene.fog=new T
 const camera=new T.PerspectiveCamera(28,1,.35,1800);
 optimizeFiniteLights();
 const renderer=new T.WebGLRenderer({canvas,antialias:false,powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.VSMShadowMap;renderer.shadowMap.autoUpdate=false;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.AgXToneMapping;renderer.toneMappingExposure=1.3;
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.VSMShadowMap;renderer.shadowMap.autoUpdate=false;renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.NeutralToneMapping;renderer.toneMappingExposure=1.02;
 const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.10;controls.maxPolarAngle=Math.PI/2-.025;controls.minDistance=38;controls.maxDistance=850;controls.autoRotateSpeed=.62;controls.zoomSpeed=.72;controls.rotateSpeed=.65;controls.target.set(0,32,0);
 canvas.tabIndex=0;controls.listenToKeyEvents(canvas);
 const profile=createRenderProfile(canvas,renderer),pipeline=createSmoothRenderer(renderer,scene,camera);
@@ -32,8 +33,8 @@ canvas.dataset.build='balaji-textured-finishes-1';
 const ambient=new T.HemisphereLight(0xe2f1ff,0x6b7256,.48),sun=new T.DirectionalLight(0xfff0dc,2.3),fill=new T.DirectionalLight(0xd6eaff,.28);scene.add(ambient,sun,fill);
 sun.position.set(-180,140,140);sun.castShadow=true;sun.shadow.mapSize.set(4096,4096);Object.assign(sun.shadow.camera,{left:-115,right:115,top:110,bottom:-110,near:10,far:650});sun.shadow.bias=-.00004;sun.shadow.normalBias=.025;sun.shadow.radius=4;sun.shadow.blurSamples=8;fill.position.set(120,115,20);
 let activeView='courtyard';
-const presets={facade:{p:[-26,38.5,53],t:[-29,37.8,44],fov:55,minDistance:3,name:'Facade detail'},interior:{p:[-28,37.6,38],t:[6,20,20],fov:65,name:'Inside floor 11'},courtyard:{p:[155,64,260],t:[0,35,2],name:'The residential courtyard'},aerial:{p:[-45,210,135],t:[0,12,0],name:'Aerial'},street:{p:[30,20,145],t:[0,33,10],name:'The boulevard'},plan:{p:[0,260,.01],t:[0,0,0],name:'Site plan'}};
-let site,towers=[],pickTower,cullFacades,updateLOD,updateMaterialLOD,lighting,detail,tours,dirty=true,transition=null,walk=false,walkYaw=-.5,walkPitch=.02,drag=null,press=null,last=0,planOpen=false,elevationOpen=false;
+const presets={facade:{p:[-26,38.5,53],t:[-29,37.8,44],fov:55,minDistance:3,name:'Facade detail'},interior:{p:[-28,37.6,38],t:[6,20,20],fov:65,name:'Inside floor 11'},courtyard:{p:[135,66,270],t:[0,35,2],name:'The residential courtyard'},aerial:{p:[-45,210,135],t:[0,12,0],name:'Aerial'},street:{p:[30,20,145],t:[0,33,10],name:'The boulevard'},plan:{p:[0,260,.01],t:[0,0,0],name:'Site plan'}};
+let site,towers=[],pickTower,cullFacades,updateLOD,updateMaterialLOD,lighting,detail,tours,atmosphere,guidance,dirty=true,transition=null,walk=false,walkYaw=-.5,walkPitch=.02,drag=null,press=null,last=0,planOpen=false,elevationOpen=false;
 let frameRequest=0,viewportVisible=true,ready=false,interacting=false;
 const keys=new Set(),labels=[],ray=new T.Raycaster(),pointer=new T.Vector2(),context=new T.Group();context.name='Illustrative city blocks';context.visible=false;scene.add(context);
 function requestFrame(){if(ready&&!frameRequest&&!document.hidden&&viewportVisible)frameRequest=requestAnimationFrame(animate);}
@@ -48,9 +49,10 @@ new IntersectionObserver(([entry])=>{viewportVisible=entry.isIntersecting;if(vie
 document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frameRequest);frameRequest=0;last=0;}else invalidate();});
 function moveCamera(p,t,duration=400){transition={start:performance.now(),duration,p0:camera.position.clone(),t0:controls.target.clone(),p,t};invalidate();}
 function view(name){if(walk)exitWalk();const v=presets[name];if(!v)return;activeView=name;controls.minDistance=v.minDistance||38;camera.fov=v.fov||28;camera.updateProjectionMatrix();transition={start:performance.now(),p0:camera.position.clone(),t0:controls.target.clone(),p:name==='interior'?new T.Vector3(...v.p):fitted(v.p,v.t),t:new T.Vector3(...v.t)};$('#view-name').textContent=v.name;$$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===name)));invalidate();}
-function selectTower(id){transition=null;motionResolution.stop();updateMaterialLOD?.(false);if(!id){view('courtyard');return;}if(walk)exitWalk();$('#tower').value=id;$('#plan-building').value=id;floorChoices();detail.open(id);}
+function selectTower(id){guidance?.complete();setDrawer(false);controls.autoRotate=false;transition=null;motionResolution.stop();updateMaterialLOD?.(false);if(!id){view('courtyard');return;}if(walk)exitWalk();$('#tower').value=id;$('#plan-building').value=id;floorChoices();detail.open(id);}
 function label(spec){const el=document.createElement('span');el.className='roof-label';const caption=document.createElement('button');caption.className='roof-caption';caption.textContent=spec.name;caption.setAttribute('aria-label','Explore '+spec.name+' levels');caption.onclick=()=>selectTower(spec.id);const arrow=document.createElement('span');arrow.className='roof-arrow';arrow.setAttribute('aria-hidden','true');arrow.onclick=()=>selectTower(spec.id);el.append(caption,arrow);host.append(el);labels.push({el,caption,arrow,width:0,height:0,pos:new T.Vector3(spec.labelAnchor?.[0]??spec.x,spec.floors*3.1+13,spec.labelAnchor?.[1]??spec.z)});}
 function updateOverlays(){
+ guidance?.update(performance.now(),!walk&&!planOpen&&!elevationOpen);
  const w=host.clientWidth,h=host.clientHeight,visible=[];
  for(const marker of labels){const p=marker.pos.clone().project(camera),x=(p.x+1)/2*w,y=(1-p.y)/2*h-3;marker.el.hidden=walk||activeView==='interior'||p.z>1||x<0||x>w||y<0||y>h;if(!marker.el.hidden)visible.push({marker,x,y});}
  for(const {marker} of visible)if(!marker.width){marker.width=marker.caption.offsetWidth;marker.height=marker.caption.offsetHeight;}
@@ -61,13 +63,10 @@ function updateOverlays(){
   top=Math.max(2,top);placed.push({left,right:left+marker.width,top,bottom:top+marker.height+19});placed.sort((a,b)=>b.top-a.top);
   marker.el.style.transform=`translate(${x}px,${y}px)`;marker.caption.style.left=(left-x)+'px';marker.caption.style.top=(top-y)+'px';marker.arrow.style.left=(left+marker.width/2-x-8)+'px';marker.arrow.style.top=(top-y+marker.height+4)+'px';marker.arrow.style.bottom='auto';
  }
- const hotspots=[];
- for(const [id,p] of [['pool-hotspot',[25.5,3,-7.8]],['garden-hotspot',[-9.6,3,-3.3]]]){const node=$('#'+id),q=new T.Vector3(...p).project(camera),x=(q.x+1)/2*w,y=(1-q.y)/2*h;node.hidden=walk||activeView==='interior'||$('#view-name').textContent==='Site plan'||q.z>1||x<30||x>w-30||y<75||y>h-100;if(!node.hidden)hotspots.push({node,x,y});}
- spaceWalkHotspots(hotspots);
- for(const item of hotspots){item.node.style.left=item.x+'px';item.node.style.top=item.y+'px';}
+
 }
-function enterWalk(zone='garden'){transition=null;motionResolution.stop();walk=true;controls.enabled=false;controls.autoRotate=false;$('#rotate').setAttribute('aria-pressed','false');camera.position.set(...(zone==='pool'?[13,3.6,-12]:[-24,3.6,22]));walkYaw=zone==='pool'?-1.57:-.4;walkPitch=.02;tours.show(true);$('#walk-zone-title').textContent=zone==='pool'?'Pool terrace':'The courtyard';$('#walk-status').textContent='Drag to look · WASD or arrows to walk';$('#walk-hotspots').hidden=true;$('.scene-bottom').hidden=true;$$('[data-walk-zone]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.walkZone===zone)));invalidate();}
-function exitWalk(){tours?.show(false);walk=false;keys.clear();controls.enabled=!planOpen&&!elevationOpen;controls.target.copy(camera.position).add(new T.Vector3(-Math.sin(walkYaw)*20,0,-Math.cos(walkYaw)*20));$('#walk-hotspots').hidden=false;$('.scene-bottom').hidden=false;invalidate();}
+function enterWalk(zone='garden'){setDrawer(false);stage.dataset.mode='walk';$('#walk-launcher').hidden=true;$('#show-scene-help').hidden=true;transition=null;motionResolution.stop();walk=true;controls.enabled=false;controls.autoRotate=false;$('#rotate').setAttribute('aria-pressed','false');camera.position.set(...(zone==='pool'?[13,3.6,-12]:[-24,3.6,22]));walkYaw=zone==='pool'?-1.57:-.4;walkPitch=.02;tours.show(true);$('#walk-zone-title').textContent=zone==='pool'?'Pool terrace':'The courtyard';$('#walk-status').textContent='Drag to look · WASD or arrows to walk';$('.scene-bottom').hidden=true;$$('[data-walk-zone]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.walkZone===zone)));invalidate();}
+function exitWalk(){stage.dataset.mode='colony';$('#walk-launcher').hidden=false;$('#show-scene-help').hidden=false;tours?.show(false);walk=false;keys.clear();controls.enabled=!planOpen&&!elevationOpen;controls.target.copy(camera.position).add(new T.Vector3(-Math.sin(walkYaw)*20,0,-Math.cos(walkYaw)*20));$('.scene-bottom').hidden=false;invalidate();}
 function walkFrame(dt){const forward=(keys.has('w')||keys.has('arrowup')?1:0)-(keys.has('s')||keys.has('arrowdown')?1:0),side=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);const speed=8*dt,dx=(-Math.sin(walkYaw)*forward+Math.cos(walkYaw)*side)*speed,dz=(-Math.cos(walkYaw)*forward-Math.sin(walkYaw)*side)*speed;
   if(canWalk(camera.position.x+dx,camera.position.z))camera.position.x+=dx;if(canWalk(camera.position.x,camera.position.z+dz))camera.position.z+=dz;
   camera.lookAt(camera.position.clone().add(new T.Vector3(-Math.sin(walkYaw)*Math.cos(walkPitch),Math.sin(walkPitch),-Math.cos(walkYaw)*Math.cos(walkPitch))));invalidate();
@@ -82,13 +81,17 @@ function animate(now){frameRequest=0;if(document.hidden||!viewportVisible)return
   if(!planOpen&&!elevationOpen&&(dirty||changed||transition||(controls.enabled&&controls.autoRotate)||(walk&&(keys.size||tours.running))))requestFrame();else last=0;
 }
 function floorChoices(){const spec=towerSpecs.find(s=>s.id===$('#plan-building').value);$('#plan-floor').replaceChildren();$('#plan-floor').disabled=!spec;$('#open-floor-plan').disabled=!spec;if(!spec)return;for(let n=0;n<=spec.floors;n++)$('#plan-floor').add(new Option(n===0?'Ground floor':'Floor '+n,String(n)));$('#plan-floor').value='2';$('#plan-availability').textContent=spec.plan?'Original floor drawing available':spec.id==='G'?'Original ground-floor drawing available. Residential-floor plan not supplied.':'Drawing not supplied for this building';}
+function setDrawer(open){$('#explore-drawer').hidden=!open;$('#explore-toggle').setAttribute('aria-expanded',String(open));}
 function bind(){
-  $('#browse-plans').onclick=()=>openPlanExplorer($('#plan-building').value||'NOVA',Number($('#plan-floor').value)||1);
+  $('#explore-toggle').onclick=()=>setDrawer($('#explore-drawer').hidden);$('#close-explore').onclick=()=>setDrawer(false);
+  const menu=$('#amenity-menu');for(const [name,place] of [['Swimming pool','pool'],['Landscaped gardens','garden'],['Clubhouse','garden'],['Sports court','garden'],['Children’s play areas','garden']]){const b=document.createElement('button');b.className='place';b.textContent=name;b.onclick=()=>{setDrawer(false);document.querySelector(`[data-place="${place}"]`)?.click();};menu.append(b);}
+
+  $('#browse-plans').onclick=()=>{setDrawer(false);openPlanExplorer($('#plan-building').value||'NOVA',Number($('#plan-floor').value)||1);};
   for(const spec of towerSpecs)$('#tower').add(new Option(spec.name,spec.id));$('#tower').onchange=()=>selectTower($('#tower').value);$('#plan-building').add(new Option('Choose a building',''));for(const s of towerSpecs)$('#plan-building').add(new Option(s.name,s.id));$('#plan-building').onchange=floorChoices;const openSelectedFloor=()=>{const id=$('#plan-building').value,n=Number($('#plan-floor').value);$('#plan-availability').textContent=hasTypicalPlan(id,n)?'Original floor drawing available':'Drawing not supplied for this floor';openPlanExplorer(id,n);};$('#open-floor-plan').onclick=openSelectedFloor;$('#plan-floor').onchange=openSelectedFloor;
   $$('button[data-lighting]').forEach(b=>b.onclick=()=>lighting.set(b.dataset.lighting));$$('[data-view]').forEach(b=>b.onclick=()=>view(b.dataset.view));$$('[data-place]').forEach(b=>b.onclick=()=>{view({residences:'courtyard',garden:'aerial',pool:'courtyard',retail:'street'}[b.dataset.place]);$$('[data-place]').forEach(p=>p.classList.toggle('active',p===b));if(b.dataset.place==='pool')transition={start:performance.now(),p0:camera.position.clone(),t0:controls.target.clone(),p:fitted([6,23,14],[25.5,2,-7.8]),t:new T.Vector3(25.5,2,-7.8)};});
-  $('#rotate').onclick=()=>{controls.autoRotate=!controls.autoRotate;if(controls.autoRotate)motionResolution.start();$('#rotate').setAttribute('aria-pressed',String(controls.autoRotate));invalidate();};
+  $('#rotate').onclick=()=>{controls.autoRotate=!controls.autoRotate;if(controls.autoRotate)motionResolution.start();$('#rotate').setAttribute('aria-pressed',String(controls.autoRotate));$('#rotate').setAttribute('aria-label',controls.autoRotate?'Pause 360 degree rotation':'Start 360 degree rotation');invalidate();};
   for(const [id,scale] of [['zoom-in',.84],['zoom-out',1.18]])$('#'+id).onclick=()=>{moveCamera(camera.position.clone().sub(controls.target).multiplyScalar(scale).add(controls.target),controls.target.clone(),320);};
-  $$('[data-orbit]').forEach(b=>b.onclick=()=>{const offset=camera.position.clone().sub(controls.target);offset.applyAxisAngle(new T.Vector3(0,1,0),b.dataset.orbit==='left'?.12:-.12);moveCamera(controls.target.clone().add(offset),controls.target.clone(),300);});$('#reset').onclick=()=>view('courtyard');
+  $$('[data-orbit]').forEach(b=>b.onclick=()=>{const offset=camera.position.clone().sub(controls.target);offset.applyAxisAngle(new T.Vector3(0,1,0),b.dataset.orbit==='left'?.12:-.12);moveCamera(controls.target.clone().add(offset),controls.target.clone(),300);});$('#reset').onclick=()=>{controls.autoRotate=false;motionResolution.stop();$('#rotate').setAttribute('aria-pressed','false');$('#rotate').setAttribute('aria-label','Start 360 degree rotation');view('courtyard');};
   $('#context').onclick=()=>{context.visible=!context.visible;$('#context').setAttribute('aria-pressed',String(context.visible));renderer.shadowMap.needsUpdate=true;invalidate();};$('#fullscreen').onclick=()=>document.fullscreenElement?document.exitFullscreen():stage.requestFullscreen?.();
   $$('[data-enter-walk]').forEach(b=>b.onclick=()=>enterWalk(b.dataset.enterWalk));$$('[data-walk-zone]').forEach(b=>b.onclick=()=>enterWalk(b.dataset.walkZone));$('#exit-walk').onclick=()=>{exitWalk();view('courtyard');};
   $$('[data-move]').forEach(b=>{b.onpointerdown=e=>{e.preventDefault();b.setPointerCapture(e.pointerId);tours.stop();keys.add(b.dataset.move);invalidate();};b.onpointerup=b.onpointercancel=()=>keys.delete(b.dataset.move);});
@@ -99,7 +102,7 @@ function bind(){
   document.addEventListener('plan-explorer-state',e=>{planOpen=e.detail.open;if(planOpen)motionResolution.stop();else if(controls.autoRotate)motionResolution.start();controls.enabled=!walk&&!planOpen&&!elevationOpen;invalidate();});document.addEventListener('tower-detail-state',e=>{elevationOpen=e.detail.open;if(elevationOpen)motionResolution.stop();else if(controls.autoRotate)motionResolution.start();if(!elevationOpen)$('#tower').value='';controls.enabled=!walk&&!planOpen&&!elevationOpen;invalidate();});
 }
 async function init(){try{
-  const dayEnvironment=await prepareMaterials(renderer,invalidate),built=buildSite();site=built.root;towers=built.towers;scene.add(site);
+  const dayEnvironment=await prepareMaterials(renderer,invalidate),built=buildSite();site=built.root;towers=built.towers;scene.add(site);atmosphere=createAtmosphere(scene,invalidate);setInterval(()=>{if(!document.hidden&&viewportVisible&&atmosphere.update(performance.now()))invalidate();},100);
   const decoder=new DRACOLoader().setDecoderPath('shared/vendor/draco/').setDecoderConfig({type:'wasm'}).setWorkerLimit(2);
   const loader=new GLTFLoader().setDRACOLoader(decoder);
   const [detailed,moving,landscape]=await Promise.all([loader.loadAsync('assets/balaji-towers-pbr.glb?v=textured-finishes-1'),loader.loadAsync('assets/balaji-motion-pbr.glb?v=textured-finishes-1'),loader.loadAsync('assets/balaji-site-pbr.glb?v=textured-finishes-1')]);decoder.dispose();site.add(landscape.scene);landscape.scene.traverse(o=>{if(o.isMesh){o.castShadow=!o.name.startsWith('native-glass-');o.receiveShadow=true;if(o.name==='paving'){o.material.map=materials.path.map;o.material.bumpMap=materials.path.bumpMap;o.material.bumpScale=.025;}}});
@@ -119,11 +122,12 @@ async function init(){try{
   tours=createTours({canvas,camera,enterWalk,isWalking:()=>walk,invalidate,toast:announce,onPose:d=>{walkYaw=Math.atan2(-d.x,-d.z);walkPitch=Math.asin(d.y);}});
   stage.append($('#labels'));$('#labels').hidden=false;towerSpecs.forEach(label);
   const mat=new T.MeshStandardMaterial({color:0xa7ac9f,roughness:1});for(let i=0;i<18;i++){const h=8+(i%5)*4,b=new T.Mesh(new T.BoxGeometry(18,h,24),mat);b.position.set(i%2?-205:205,h/2,-175+Math.floor(i/2)*40);context.add(b);}
+  guidance=createSceneGuidance({camera,towers,host,focusTower:selectTower,targetNames:['Athena','Iris','Nova'],floorHost:document.querySelector('.detail-stage'),unitHost:document.querySelector('.elements-plan-drawing')});
   bind();const initialView=new URLSearchParams(location.search).get('view');activeView=initialView==='interior'||initialView==='facade'?initialView:'courtyard';const initial=presets[activeView];controls.minDistance=initial.minDistance||38;camera.fov=initial.fov||28;resize();camera.updateProjectionMatrix();camera.position.copy(activeView==='interior'?new T.Vector3(...initial.p):fitted(initial.p,initial.t));controls.target.set(...initial.t);controls.update();$('#view-name').textContent=initial.name;$$('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===activeView)));
   $('#loading-message').textContent='Preparing facade reflections and lighting…';
   lighting.set('evening');await pipeline.compile();lighting.set('night');await pipeline.compile();lighting.set('day');await pipeline.compile();
   updateLOD(camera,true,false);updateMaterialLOD(true);for(const mode of ['evening','night','day']){lighting.set(mode);await pipeline.compile();}cullFacades(camera,true);pipeline.render(drawRatio,true);updateLOD(camera,false,false);updateMaterialLOD(false);renderer.shadowMap.needsUpdate=true;cullFacades(camera,true);pipeline.render(drawRatio,false);
-  $('#loading').hidden=true;ready=true;invalidate();
+  $('#loading').hidden=true;ready=true;controls.autoRotate=!matchMedia('(prefers-reduced-motion: reduce)').matches;$('#rotate').setAttribute('aria-pressed',String(controls.autoRotate));$('#rotate').setAttribute('aria-label',controls.autoRotate?'Pause 360 degree rotation':'Start 360 degree rotation');invalidate();
   const requestedPlan=new URLSearchParams(location.search);if(requestedPlan.has('plan'))openPlanExplorer(requestedPlan.get('tower')||'NOVA',Number(requestedPlan.get('floor')||2));
 }catch(error){console.error(error);$('#loading').hidden=true;$('#error').hidden=false;}}
 init();

@@ -10,7 +10,7 @@ export function createSceneMaterialLOD(site){
     const source=mesh.material;if(!(source.transmission>0||source.clearcoat>0||source.normalMap))return;
     let fast=cache.get(source);
     if(!fast){
-      fast=source.clone();fast.transmission=0;fast.clearcoat=0;fast.normalMap=null;
+      fast=source.clone();fast.transmission=0;fast.clearcoat=0;
       fast.onBeforeCompile=source.onBeforeCompile;fast.customProgramCacheKey=()=>source.customProgramCacheKey()+'|motion-reflection';
       if(source.transmission>0&&/glass|glazing/i.test(source.name)){fast.transparent=true;fast.opacity=.72;fast.depthWrite=false;}
       cache.set(source,fast);

@@ -1,8 +1,8 @@
 import * as T from './vendor/three.module.js?v=shared-runtime-12';
 import {elevationFloorAt} from './interaction-performance.js?v=balaji-2';
 import {createFacadeCuller} from './facade-performance.js?v=balaji-2';
-import {towerSpecs} from './model.js?v=balaji-2';
-import {LIGHTING} from './lighting.js?v=approved-materials-1';
+import {towerSpecs} from './model.js?v=local-refinement-3';
+import {LIGHTING} from './lighting.js?v=local-refinement-3';
 
 export function createTowerDetail({towers,snapshot,openPlan,lighting,getEnvironment}){
   const dialog=document.createElement('dialog');dialog.id='tower-detail';

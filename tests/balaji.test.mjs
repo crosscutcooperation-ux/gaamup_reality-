@@ -56,14 +56,23 @@ test('Balaji swaps plans under a loader, opens matching GLBs and cancels stale m
  win.HTMLDialogElement.prototype.showModal=function(){this.open=true;};win.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new win.Event('close'));};
  const stub='data:text/javascript,'+encodeURIComponent(`export class PlanViewer{revision=0;async loadModel(url){globalThis.__balajiCalls.push(url);await globalThis.__balajiWait();return true;}setActive(){}setMode(){}reset(){}zoom(){}}`);
  let source=await readFile(new URL('plan-explorer.js',base),'utf8');source=source.replace(/from '(\.[^']+)'/g,(_,path)=>`from '${new URL(path,base).href}'`).replace("import('/scenes/venus-skky-city/plan-viewer.js')",`import('${stub}')`);
+ win.HTMLImageElement.prototype.decode=async function(){};
  const tick=()=>new Promise(resolve=>setTimeout(resolve,15));
  try{
   const {openPlanExplorer}=await import('data:text/javascript,'+encodeURIComponent(source));await openPlanExplorer('ATHENA',2);
-  const doc=win.document;assert.equal(doc.querySelectorAll('.apartment-choice').length,14);assert.match(doc.querySelector('[data-apartment="athena-13"]').textContent,/2 BHK/);
+  const doc=win.document;assert.equal(doc.querySelectorAll('a').length,0);assert.equal(doc.querySelectorAll('.apartment-choice').length,14);assert.deepEqual([...doc.querySelectorAll('.bhk-legend span')].map(e=>e.textContent),['1 BHK','2 BHK']);for(const beds of [1,2]){const card=doc.querySelector(`.apartment-choice[data-beds="${beds}"]`),region=doc.querySelector(`#apartment-hotspots g[data-beds="${beds}"]`);assert.ok(card);assert.ok(region);assert.equal(card.style.getPropertyValue('--unit-color'),region.style.getPropertyValue('--unit-color'));assert.equal(card.style.getPropertyValue('--unit-color'),beds===1?'#588348':'#c39a35');}assert.match(doc.querySelector('[data-apartment="athena-13"]').textContent,/2 BHK/);
   doc.querySelector('.apartment-choice').click();assert.match(doc.querySelector('#plan-image').src,/athena-01-2d.webp/);assert.equal(doc.querySelector('#plan-frame').hidden,true);assert.equal(doc.querySelector('#plan-status').hidden,false);
   doc.querySelector('#view-3d').click();assert.match(doc.querySelector('#plan-image').src,/athena-01/);assert.equal(doc.querySelector('#plan-frame').hidden,true);
   doc.querySelector('#view-model').click();await tick();assert.match(calls[0],/balaji-classica-athena-flat-01.glb$/);assert.match(doc.querySelector('#plan-status').textContent,/Loading furnished/);
-  doc.querySelector('#back-floor').click();finishModel();await tick();assert.equal(doc.querySelector('#apartment-model').hidden,true);assert.equal(doc.querySelectorAll('.apartment-choice').length,14);
+  doc.querySelector('#back-floor').click();finishModel();await tick();assert.equal(doc.querySelector('#apartment-model').hidden,true);assert.equal(doc.querySelectorAll('.apartment-choice').length,14);assert.equal(doc.querySelectorAll('a').length,0);
   await openPlanExplorer('ATHENA',8);assert.match(doc.querySelector('#plan-status').textContent,/does not include/);
  }finally{for(const [key,value]of Object.entries(prior)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}await win.happyDOM.close();}
+});
+
+test('the local Balaji viewer reuses existing controls, feedback and sky while preserving PBR textures',async()=>{
+ const html=await readFile(new URL('index.html',base),'utf8'),viewer=await readFile(new URL('viewer.js',base),'utf8'),lighting=await readFile(new URL('lighting.js',base),'utf8');
+ const win=new Window();try{win.document.write(html);assert.equal(win.document.querySelector('#explore-drawer').hidden,true);for(const id of ['explore-toggle','close-explore','walk-launcher','show-scene-help','loading','rotate'])assert.ok(win.document.getElementById(id),id);}finally{await win.happyDOM.close();}
+ assert.match(viewer,/createSceneGuidance/);assert.doesNotMatch(html,/id="(?:walk-hotspots|pool-hotspot|garden-hotspot)"/);assert.match(viewer,/courtyard:\{p:\[135,66,270\],t:\[0,35,2\]/);assert.match(viewer,/\$\('#reset'\)\.onclick=\(\)=>\{controls.autoRotate=false;/);assert.match(viewer,/createAtmosphere/);assert.match(viewer,/T.NeutralToneMapping/);assert.doesNotMatch(lighting,/sky.visible=false/);assert.match(lighting,/materials.terrain.map=terrainMap/);
+ const plans=await readFile(new URL('plan-explorer.js',base),'utf8');assert.match(plans,/createPlanFeedback/);assert.match(plans,/feedback.image/);assert.match(plans,/feedback.run/);
+ const lod=await readFile(new URL('model-lod.js',base),'utf8');assert.doesNotMatch(lod,/normalMap=null/);
 });
