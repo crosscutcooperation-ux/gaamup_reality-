@@ -55,7 +55,7 @@
 #tower-detail .detail-rail button[aria-current=true]::before{background:#59614a}
 #tower-detail #detail-open{background:#59614a}
 #tower-detail #detail-open button{background:#2f3229;color:#f6f4f1;border-radius:0;box-shadow:none}
-#tower-detail .detail-copy::before{content:'';display:block;width:76px;height:76px;background:url('../../assets/brand/gaamup-mark.png') center / contain no-repeat;margin-bottom:24px}
+#tower-detail .detail-copy::before{content:'';display:block;width:76px;height:76px;background:url('../../assets/brand/gaamup-mark.png?v=20261127') center / contain no-repeat;margin-bottom:24px}
 #tower-detail[data-lighting=night]{background:#142021;color:#e9ede3}
 #tower-detail[data-lighting=night] .detail-glass{background:linear-gradient(90deg,#142021f0,#19362aaf 60%,#142021dc)}
 #tower-detail[data-lighting=night] header,#tower-detail[data-lighting=night] .detail-copy{color:#e9ede3}
